@@ -104,7 +104,7 @@ Each model family tokenizes text differently. E = tokens per word. Three raw val
 
 > **Session 5 (2026-07-09):** Full standardized re-test of all 23 measurable models with identical samples, same API key (OPENROUTER_CODE_KEY), same max_tokens=20. 69 calls, ~$0.20 total. Replaces all earlier Sessions 1-4 data. Unmeasurable models: Fugu Ultra (ignores max_tokens, ~95 tok/word), o4-mini (Responses API, no usage field), Inflection 3 Pi/Productivity (502 errors), Qwen 3.7 Plus/Max (guardrail), Sonar Reasoning Pro/Deep Research (timeout). See `data/experiment-session5-raw.csv` and `docs/tokenizer-efficiency-experiment.md` for full data.
 >
-> **Output & reasoning extension (proposed):** Section 8 of the experiment doc defines 6 task prompts (one-word, one-sentence, short code, short list, reasoning, multi-step) for measuring output verbosity and hidden reasoning tokens. Full 21-model run costs ~$0.15-0.50. See [`docs/tokenizer-efficiency-experiment.md §8`](docs/tokenizer-efficiency-experiment.md).
+> **Output & reasoning extension (proposed):** Section 8 of the experiment doc defines 6 task prompts (one-word, one-sentence, short code, short list, reasoning, multi-step) for measuring output verbosity and hidden reasoning tokens. Full 21-model run costs at most ~$0.38 (worst case, all models hit cap). Per-model per-task costs documented in §8.6. See [`docs/tokenizer-efficiency-experiment.md §8`](docs/tokenizer-efficiency-experiment.md).
 
 ## Appraisal Table Template — Primary View
 
