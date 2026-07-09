@@ -1,6 +1,6 @@
 {
   "$schema": "./models.schema.json",
-  "last_updated": "2026-07-08 (Session 4: measured Mistral Large 3/Codestral E=1.68, Command A E=1.72, Jamba 1.7 E=1.97, o3-mini E=1.64)",
+  "last_updated": "2026-07-09 (Session 5: Live SWE-bench data validated from BenchLM.ai + swebench.com. Corrected 6 model entries. See SWE-bench section in docs.)",
   "pricing_sources": {
     "primary": {
       "name": "OpenCode Zen",
@@ -147,8 +147,8 @@
           "date": "2026-07"
         },
         "swe_bench_verified": {
-          "score": 75.8,
-          "source": "SWE-bench Verified leaderboard (mid-2026)",
+          "score": 79.0,
+          "source": "SWE-bench Verified leaderboard via BenchLM.ai (Jul 2026). Previously 75.8 — corrected 3.2 pts up.",
           "date": "2026-07"
         },
         "swe_bench_pro": {
@@ -592,7 +592,11 @@
           "source": "AA v4.1 (Max mode)",
           "date": "2026-07"
         },
-        "swe_bench_verified": null,
+        "swe_bench_verified": {
+          "score": 85.2,
+          "source": "SWE-bench Verified leaderboard via BenchLM.ai (Jul 2026)",
+          "date": "2026-07"
+        },
         "swe_bench_pro": {
           "score": 63.2,
           "source": "SWE-bench Pro leaderboard (Jul 2026)",
@@ -668,8 +672,16 @@
           "source": "Likely ~38-40",
           "date": "2026-07"
         },
-        "swe_bench_verified": null,
-        "swe_bench_pro": null,
+        "swe_bench_verified": {
+          "score": 73.3,
+          "source": "SWE-bench Verified leaderboard via BenchLM.ai (Jul 2026)",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": {
+          "score": 39.5,
+          "source": "SWE-bench Pro leaderboard via swebench.com (Jul 2026)",
+          "date": "2026-07"
+        },
         "terminal_bench_2_1": null
       },
       "speed_tok_per_s": null,
@@ -704,7 +716,7 @@
         },
         "swe_bench_verified": {
           "score": 88.7,
-          "source": "SWE-bench Verified leaderboard (mid-2026)",
+          "source": "OpenAI self-reported. Vals.ai independent evaluation shows 82.6. 88.7 stored per OpenAI's claim; 82.6 is the validated independent score.",
           "date": "2026-07"
         },
         "swe_bench_pro": {
@@ -980,7 +992,11 @@
           "date": "2026-07"
         },
         "swe_bench_verified": null,
-        "swe_bench_pro": null,
+        "swe_bench_pro": {
+          "score": 52.4,
+          "source": "SWE-bench Pro leaderboard via swebench.com (Jul 2026)",
+          "date": "2026-07"
+        },
         "terminal_bench_2_1": null
       },
       "speed_tok_per_s": null,
@@ -1823,9 +1839,9 @@
           "date": "2026-07"
         },
         "swe_bench_verified": {
-          "score": 65.0,
-          "source": "OpenAI model card",
-          "date": "2025-01"
+          "score": 49.3,
+          "source": "BenchLM.ai (Jul 2026). Previously 65.0 from Jan 2025 model card — stale data corrected.",
+          "date": "2026-07"
         },
         "swe_bench_pro": null,
         "terminal_bench_2_1": null,
@@ -2103,7 +2119,7 @@
         },
         "swe_bench_verified": {
           "score": 75.0,
-          "source": "SWE-bench Verified leaderboard (Jun 2026)",
+          "source": "SWE-bench Verified — NOT in BenchLM.ai top 57 (Jul 2026). Score from Jun 2026, needs live verification. May reflect a different subset or stale data.",
           "date": "2026-06"
         },
         "swe_bench_pro": null,
