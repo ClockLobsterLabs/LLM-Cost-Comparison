@@ -1,0 +1,70 @@
+model_id,model_name,family,sample_type,word_count,prompt_tokens,output_tokens,tokens_per_word,status
+ai21/jamba-large-1.7,Jamba Large 1.7,ai21,blended,250,474,20,1.9,success
+ai21/jamba-large-1.7,Jamba Large 1.7,ai21,prose,235,287,20,1.22,success
+ai21/jamba-large-1.7,Jamba Large 1.7,ai21,code,306,862,20,2.82,success
+cohere/command-a,Command A,cohere,blended,250,427,19,1.71,success
+cohere/command-a,Command A,cohere,prose,235,265,19,1.13,success
+cohere/command-a,Command A,cohere,code,306,765,19,2.5,success
+mistralai/codestral-2508,Codestral,mistral,blended,250,433,20,1.73,success
+mistralai/codestral-2508,Codestral,mistral,prose,235,277,20,1.18,success
+mistralai/codestral-2508,Codestral,mistral,code,306,687,20,2.25,success
+mistralai/mistral-large-2512,Mistral Large 3,mistral,blended,250,433,20,1.73,success
+mistralai/mistral-large-2512,Mistral Large 3,mistral,prose,235,277,20,1.18,success
+mistralai/mistral-large-2512,Mistral Large 3,mistral,code,306,694,20,2.27,success
+openai/o3-mini,o3-mini,openai,blended,250,428,20,1.71,success
+openai/o3-mini,o3-mini,openai,prose,235,272,20,1.16,success
+openai/o3-mini,o3-mini,openai,code,306,672,20,2.2,success
+amazon/nova-premier-v1,Amazon Nova Premier,amazon,blended,250,479,20,1.92,success
+amazon/nova-premier-v1,Amazon Nova Premier,amazon,prose,235,307,20,1.31,success
+amazon/nova-premier-v1,Amazon Nova Premier,amazon,code,306,895,20,2.92,success
+perplexity/sonar-pro-search,Perplexity Sonar Pro Search,perplexity,blended,250,421,11,1.68,success
+perplexity/sonar-pro-search,Perplexity Sonar Pro Search,perplexity,prose,235,269,17,1.14,success
+perplexity/sonar-pro-search,Perplexity Sonar Pro Search,perplexity,code,306,663,11,2.17,success
+perplexity/sonar-pro,Perplexity Sonar Pro,perplexity,blended,250,421,11,1.68,success
+perplexity/sonar-pro,Perplexity Sonar Pro,perplexity,prose,235,269,11,1.14,success
+perplexity/sonar-pro,Perplexity Sonar Pro,perplexity,code,306,663,11,2.17,success
+amazon/nova-pro-v1,Amazon Nova Pro,amazon,blended,250,439,20,1.76,success
+amazon/nova-pro-v1,Amazon Nova Pro,amazon,prose,235,273,20,1.16,success
+amazon/nova-pro-v1,Amazon Nova Pro,amazon,code,306,750,20,2.45,success
+microsoft/phi-4,Phi-4,microsoft,blended,250,428,20,1.71,success
+microsoft/phi-4,Phi-4,microsoft,prose,235,276,20,1.17,success
+microsoft/phi-4,Phi-4,microsoft,code,306,670,20,2.19,success
+meta-llama/llama-3.3-70b-instruct,Llama 3.3 70B,meta,blended,250,456,20,1.82,success
+meta-llama/llama-3.3-70b-instruct,Llama 3.3 70B,meta,prose,235,279,20,1.19,success
+meta-llama/llama-3.3-70b-instruct,Llama 3.3 70B,meta,code,306,673,20,2.2,success
+google/gemini-2.5-pro-preview-05-06,Gemini 2.5 Pro,gemini,blended,250,429,16,1.72,success
+google/gemini-2.5-pro-preview-05-06,Gemini 2.5 Pro,gemini,prose,235,267,17,1.14,success
+google/gemini-2.5-pro-preview-05-06,Gemini 2.5 Pro,gemini,code,306,820,17,2.68,success
+deepseek/deepseek-chat-v3,DeepSeek Chat V3,deepseek,blended,250,440,20,1.76,success
+deepseek/deepseek-chat-v3,DeepSeek Chat V3,deepseek,prose,235,280,20,1.19,success
+deepseek/deepseek-chat-v3,DeepSeek Chat V3,deepseek,code,306,699,20,2.28,success
+deepseek/deepseek-r1,DeepSeek R1,deepseek,blended,250,440,20,1.76,success
+deepseek/deepseek-r1,DeepSeek R1,deepseek,prose,235,280,20,1.19,success
+deepseek/deepseek-r1,DeepSeek R1,deepseek,code,306,699,20,2.28,success
+minimax/minimax-m2.5,MiniMax M3,minimax,blended,250,460,20,1.84,success
+minimax/minimax-m2.5,MiniMax M3,minimax,prose,235,303,20,1.29,success
+minimax/minimax-m2.5,MiniMax M3,minimax,code,306,714,20,2.33,success
+x-ai/grok-4.5,Grok 4.5,grok,blended,250,634,959,2.54,success
+x-ai/grok-4.5,Grok 4.5,grok,prose,235,473,461,2.01,success
+x-ai/grok-4.5,Grok 4.5,grok,code,306,946,1161,3.09,success
+z-ai/glm-5.2,GLM 5.2,glm,blended,250,433,20,1.73,success
+z-ai/glm-5.2,GLM 5.2,glm,prose,235,281,20,1.2,success
+z-ai/glm-5.2,GLM 5.2,glm,code,306,675,20,2.21,success
+openai/gpt-5.4-nano,GPT-5.4 Nano,openai,blended,250,428,20,1.71,success
+openai/gpt-5.4-nano,GPT-5.4 Nano,openai,prose,235,272,20,1.16,success
+openai/gpt-5.4-nano,GPT-5.4 Nano,openai,code,306,672,20,2.2,success
+anthropic/claude-haiku-4.5,Claude Haiku 4.5,anthropic,blended,250,469,20,1.88,success
+anthropic/claude-haiku-4.5,Claude Haiku 4.5,anthropic,prose,235,306,20,1.3,success
+anthropic/claude-haiku-4.5,Claude Haiku 4.5,anthropic,code,306,864,20,2.82,success
+deepseek/deepseek-v4-flash,DeepSeek V4 Flash,deepseek,prose,235,281,21,1.2,success
+deepseek/deepseek-v4-flash,DeepSeek V4 Flash,deepseek,blended,250,458,259,1.83,success
+deepseek/deepseek-v4-flash,DeepSeek V4 Flash,deepseek,code,306,700,21,2.29,success
+moonshotai/kimi-k2.7-code,Kimi K2.7 Code,kimi,prose,235,273,20,1.16,success
+moonshotai/kimi-k2.7-code,Kimi K2.7 Code,kimi,blended,250,428,20,1.71,success
+moonshotai/kimi-k2.7-code,Kimi K2.7 Code,kimi,code,306,676,20,2.21,success
+deepseek/deepseek-v3.2,DeepSeek V3.2,deepseek,prose,235,287,20,1.22,success
+deepseek/deepseek-v3.2,DeepSeek V3.2,deepseek,blended,250,441,20,1.76,success
+deepseek/deepseek-v3.2,DeepSeek V3.2,deepseek,code,306,706,20,2.31,success
+meta-llama/llama-4-maverick,Llama 4 Maverick,meta,prose,235,280,20,1.19,success
+meta-llama/llama-4-maverick,Llama 4 Maverick,meta,blended,250,430,20,1.72,success
+meta-llama/llama-4-maverick,Llama 4 Maverick,meta,code,306,679,20,2.22,success
