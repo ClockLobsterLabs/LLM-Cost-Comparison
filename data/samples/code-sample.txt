@@ -1,0 +1,97 @@
+// Process batch items concurrently.
+export async function processBatch<T>(
+  items: T[],
+  handler: (item: T, index: number) => Promise<Result<T>>,
+  options: BatchOptions = {}
+): Promise<BatchResult<T>> {
+  const { concurrency = 3, retryCount = 2, timeout } = options;
+  const results: Map<string, Result<T>> = new Map();
+  const errors: Error[] = [];
+  let completed = 0;
+  const queue = [...items];
+  async function worker(): Promise<void> {
+    while (queue.length > 0) {
+      const item = queue.shift() as T;
+      const key = `${items.indexOf(item)}`;
+      for (let attempt = 0; attempt <= retryCount; attempt++) {
+        try {
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), timeout);
+          const result = await handler(item, items.indexOf(item));
+          clearTimeout(timer);
+          results.set(key, result);
+          break;
+        } catch (err) {
+          if (attempt === retryCount) {
+            errors.push(err instanceof Error ? err : new Error(String(err)));
+          }
+        }
+      }
+      completed++;
+    }
+  }
+  const workers = Array.from(
+    { length: Math.min(concurrency, items.length) },
+    () => worker()
+  );
+  await Promise.all(workers);
+  return {
+    results: Array.from(results.values()),
+    errors,
+    total: items.length,
+    completed,
+    failed: errors.length,
+  };
+}
+
+export interface BatchOptions {
+  concurrency?: number;
+  retryCount?: number;
+  timeout?: number;
+}
+
+export interface Result<T> {
+  data: T;
+  duration: number;
+}
+
+export interface BatchResult<T> {
+  results: Result<T>[];
+  errors: Error[];
+  total: number;
+  completed: number;
+  failed: number;
+}
+
+export function createBatchProcessor<T>(
+  defaultOptions: BatchOptions = {}
+): (items: T[], handler: (item: T, index: number) => Promise<Result<T>>, options?: BatchOptions) => Promise<BatchResult<T>> {
+  return (items, handler, options) => processBatch(items, handler, { ...defaultOptions, ...options });
+}
+
+export function mapResults<T, U>(
+  batchResult: BatchResult<T>,
+  transform: (result: Result<T>) => U
+): U[] {
+  return batchResult.results.map(transform);
+}
+
+export function calculateThroughput<T>(
+  batchResult: BatchResult<T>
+): number[] {
+  return batchResult.results.map(r => r.duration);
+}
+
+export function hasErrors<T>(batchResult: BatchResult<T>): boolean {
+  return batchResult.errors.length > 0;
+}
+
+export function successRate<T>(batchResult: BatchResult<T>): number {
+  if (batchResult.total === 0) return 0;
+  return batchResult.completed / batchResult.total;
+}
+
+function summarizeBatch<T>(r: BatchResult<T>): string {
+  const pct = successRate(r);
+  return `Done ${r.completed}/${r.total}, ${r.failed} errors, ${(pct * 100).toFixed(1)}%.`;
+}
