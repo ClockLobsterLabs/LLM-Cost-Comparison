@@ -88,13 +88,16 @@ Each model family tokenizes text differently. E = tokens per word. Two raw value
 | Anthropic (Claude) | 2.25 | 1.25 | 1.85 | Yes (Haiku 4.5) | Most verbose code tokenizer in measured set |
 | GLM / Zhipu | 1.87 | 1.18 | 1.59 | Yes (GLM 5.2) | Best blend efficiency in measured set |
 | Kimi / Moonshot | 1.90 | 1.16 | 1.60 | Yes (K2.7 Code) | Similar to GLM, weaker on prose |
-| GPT (o200k) | 2.07 | 1.19 | 1.72 | Yes (5.4 Nano/Mini) | o200k tokenizer, all GPT-5.x/4.x models |
+| GPT (o200k) | 2.07 | 1.19 | 1.72 | Yes (5.4 Nano/Mini) | o200k tokenizer, all GPT-5.x/4.x/o-series |
 | Gemini | — | — | 1.65 | No | Estimated — OpenRouter doesn't report usage for Gemini |
 | Grok / xAI | 2.89 | 1.81 | 2.46 | Yes (Grok 4.5) | Most verbose tokenizer — 2× DS tokens per word |
 | MiniMax | 2.67 | 1.72 | 2.29 | Yes (M3) | Second most verbose |
 | Qwen / Alibaba | — | — | 1.60 | No | Estimated — guardrail blocked measurement |
 | Perplexity Sonar | 2.22 | 1.15 | 1.79 | Yes (Sonar Pro) | Search-augmented, distinctive code/prose split |
 | Amazon Nova Premier | 2.88 | 1.29 | 2.24 | Yes (Premier v1) | Very verbose — third most verbose measured |
+| Mistral | 2.04 | 1.15 | 1.68 | Yes (Large 3, Codestral) | SentencePiece, Llama-like efficiency |
+| Cohere | 2.13 | 1.10 | 1.72 | Yes (Command A) | C4 tokenizer, mid-efficiency |
+| AI21 Jamba | 2.48 | 1.21 | 1.97 | Yes (Jamba Large 1.7) | Third most verbose measured — dense tokenizer |
 
 ## Appraisal Table Template — Primary View
 

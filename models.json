@@ -1,6 +1,6 @@
 {
   "$schema": "./models.schema.json",
-  "last_updated": "2026-07-08 (Added Perplexity Sonar Pro/Search (E=1.79) and Amazon Nova Premier (E=2.24); measured via OpenRouter API)",
+  "last_updated": "2026-07-08 (Session 4: measured Mistral Large 3/Codestral E=1.68, Command A E=1.72, Jamba 1.7 E=1.97, o3-mini E=1.64)",
   "pricing_sources": {
     "primary": {
       "name": "OpenCode Zen",
@@ -1845,7 +1845,7 @@
       "new_features": "Predecessor to o4-mini. Older reasoning model.",
       "specialty": "Cheap reasoning, coding",
       "strategy_note": "o4-mini is better at the same price. No reason to use o3-mini if o4-mini is available.",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.64
     },
     "deepseek-r1": {
       "name": "DeepSeek R1",
@@ -2191,7 +2191,7 @@
       "new_features": "Mistral flagship. 675B MoE. Open weights. Competitive with DeepSeek V3.2.",
       "specialty": "Open-weight European model, multilingual, enterprise",
       "strategy_note": "MMLU-Pro 85.46% is strong, but agentic coding benchmarks are missing. DeepSeek V4 Flash and V3.2 are cheaper with better coding scores. Consider if you need Mistral's European hosting.",
-      "tokenizer_efficiency": 1.74
+      "tokenizer_efficiency": 1.68
     },
     "codestral": {
       "name": "Codestral",
@@ -2232,7 +2232,7 @@
       "new_features": "Code-specialized model. 80+ programming languages. 256K context. Superseded by Codestral 2.0.",
       "specialty": "Code generation, multi-language completion",
       "strategy_note": "Weak SWE-bench Verified (40%) vs DeepSeek V4 Flash. Only relevant if you want a dedicated code model on Mistral's platform.",
-      "tokenizer_efficiency": 1.74
+      "tokenizer_efficiency": 1.68
     },
     "command-a": {
       "name": "Command A",
@@ -2279,7 +2279,7 @@
       "new_features": "Enterprise-focused. 256K context. Strong tool use and RAG. Open weights (non-commercial).",
       "specialty": "Enterprise tool use, RAG, long-context",
       "strategy_note": "Expensive ($10/M out) for its capability level. Cohere's strength is enterprise RAG and tool use, not raw coding. Skip unless you need Cohere's platform.",
-      "tokenizer_efficiency": 1.74
+      "tokenizer_efficiency": 1.72
     },
     "phi-4": {
       "name": "Phi-4",

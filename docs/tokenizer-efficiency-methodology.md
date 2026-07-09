@@ -90,10 +90,24 @@ For task-specific estimates, substitute the raw code or prose value from the fam
 | Perplexity Sonar Reasoning Pro | — | — | — | Timed out (search model) |
 | Perplexity Sonar Deep Research | — | — | — | Timed out (search model) |
 
-Blocked models' E values are estimated from family tokenizer similarity:
-- o4-mini, o3-mini: OpenAI o200k (same as GPT-5.x) → 1.72
-- Mistral Large, Codestral: SentencePiece, similar to Llama → 1.74
-- Command A: Cohere's C4 tokenizer, similar to Llama → 1.74
+### Session 4 (2026-07-08) — Guardrail-unblocked models
+
+After relaxing OpenRouter workspace guardrails (Model Access filtering), 5 previously blocked models became measurable:
+
+| Model | Code E | Prose E | Blend | Status |
+|-------|:-----:|:------:|:-----:|--------|
+| o3-mini | 1.97 | 1.15 | 1.64 | Measured (max_tokens≥16) |
+| Mistral Large 3 | 2.04 | 1.15 | 1.68 | Measured |
+| Codestral | 2.04 | 1.15 | 1.68 | Measured (same tokenizer as Large 3) |
+| Command A | 2.13 | 1.10 | 1.72 | Measured |
+| Jamba Large 1.7 | 2.48 | 1.21 | 1.97 | Measured |
+| o4-mini | — | — | 1.72 | Cannot measure — encrypted reasoning responses, no `usage.prompt_tokens` field |
+| Sakana Fugu Ultra | — | — | — | Non-standard token counting (~95 tok/word), $0.39/test, not comparable |
+| Inflection 3 Pi / Productivity | — | — | — | Provider returns empty responses (502) |
+
+Session 4 used shorter sample texts (152-word code, 125-word prose) than Sessions 1-3 (306-word code, 235-word prose). Values are consistent within the session but may have slightly different absolute values due to per-message overhead being amortized over fewer words.
+
+**Guardrail root cause**: The 11 blocked models were filtered by workspace-level guardrails (Model Access section), not account-level privacy settings. Relaxing the guardrail allowlist or policy restored access to all models that have working inference endpoints on OpenRouter.
 
 ### Families with Estimated Values (unmeasurable via OpenRouter)
 
