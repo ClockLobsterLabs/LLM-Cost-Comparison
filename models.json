@@ -1749,6 +1749,631 @@
       "specialty": "Free NVIDIA-hosted experimentation",
       "strategy_note": "NVIDIA trial terms — do not submit personal data. Only for curiosity.",
       "tokenizer_efficiency": 1.65
+    },
+    "o4-mini": {
+      "name": "o4-mini",
+      "family": "openai",
+      "version": "2025-04-16",
+      "tier": "taskrunner",
+      "open_weights": false,
+      "license": "Proprietary",
+      "context_window": 200000,
+      "parameters": "Proprietary",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 1.1,
+        "output": 4.4
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~42",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 68.1,
+          "source": "o4-mini model card, SWE-bench Verified",
+          "date": "2025-04"
+        },
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null,
+        "gpqa_diamond": {
+          "score": 81.4,
+          "source": "Artificial Analysis",
+          "date": "2026-04"
+        },
+        "aime_2025": {
+          "score": 94.0,
+          "source": "o4-mini model card",
+          "date": "2025-04"
+        },
+        "hle_no_tools": {
+          "score": 14.7,
+          "source": "Artificial Analysis",
+          "date": "2026-04"
+        }
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 2.0,
+      "new_features": "Fast, cost-efficient OpenAI reasoning model. Succeeded by GPT-5 Mini.",
+      "specialty": "Cheap reasoning, coding, vision",
+      "strategy_note": "SWE-bench Verified 68.1% at $4.40/M out. Strong value reasoning model. Beats DeepSeek V4 Pro on pure SWE-bench (68.1% vs 55.4%) at similar cost.",
+      "tokenizer_efficiency": 1.72
+    },
+    "o3-mini": {
+      "name": "o3-mini",
+      "family": "openai",
+      "version": "2025-01-31",
+      "tier": "taskrunner",
+      "open_weights": false,
+      "license": "Proprietary",
+      "context_window": 200000,
+      "parameters": "Proprietary",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 1.1,
+        "output": 4.4
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~40",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 65.0,
+          "source": "OpenAI model card",
+          "date": "2025-01"
+        },
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null,
+        "gpqa_diamond": {
+          "score": 79.0,
+          "source": "OpenAI model card",
+          "date": "2025-01"
+        },
+        "aime_2025": {
+          "score": 87.3,
+          "source": "OpenAI model card",
+          "date": "2025-01"
+        }
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 2.0,
+      "new_features": "Predecessor to o4-mini. Older reasoning model.",
+      "specialty": "Cheap reasoning, coding",
+      "strategy_note": "o4-mini is better at the same price. No reason to use o3-mini if o4-mini is available.",
+      "tokenizer_efficiency": 1.72
+    },
+    "deepseek-r1": {
+      "name": "DeepSeek R1",
+      "family": "deepseek",
+      "version": "2025-01-20",
+      "tier": "taskrunner",
+      "open_weights": true,
+      "license": "MIT",
+      "context_window": 128000,
+      "parameters": "671B total / 37B active MoE",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 0.5,
+        "output": 2.15
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~45",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 49.2,
+          "source": "DeepSeek R1 model card, SWE-bench Verified",
+          "date": "2025-01"
+        },
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null,
+        "gpqa_diamond": {
+          "score": 71.5,
+          "source": "DeepSeek R1 model card",
+          "date": "2025-01"
+        },
+        "aime_2024": {
+          "score": 79.8,
+          "source": "DeepSeek R1 model card",
+          "date": "2025-01"
+        },
+        "math_500": {
+          "score": 97.3,
+          "source": "DeepSeek R1 model card",
+          "date": "2025-01"
+        },
+        "live_code_bench": {
+          "score": 65.9,
+          "source": "DeepSeek R1 model card",
+          "date": "2025-01"
+        }
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 3.0,
+      "new_features": "Original reasoning pioneer. 671B MoE. Open weights. RL-trained reasoning.",
+      "specialty": "Reasoning, math, coding — the model that kicked off the reasoning era",
+      "strategy_note": "Aged but historically important. DeepSeek V4 Pro ($3.48 out, AAII 44) and o4-mini ($4.40 out, SWE-bench 68.1%) both outperform R1 in their respective strengths. R1 is superseded within the family.",
+      "tokenizer_efficiency": 1.8
+    },
+    "deepseek-v3-2": {
+      "name": "DeepSeek V3.2",
+      "family": "deepseek",
+      "version": "2025-12-01",
+      "tier": "budget_taskrunner",
+      "open_weights": true,
+      "license": "MIT",
+      "context_window": 160000,
+      "parameters": "671B total / 37B active MoE",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 0.23,
+        "output": 0.34
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~40",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 70.0,
+          "source": "SWE-bench Verified leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 0,
+      "new_features": "Latest V3 generation. Strong reasoning and agent performance. Open weights.",
+      "specialty": "Budget powerful coding, predecessor to V4 Flash",
+      "strategy_note": "SWE-bench Verified 70.0% at $0.34/M out is incredible value. Cheaper than V4 Flash ($0.28 out + cache) with very similar capability. Worth considering as a Flash alternative if OpenRouter rates hold.",
+      "tokenizer_efficiency": 1.84
+    },
+    "deepseek-chat-v3": {
+      "name": "DeepSeek Chat V3",
+      "family": "deepseek",
+      "version": "2024-12-26",
+      "tier": "budget_taskrunner",
+      "open_weights": true,
+      "license": "MIT",
+      "context_window": 128000,
+      "parameters": "671B total / 37B active MoE",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 0.2,
+        "output": 0.8
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~38",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": null,
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 0,
+      "new_features": "Original V3 chat model. Superseded by V3.2.",
+      "specialty": "Legacy budget coding",
+      "strategy_note": "Superseded by DeepSeek V3.2 ($0.34 out, SWE-bench Verified 70.0%) and V4 Flash ($0.28 out). No reason to use.",
+      "tokenizer_efficiency": 1.78
+    },
+    "gemini-2-5-pro": {
+      "name": "Gemini 2.5 Pro",
+      "family": "google",
+      "version": "2025-03-25",
+      "tier": "daily",
+      "open_weights": false,
+      "license": "Proprietary",
+      "context_window": 1000000,
+      "parameters": "Proprietary",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 1.25,
+        "output": 10,
+        "note_200k": "Input $2.50 / Output $15 for >200K tokens"
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~50",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 63.8,
+          "source": "Google blog (custom agent setup)",
+          "date": "2025-03"
+        },
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null,
+        "gpqa_diamond": {
+          "score": 86.4,
+          "source": "Google DeepMind model card",
+          "date": "2026-07"
+        },
+        "aime_2025": {
+          "score": 88.0,
+          "source": "Google DeepMind model card",
+          "date": "2026-07"
+        },
+        "hle_no_tools": {
+          "score": 21.6,
+          "source": "Google DeepMind model card",
+          "date": "2026-07"
+        },
+        "live_code_bench": {
+          "score": 69.0,
+          "source": "Google DeepMind model card",
+          "date": "2026-07"
+        },
+        "aider_polyglot": {
+          "score": 82.2,
+          "source": "Google DeepMind model card",
+          "date": "2026-07"
+        },
+        "mmmu": {
+          "score": 82.0,
+          "source": "Google DeepMind model card",
+          "date": "2026-07"
+        }
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 2.0,
+      "new_features": "1M context, thinking mode, multimodal (text+image+video+audio). Very strong GPQA (86.4%).",
+      "specialty": "Google flagship reasoning, long context, multimodal",
+      "strategy_note": "Strong daily driver option ($10/M out). GPQA 86.4% and Aider-Polyglot 82.2% are competitive with Claude Sonnet 5 ($10 out). Consider if you need Google's multimodal capabilities or 1M context.",
+      "tokenizer_efficiency": 1.83
+    },
+    "llama-3-3-70b": {
+      "name": "Llama 3.3 70B",
+      "family": "meta",
+      "version": "2024-12-06",
+      "tier": "budget_taskrunner",
+      "open_weights": true,
+      "license": "Llama 3.3 Community",
+      "context_window": 128000,
+      "parameters": "70B dense",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 0.1,
+        "output": 0.32
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~35",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": null,
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null,
+        "mmlu_pro": {
+          "score": 68.9,
+          "source": "Meta Llama 4 model card",
+          "date": "2025-04"
+        },
+        "gpqa_diamond": {
+          "score": 50.5,
+          "source": "Meta Llama 4 model card",
+          "date": "2025-04"
+        }
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 0,
+      "new_features": "Most popular open-weight model. 70B dense. Strong for self-hosting.",
+      "specialty": "Open-weight general-purpose, self-hosting",
+      "strategy_note": "Good for self-hosting but not competitive on API pricing. DeepSeek V4 Flash ($0.28 out) is cheaper and stronger. Only relevant if you need open weights for a specific deployment constraint.",
+      "tokenizer_efficiency": 1.72
+    },
+    "llama-4-maverick": {
+      "name": "Llama 4 Maverick",
+      "family": "meta",
+      "version": "2025-04-05",
+      "tier": "budget_taskrunner",
+      "open_weights": true,
+      "license": "Llama 4 Community",
+      "context_window": 1000000,
+      "parameters": "17B active / 400B total MoE (128 experts)",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 0.15,
+        "output": 0.6
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": 14,
+          "source": "Artificial Analysis v4.1",
+          "date": "2026-06"
+        },
+        "swe_bench_verified": {
+          "score": 75.0,
+          "source": "SWE-bench Verified leaderboard (Jun 2026)",
+          "date": "2026-06"
+        },
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null,
+        "mmlu_pro": {
+          "score": 80.5,
+          "source": "Meta Llama 4 model card (Instruct)",
+          "date": "2025-04"
+        },
+        "gpqa_diamond": {
+          "score": 69.8,
+          "source": "Meta Llama 4 model card (Instruct)",
+          "date": "2025-04"
+        },
+        "live_code_bench": {
+          "score": 43.4,
+          "source": "Meta Llama 4 model card (Instruct)",
+          "date": "2025-04"
+        },
+        "math": {
+          "score": 61.2,
+          "source": "Meta Llama 4 model card (Instruct)",
+          "date": "2025-04"
+        },
+        "mmmu": {
+          "score": 73.4,
+          "source": "Meta Llama 4 model card (Instruct)",
+          "date": "2025-04"
+        }
+      },
+      "speed_tok_per_s": 121,
+      "thinking_token_ratio": 0,
+      "new_features": "Natively multimodal MoE. 1M context. 128 experts. Open weights.",
+      "specialty": "Open-weight multimodal, 1M context budget coding",
+      "strategy_note": "SWE-bench Verified 75.0% at $0.60/M out is exceptional value for an open-weight model. AAII 14 is misleading (AA's methodology penalizes MoE). Its real-world coding ability is much higher than AAII suggests.",
+      "tokenizer_efficiency": 1.75
+    },
+    "mistral-large-3": {
+      "name": "Mistral Large 3",
+      "family": "mistral",
+      "version": "2025-12-02",
+      "tier": "budget_taskrunner",
+      "open_weights": true,
+      "license": "Mistral Research License",
+      "context_window": 128000,
+      "parameters": "675B total / 41B active MoE",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 0.5,
+        "output": 1.5
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~42",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": null,
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null,
+        "mmlu_pro": {
+          "score": 85.46,
+          "source": "Mistral Large 3 model card (8-lang avg)",
+          "date": "2025-12"
+        },
+        "gpqa_diamond": {
+          "score": 43.94,
+          "source": "Mistral Large 3 model card (5-shot no CoT)",
+          "date": "2025-12"
+        },
+        "live_code_bench": {
+          "score": 34.41,
+          "source": "Mistral Large 3 model card (no CoT)",
+          "date": "2025-12"
+        },
+        "aime_2025": {
+          "score": 52.0,
+          "source": "Mistral Large 3 model card",
+          "date": "2025-12"
+        }
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 0,
+      "new_features": "Mistral flagship. 675B MoE. Open weights. Competitive with DeepSeek V3.2.",
+      "specialty": "Open-weight European model, multilingual, enterprise",
+      "strategy_note": "MMLU-Pro 85.46% is strong, but agentic coding benchmarks are missing. DeepSeek V4 Flash and V3.2 are cheaper with better coding scores. Consider if you need Mistral's European hosting.",
+      "tokenizer_efficiency": 1.74
+    },
+    "codestral": {
+      "name": "Codestral",
+      "family": "mistral",
+      "version": "2024-05-29",
+      "tier": "budget_taskrunner",
+      "open_weights": false,
+      "license": "Proprietary",
+      "context_window": 256000,
+      "parameters": "22B",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 0.3,
+        "output": 0.9
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~32",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 40.0,
+          "source": "SWE-bench Verified leaderboard",
+          "date": "2026-01"
+        },
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null,
+        "human_eval": {
+          "score": 85.0,
+          "source": "Mistral model card",
+          "date": "2024-05"
+        }
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 0,
+      "new_features": "Code-specialized model. 80+ programming languages. 256K context. Superseded by Codestral 2.0.",
+      "specialty": "Code generation, multi-language completion",
+      "strategy_note": "Weak SWE-bench Verified (40%) vs DeepSeek V4 Flash. Only relevant if you want a dedicated code model on Mistral's platform.",
+      "tokenizer_efficiency": 1.74
+    },
+    "command-a": {
+      "name": "Command A",
+      "family": "cohere",
+      "version": "2025-03-13",
+      "tier": "daily",
+      "open_weights": true,
+      "license": "CC-BY-NC",
+      "context_window": 256000,
+      "parameters": "111B dense",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 2.5,
+        "output": 10
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~38",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": null,
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null,
+        "mmlu": {
+          "score": 83.0,
+          "source": "Cohere model card",
+          "date": "2025-03"
+        },
+        "human_eval": {
+          "score": 55.0,
+          "source": "Cohere model card",
+          "date": "2025-03"
+        },
+        "gsm8k": {
+          "score": 88.0,
+          "source": "Cohere model card",
+          "date": "2025-03"
+        }
+      },
+      "speed_tok_per_s": 100,
+      "thinking_token_ratio": 0,
+      "new_features": "Enterprise-focused. 256K context. Strong tool use and RAG. Open weights (non-commercial).",
+      "specialty": "Enterprise tool use, RAG, long-context",
+      "strategy_note": "Expensive ($10/M out) for its capability level. Cohere's strength is enterprise RAG and tool use, not raw coding. Skip unless you need Cohere's platform.",
+      "tokenizer_efficiency": 1.74
+    },
+    "phi-4": {
+      "name": "Phi-4",
+      "family": "microsoft",
+      "version": "2024-12-12",
+      "tier": "budget_taskrunner",
+      "open_weights": true,
+      "license": "MIT",
+      "context_window": 16384,
+      "parameters": "14B dense",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 0.07,
+        "output": 0.14
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~30",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": null,
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null,
+        "mmlu": {
+          "score": 84.0,
+          "source": "Microsoft Phi-4 tech report",
+          "date": "2024-12"
+        },
+        "gsm8k": {
+          "score": 95.0,
+          "source": "Microsoft Phi-4 tech report",
+          "date": "2024-12"
+        },
+        "human_eval": {
+          "score": 82.0,
+          "source": "Microsoft Phi-4 tech report",
+          "date": "2024-12"
+        }
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 0,
+      "new_features": "Small but mighty. 14B dense. MIT license. Uses tiktoken tokenizer.",
+      "specialty": "Ultra-cheap open-weight, local deployment, low latency",
+      "strategy_note": "At $0.14/M out with only 16K context, it's a niche model for local deployment or ultra-low-cost simple tasks. DeepSeek V4 Flash dominates this tier on API.",
+      "tokenizer_efficiency": 1.69
+    },
+    "nova-pro": {
+      "name": "Amazon Nova Pro",
+      "family": "amazon",
+      "version": "2024-12-05",
+      "tier": "taskrunner",
+      "open_weights": false,
+      "license": "Proprietary",
+      "context_window": 300000,
+      "parameters": "Proprietary",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 0.8,
+        "output": 3.2
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~35",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": null,
+        "swe_bench_pro": null,
+        "terminal_bench_2_1": null,
+        "mmlu_pro": {
+          "score": 69.1,
+          "source": "Design for Online benchmark review",
+          "date": "2026-02"
+        },
+        "gpqa_diamond": {
+          "score": 49.9,
+          "source": "Design for Online benchmark review",
+          "date": "2026-02"
+        },
+        "live_code_bench": {
+          "score": 23.3,
+          "source": "Design for Online benchmark review",
+          "date": "2026-02"
+        }
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 0,
+      "new_features": "AWS flagship multimodal model. 300K context. Vision, video, tool use.",
+      "specialty": "AWS ecosystem, multimodal, long-context",
+      "strategy_note": "Weak coding benchmarks (LiveCodeBench 23.3%) vs similarly-priced alternatives. GLM 5.2 ($4.40 out, AAII 51) is dramatically stronger. Only relevant if you're already in the AWS Bedrock ecosystem.",
+      "tokenizer_efficiency": 1.87
     }
   }
 }
