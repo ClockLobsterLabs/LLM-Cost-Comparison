@@ -76,6 +76,20 @@ For task-specific estimates, substitute the raw code or prose value from the fam
 | Codestral | — | — | 1.74 | Blocked — privacy guardrail |
 | Cohere Command A | — | — | 1.74 | Blocked — privacy guardrail |
 
+### Session 3 (2026-07-08, later) — Expensive models (> $6/M out)
+
+| Model | Code E | Prose E | Blend | Status |
+|-------|:-----:|:------:|:-----:|--------|
+| Perplexity Sonar Pro Search | 2.22 | 1.15 | 1.79 | Measured (long sample) |
+| Perplexity Sonar Pro | 2.22 | 1.15 | 1.79 | Measured (long sample, same tokenizer) |
+| Amazon Nova Premier | 2.88 | 1.29 | 2.24 | Measured (long sample) |
+| Sakana Fugu Ultra | — | — | — | Blocked — privacy guardrail |
+| Inflection-3 Pi | — | — | — | Blocked — privacy guardrail |
+| Inflection-3 Productivity | — | — | — | Blocked — privacy guardrail |
+| AI21 Jamba Large 1.7 | — | — | — | Blocked — privacy guardrail |
+| Perplexity Sonar Reasoning Pro | — | — | — | Timed out (search model) |
+| Perplexity Sonar Deep Research | — | — | — | Timed out (search model) |
+
 Blocked models' E values are estimated from family tokenizer similarity:
 - o4-mini, o3-mini: OpenAI o200k (same as GPT-5.x) → 1.72
 - Mistral Large, Codestral: SentencePiece, similar to Llama → 1.74
@@ -101,16 +115,17 @@ All API calls used `max_tokens=20` with minimal output text, making input tokens
 | Session 2 — long-sample re-tests | 4 | ~$0.003 |
 | Session 2 — 8 newly measured models | 16 | ~$0.005 |
 | Session 2 — 5 guardrail-blocked models | 10 | $0 (not billed) |
-| **Total** | **52** | **~$0.01** |
+| Session 3 — 9 expensive models (> $6/M out) | 18 | ~$0.06 |
+| **Total** | **70** | **~$0.07** |
 
 The entire measurement campaign cost approximately **1 cent (USD)** on OpenRouter. This is why the methodology is sustainable: measuring a new model costs about $0.0003–0.002 per family.
 
 ### Cost Per Model (detailed)
 
 Most expensive calls:
+- Perplexity Sonar Pro: ~$0.015 (2 calls) — $3.00/M input + $15/M output, verbose code (2.22)
+- Amazon Nova Premier: ~$0.008 (2 calls) — $2.50/M input + $12.50/M output, very verbose (2.88 code)
 - Gemini 2.5 Pro: ~$0.002 (2 calls) — $1.25/M input + $10/M output
-- Grok 4.5 (long): ~$0.002 (2 calls) — $1.50/M input + verbose tokenizer
-- Amazon Nova Pro: ~$0.001 (2 calls) — $0.80/M input
 
 Cheapest calls:
 - Phi-4: ~$0.00009 (2 calls) — $0.07/M input

@@ -1,6 +1,6 @@
 {
   "$schema": "./models.schema.json",
-  "last_updated": "2026-07-08 (Measured tokenizer_efficiency via OpenRouter API for 8 model families; updated all 35 models with code/prose blend values)",
+  "last_updated": "2026-07-08 (Added Perplexity Sonar Pro/Search (E=1.79) and Amazon Nova Premier (E=2.24); measured via OpenRouter API)",
   "pricing_sources": {
     "primary": {
       "name": "OpenCode Zen",
@@ -2374,6 +2374,91 @@
       "specialty": "AWS ecosystem, multimodal, long-context",
       "strategy_note": "Weak coding benchmarks (LiveCodeBench 23.3%) vs similarly-priced alternatives. GLM 5.2 ($4.40 out, AAII 51) is dramatically stronger. Only relevant if you're already in the AWS Bedrock ecosystem.",
       "tokenizer_efficiency": 1.87
+    },
+    "perplexity-sonar-pro-search": {
+      "name": "Perplexity Sonar Pro Search",
+      "family": "perplexity",
+      "version": "2025-05-01",
+      "tier": "daily",
+      "open_weights": false,
+      "license": "Proprietary",
+      "context_window": 200000,
+      "parameters": "Proprietary",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 3.0,
+        "output": 15.0
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": null,
+        "swe_bench_verified": null,
+        "simple_qa": {
+          "score": 93.1,
+          "source": "Perplexity model card",
+          "date": "2025-05"
+        }
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 0,
+      "new_features": "Search-augmented model. Real-time web search + answer generation. 200K context.",
+      "specialty": "Search-based Q&A, research, citations",
+      "strategy_note": "Expensive ($15/M out) for a search model. Use only when you need verified citations with LLM synthesis. Not a general coding model.",
+      "tokenizer_efficiency": 1.79
+    },
+    "perplexity-sonar-pro": {
+      "name": "Perplexity Sonar Pro",
+      "family": "perplexity",
+      "version": "2025-03-01",
+      "tier": "daily",
+      "open_weights": false,
+      "license": "Proprietary",
+      "context_window": 200000,
+      "parameters": "Proprietary",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 3.0,
+        "output": 15.0
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {},
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 0,
+      "new_features": "Search-augmented model. Predecessor to Sonar Pro Search.",
+      "specialty": "Search-based Q&A",
+      "strategy_note": "Superseded by Sonar Pro Search at same price. Same tokenizer.",
+      "tokenizer_efficiency": 1.79
+    },
+    "nova-premier-v1": {
+      "name": "Amazon Nova Premier",
+      "family": "amazon",
+      "version": "2025-05-01",
+      "tier": "daily",
+      "open_weights": false,
+      "license": "Proprietary",
+      "context_window": 1000000,
+      "parameters": "Proprietary",
+      "zen_available": false,
+      "openrouter_pricing": {
+        "input": 2.5,
+        "output": 12.5
+      },
+      "pricing_source": "openrouter",
+      "benchmarks": {
+        "aa_intelligence_index": null,
+        "swe_bench_verified": null,
+        "mmlu_pro": {
+          "score": 75.0,
+          "source": "Amazon model card",
+          "date": "2025-05"
+        }
+      },
+      "speed_tok_per_s": null,
+      "thinking_token_ratio": 0,
+      "new_features": "AWS highest-tier model. 1M context. Multimodal (text+image+video).",
+      "specialty": "AWS ecosystem premium, long-context, multimodal",
+      "strategy_note": "Very verbose tokenizer (E=2.24). Nova Pro ($3.20 out, E=1.87) is cheaper AND more efficient. Nova Premier's $12.50/M out with 20% more tokens per word makes it poor value vs alternatives.",
+      "tokenizer_efficiency": 2.24
     }
   }
 }

@@ -93,6 +93,8 @@ Each model family tokenizes text differently. E = tokens per word. Two raw value
 | Grok / xAI | 2.89 | 1.81 | 2.46 | Yes (Grok 4.5) | Most verbose tokenizer — 2× DS tokens per word |
 | MiniMax | 2.67 | 1.72 | 2.29 | Yes (M3) | Second most verbose |
 | Qwen / Alibaba | — | — | 1.60 | No | Estimated — guardrail blocked measurement |
+| Perplexity Sonar | 2.22 | 1.15 | 1.79 | Yes (Sonar Pro) | Search-augmented, distinctive code/prose split |
+| Amazon Nova Premier | 2.88 | 1.29 | 2.24 | Yes (Premier v1) | Very verbose — third most verbose measured |
 
 ## Appraisal Table Template — Primary View
 
@@ -169,8 +171,9 @@ When asked to appraise:
 
 | File | Purpose |
 |------|---------|
-| `Skills/Research/Appraise-LLM/models.json` | Canonical model database with pricing, benchmarks, features |
-| `Skills/Research/Appraise-LLM/SKILL.md` | This file — skill instructions |
+| `models.json` | Canonical model database with pricing, benchmarks, features |
+| `SKILL.md` | This file — skill instructions |
+| `docs/tokenizer-efficiency-methodology.md` | Methodology, cost breakdown, and measurement protocol |
 
 ## Pricing Methodology
 
