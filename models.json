@@ -1,6 +1,6 @@
 {
   "$schema": "./models.schema.json",
-  "last_updated": "2026-07-08 (Full benchmark suite populated: SWE-bench, Terminal-Bench, OSWorld, BrowseComp, GPQA, HLE, ARC-AGI, Tau2, MCP Atlas, Toolathlon, FrontierMath)",
+  "last_updated": "2026-07-08 (Measured tokenizer_efficiency via OpenRouter API for 8 model families; updated all 35 models with code/prose blend values)",
   "pricing_sources": {
     "primary": {
       "name": "OpenCode Zen",
@@ -21,7 +21,11 @@
       "output_price_min": 18,
       "role": "Hardest problems — architecture, audits, planning from scratch",
       "top_pick": "claude-fable-5",
-      "top_3": ["claude-fable-5", "gpt-5-5", "claude-opus-4-8"]
+      "top_3": [
+        "claude-fable-5",
+        "gpt-5-5",
+        "claude-opus-4-8"
+      ]
     },
     "daily": {
       "label": "Daily",
@@ -29,7 +33,11 @@
       "output_price_max": 17.99,
       "role": "Strong daily driver — general coding, reasoning",
       "top_pick": "claude-sonnet-5",
-      "top_3": ["claude-sonnet-5", "gpt-5-4", "gemini-3-1-pro"]
+      "top_3": [
+        "claude-sonnet-5",
+        "gpt-5-4",
+        "gemini-3-1-pro"
+      ]
     },
     "taskrunner": {
       "label": "Taskrunner",
@@ -37,7 +45,11 @@
       "output_price_max": 7.99,
       "role": "Fast routine tasks — implementation, refactoring, reviews",
       "top_pick": "glm-5-2",
-      "top_3": ["grok-4-5", "glm-5-2", "deepseek-v4-pro"]
+      "top_3": [
+        "grok-4-5",
+        "glm-5-2",
+        "deepseek-v4-pro"
+      ]
     },
     "budget_taskrunner": {
       "label": "Budget Taskrunner",
@@ -45,14 +57,22 @@
       "output_price_max": 1.99,
       "role": "High-volume, cost-sensitive work",
       "top_pick": "deepseek-v4-flash",
-      "top_3": ["deepseek-v4-flash", "gpt-5-4-nano", "qwen3-7-plus"]
+      "top_3": [
+        "deepseek-v4-flash",
+        "gpt-5-4-nano",
+        "qwen3-7-plus"
+      ]
     },
     "free": {
       "label": "Free",
       "output_price": 0,
       "role": "No-cost experimentation (data may train models)",
       "top_pick": "deepseek-v4-flash-free",
-      "top_3": ["deepseek-v4-flash-free", "big-pickle", "mimo-v2-5-free"]
+      "top_3": [
+        "deepseek-v4-flash-free",
+        "big-pickle",
+        "mimo-v2-5-free"
+      ]
     }
   },
   "default_slots": {
@@ -72,19 +92,37 @@
       "context_window": 1000000,
       "parameters": "284B total / 13B active MoE",
       "zen_available": true,
-      "zen_pricing": { "input": 0.14, "output": 0.28, "cached_read": 0.028 },
+      "zen_pricing": {
+        "input": 0.14,
+        "output": 0.28,
+        "cached_read": 0.028
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~35", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~35",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": { "score": 49.6, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 58.0, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" }
+        "swe_bench_pro": {
+          "score": 49.6,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 58.0,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        }
       },
       "speed_tok_per_s": 111,
+      "thinking_token_ratio": 0,
       "new_features": "Multi-Token Prediction, MoE 284B/13B, Deep EP optimization, 1M context",
       "specialty": "Cost-sensitive daily coding, general-purpose agent work",
-      "strategy_note": "Your daily driver on Zen. Best value in the market. No reason to switch within tier."
+      "strategy_note": "Your daily driver on Zen. Best value in the market. No reason to switch within tier.",
+      "tokenizer_efficiency": 1.65
     },
     "deepseek-v4-flash-max": {
       "name": "DeepSeek V4 Flash Max",
@@ -97,18 +135,35 @@
       "parameters": "284B total / 13B active MoE (Max config)",
       "zen_available": false,
       "zen_pricing": null,
-      "openrouter_pricing": { "input": 0.15, "output": 0.30 },
+      "openrouter_pricing": {
+        "input": 0.15,
+        "output": 0.3
+      },
       "pricing_source": "openrouter",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~35", "date": "2026-07" },
-        "swe_bench_verified": { "score": 75.8, "source": "SWE-bench Verified leaderboard (mid-2026)", "date": "2026-07" },
-        "swe_bench_pro": { "score": 49.6, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~35",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 75.8,
+          "source": "SWE-bench Verified leaderboard (mid-2026)",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": {
+          "score": 49.6,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
         "terminal_bench_2_1": null
       },
       "speed_tok_per_s": 111,
+      "thinking_token_ratio": 0,
       "new_features": "Same as Flash, Max serving config for best throughput",
       "specialty": "Your Max variant choice on OpenRouter. Same model, tuned serving.",
-      "strategy_note": "Your secondary daily on OpenRouter. Comparable to Zen Flash."
+      "strategy_note": "Your secondary daily on OpenRouter. Comparable to Zen Flash.",
+      "tokenizer_efficiency": 1.65
     },
     "deepseek-v4-pro": {
       "name": "DeepSeek V4 Pro",
@@ -120,19 +175,33 @@
       "context_window": 1000000,
       "parameters": "1.6T total / 49B active MoE",
       "zen_available": true,
-      "zen_pricing": { "input": 1.74, "output": 3.48, "cached_read": 0.145 },
+      "zen_pricing": {
+        "input": 1.74,
+        "output": 3.48,
+        "cached_read": 0.145
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 44, "source": "AA v4.1", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": 44,
+          "source": "AA v4.1",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": { "score": 55.4, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
+        "swe_bench_pro": {
+          "score": 55.4,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
         "terminal_bench_2_1": null
       },
       "speed_tok_per_s": 69.7,
+      "thinking_token_ratio": 4.0,
       "new_features": "1.6T MoE, 1M context, strong reasoning at low cost",
       "specialty": "Stronger reasoning than Flash, good for complex coding tasks",
-      "strategy_note": "Strong Taskrunner. Cheaper than GLM 5.2 ($3.48 vs $4.40 out) but lower AAII (44 vs 51). Good when GLM is overkill."
+      "strategy_note": "Strong Taskrunner. Cheaper than GLM 5.2 ($3.48 vs $4.40 out) but lower AAII (44 vs 51). Good when GLM is overkill. Warning: 4× thinking tax inflates effective output cost to $17.40/M (5× $3.48), jumping from Taskrunner to Daily tier.",
+      "tokenizer_efficiency": 1.65
     },
     "deepseek-v4-pro-max": {
       "name": "DeepSeek V4 Pro Max",
@@ -145,18 +214,35 @@
       "parameters": "1.6T total / 49B active MoE (Max config)",
       "zen_available": false,
       "zen_pricing": null,
-      "openrouter_pricing": { "input": 0.50, "output": 1.00 },
+      "openrouter_pricing": {
+        "input": 0.5,
+        "output": 1.0
+      },
       "pricing_source": "openrouter",
+      "thinking_token_ratio": 4.0,
       "benchmarks": {
-        "aa_intelligence_index": { "score": 44, "source": "AA v4.1 (Pro Max rating)", "date": "2026-07" },
-        "swe_bench_verified": { "score": 80.6, "source": "SWE-bench Verified leaderboard (mid-2026)", "date": "2026-07" },
-        "swe_bench_pro": null,
+        "aa_intelligence_index": {
+          "score": 44,
+          "source": "AA v4.1 (Pro Max rating)",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 80.6,
+          "source": "SWE-bench Verified leaderboard (mid-2026)",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": {
+          "score": 55.4,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
         "terminal_bench_2_1": null
       },
       "speed_tok_per_s": 69.7,
       "new_features": "Same as Pro, Max serving config",
       "specialty": "Pro quality at budget pricing on OpenRouter",
-      "strategy_note": "Remarkable value — $1/M out for 44 AAII on OpenRouter. Watch for price changes."
+      "strategy_note": "Remarkable value — $1/M out for 44 AAII on OpenRouter. Watch for price changes.",
+      "tokenizer_efficiency": 1.65
     },
     "deepseek-v4-flash-free": {
       "name": "DeepSeek V4 Flash Free",
@@ -168,19 +254,29 @@
       "context_window": 1000000,
       "parameters": "284B total / 13B active MoE",
       "zen_available": true,
-      "zen_pricing": { "input": 0, "output": 0, "cached_read": 0 },
+      "zen_pricing": {
+        "input": 0,
+        "output": 0,
+        "cached_read": 0
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 40, "source": "Same model as paid Flash", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": 40,
+          "source": "Same model as paid Flash",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
       },
       "speed_tok_per_s": 111,
+      "thinking_token_ratio": 0,
       "new_features": "Same as Flash, free tier (limited time, data may train model)",
       "specialty": "Best free model. Same capability as paid Flash.",
-      "strategy_note": "Limited availability. Data may train DeepSeek. Fine for experimentation."
+      "strategy_note": "Limited availability. Data may train DeepSeek. Fine for experimentation.",
+      "tokenizer_efficiency": 1.65
     },
     "claude-fable-5": {
       "name": "Claude Fable 5",
@@ -192,19 +288,41 @@
       "context_window": 1000000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 10, "output": 50, "cached_read": 1, "cached_write": 12.5 },
+      "zen_pricing": {
+        "input": 10,
+        "output": 50,
+        "cached_read": 1,
+        "cached_write": 12.5
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 56, "source": "AA v4.1", "date": "2026-07" },
-        "swe_bench_verified": { "score": 95.0, "source": "SWE-bench Verified leaderboard (mid-2026). Note: 'Suspended' status.", "date": "2026-07" },
-        "swe_bench_pro": { "score": 80.3, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 88.0, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" }
+        "aa_intelligence_index": {
+          "score": 56,
+          "source": "AA v4.1",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 95.0,
+          "source": "SWE-bench Verified leaderboard (mid-2026). Note: 'Suspended' status.",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": {
+          "score": 80.3,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 88.0,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Anthropic's newest frontier. #1 Arena ELO (1509). #1 Arena Agent (14.06% win rate).",
       "specialty": "Absolute frontier — planning, architecture, hardest problems",
-      "strategy_note": "Overkill for daily use vs your stack. Consider for critical planning/audit work if GLM 5.2 isn't enough."
+      "strategy_note": "Overkill for daily use vs your stack. Consider for critical planning/audit work if GLM 5.2 isn't enough.",
+      "tokenizer_efficiency": 1.85
     },
     "claude-opus-4-8": {
       "name": "Claude Opus 4.8",
@@ -216,31 +334,101 @@
       "context_window": 1000000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 5, "output": 25, "cached_read": 0.5, "cached_write": 6.25 },
+      "zen_pricing": {
+        "input": 5,
+        "output": 25,
+        "cached_read": 0.5,
+        "cached_write": 6.25
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 55, "source": "AA v4.1 (xhigh reasoning)", "date": "2026-07" },
-        "swe_bench_verified": { "score": 88.7, "source": "SWE-bench Verified leaderboard (mid-2026)", "date": "2026-07" },
-        "swe_bench_pro": { "score": 58.6, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 83.4, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" },
-        "os_world_verified": { "score": 78.7, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "browse_comp": { "score": 84.4, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "gpqa_diamond": { "score": 93.6, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "hle_no_tools": { "score": 41.4, "source": "openai.com (GPT-5.5 announcement, Humanity's Last Exam)", "date": "2026-04" },
-        "hle_with_tools": { "score": 52.2, "source": "openai.com (GPT-5.5 announcement, Humanity's Last Exam)", "date": "2026-04" },
-        "arc_agi_1": { "score": 95.0, "source": "openai.com (GPT-5.5 announcement, ARC-AGI-1 Verified)", "date": "2026-04" },
-        "arc_agi_2": { "score": 85.0, "source": "openai.com (GPT-5.5 announcement, ARC-AGI-2 Verified)", "date": "2026-04" },
-        "tau2_bench_telecom": { "score": 98.0, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "mcp_atlas": { "score": 75.3, "source": "openai.com (GPT-5.5 announcement, Scale AI)", "date": "2026-04" },
-        "toolathlon": { "score": 55.6, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "frontier_math_t1_3": { "score": 51.7, "source": "openai.com (GPT-5.5 announcement, FrontierMath Tiers 1-3)", "date": "2026-04" },
-        "frontier_math_t4": { "score": 35.4, "source": "openai.com (GPT-5.5 announcement, FrontierMath Tier 4)", "date": "2026-04" }
+        "aa_intelligence_index": {
+          "score": 55,
+          "source": "AA v4.1 (xhigh reasoning)",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 88.7,
+          "source": "SWE-bench Verified leaderboard (mid-2026)",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": {
+          "score": 58.6,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 83.4,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "os_world_verified": {
+          "score": 78.7,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "browse_comp": {
+          "score": 84.4,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "gpqa_diamond": {
+          "score": 93.6,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "hle_no_tools": {
+          "score": 41.4,
+          "source": "openai.com (GPT-5.5 announcement, Humanity's Last Exam)",
+          "date": "2026-04"
+        },
+        "hle_with_tools": {
+          "score": 52.2,
+          "source": "openai.com (GPT-5.5 announcement, Humanity's Last Exam)",
+          "date": "2026-04"
+        },
+        "arc_agi_1": {
+          "score": 95.0,
+          "source": "openai.com (GPT-5.5 announcement, ARC-AGI-1 Verified)",
+          "date": "2026-04"
+        },
+        "arc_agi_2": {
+          "score": 85.0,
+          "source": "openai.com (GPT-5.5 announcement, ARC-AGI-2 Verified)",
+          "date": "2026-04"
+        },
+        "tau2_bench_telecom": {
+          "score": 98.0,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "mcp_atlas": {
+          "score": 75.3,
+          "source": "openai.com (GPT-5.5 announcement, Scale AI)",
+          "date": "2026-04"
+        },
+        "toolathlon": {
+          "score": 55.6,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "frontier_math_t1_3": {
+          "score": 51.7,
+          "source": "openai.com (GPT-5.5 announcement, FrontierMath Tiers 1-3)",
+          "date": "2026-04"
+        },
+        "frontier_math_t4": {
+          "score": 35.4,
+          "source": "openai.com (GPT-5.5 announcement, FrontierMath Tier 4)",
+          "date": "2026-04"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Thinking mode available. Strong agentic coding. 1M context.",
       "specialty": "Premium agentic coding, complex reasoning",
-      "strategy_note": "Strongest Claude before Fable 5. Half the price of Fable on output. Consider if GLM 5.2 underperforms on a specific task."
+      "strategy_note": "Strongest Claude before Fable 5. Half the price of Fable on output. Consider if GLM 5.2 underperforms on a specific task.",
+      "tokenizer_efficiency": 1.85
     },
     "claude-opus-4-7": {
       "name": "Claude Opus 4.7",
@@ -252,29 +440,87 @@
       "context_window": 1000000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 5, "output": 25, "cached_read": 0.5, "cached_write": 6.25 },
+      "zen_pricing": {
+        "input": 5,
+        "output": 25,
+        "cached_read": 0.5,
+        "cached_write": 6.25
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 53, "source": "AA v4.1 (Thinking mode)", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": 53,
+          "source": "AA v4.1 (Thinking mode)",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": { "score": 64.3, "source": "SWE-bench Pro leaderboard (Jul 2026). Flagged: possible memorization contamination.", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 69.7, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" },
-        "os_world_verified": { "score": 78.0, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "browse_comp": { "score": 79.3, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "gpqa_diamond": { "score": 94.2, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "hle_no_tools": { "score": 46.9, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "hle_with_tools": { "score": 54.7, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "arc_agi_1": { "score": 93.5, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "arc_agi_2": { "score": 75.8, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "mcp_atlas": { "score": 79.1, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "frontier_math_t1_3": { "score": 43.8, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "frontier_math_t4": { "score": 22.9, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" }
+        "swe_bench_pro": {
+          "score": 64.3,
+          "source": "SWE-bench Pro leaderboard (Jul 2026). Flagged: possible memorization contamination.",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 69.7,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "os_world_verified": {
+          "score": 78.0,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "browse_comp": {
+          "score": 79.3,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "gpqa_diamond": {
+          "score": 94.2,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "hle_no_tools": {
+          "score": 46.9,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "hle_with_tools": {
+          "score": 54.7,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "arc_agi_1": {
+          "score": 93.5,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "arc_agi_2": {
+          "score": 75.8,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "mcp_atlas": {
+          "score": 79.1,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "frontier_math_t1_3": {
+          "score": 43.8,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "frontier_math_t4": {
+          "score": 22.9,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Previous Opus gen. Still strong. Same pricing as 4.8.",
       "specialty": "Premium general reasoning, coding",
-      "strategy_note": "Same price as 4.8 but slightly lower capability. Prefer 4.8 if both available on Zen."
+      "strategy_note": "Same price as 4.8 but slightly lower capability. Prefer 4.8 if both available on Zen.",
+      "tokenizer_efficiency": 1.85
     },
     "claude-opus-4-6": {
       "name": "Claude Opus 4.6",
@@ -286,19 +532,41 @@
       "context_window": 1000000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 5, "output": 25, "cached_read": 0.5, "cached_write": 6.25 },
+      "zen_pricing": {
+        "input": 5,
+        "output": 25,
+        "cached_read": 0.5,
+        "cached_write": 6.25
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 52, "source": "AA v4.1 (Thinking mode)", "date": "2026-07" },
-        "swe_bench_verified": { "score": 75.6, "source": "SWE-bench Verified leaderboard (mid-2026)", "date": "2026-07" },
-        "swe_bench_pro": { "score": 53.4, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 65.4, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" }
+        "aa_intelligence_index": {
+          "score": 52,
+          "source": "AA v4.1 (Thinking mode)",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 75.6,
+          "source": "SWE-bench Verified leaderboard (mid-2026)",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": {
+          "score": 53.4,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 65.4,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Previous Opus gen. Still on Zen. Replaced by Opus 4.7 and 4.8.",
       "specialty": "Premium general reasoning, coding",
-      "strategy_note": "Weaker than 4.7 and 4.8 at the same price ($25/M out). No reason to choose over newer Opus models."
+      "strategy_note": "Weaker than 4.7 and 4.8 at the same price ($25/M out). No reason to choose over newer Opus models.",
+      "tokenizer_efficiency": 1.85
     },
     "claude-sonnet-5": {
       "name": "Claude Sonnet 5",
@@ -310,19 +578,37 @@
       "context_window": 1000000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 2, "output": 10, "cached_read": 0.2, "cached_write": 2.5 },
+      "zen_pricing": {
+        "input": 2,
+        "output": 10,
+        "cached_read": 0.2,
+        "cached_write": 2.5
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 53, "source": "AA v4.1 (Max mode)", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": 53,
+          "source": "AA v4.1 (Max mode)",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": { "score": 63.2, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 80.4, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" }
+        "swe_bench_pro": {
+          "score": 63.2,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 80.4,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        }
       },
       "speed_tok_per_s": 84.8,
       "new_features": "Adaptive Reasoning (Low/Medium/High/XHigh/Max). Very verbose — 300M output tokens. Strong Arena presence.",
       "specialty": "Best daily driver at this price. Matches Opus 4.7 on AAII at 60% less cost.",
-      "strategy_note": "AAII 53 at $10/M out is exceptional. If you ever need a stronger daily than Flash, this is the upgrade path. Consider for complex one-off tasks where GLM is unavailable."
+      "strategy_note": "AAII 53 at $10/M out is exceptional. If you ever need a stronger daily than Flash, this is the upgrade path. Consider for complex one-off tasks where GLM is unavailable.",
+      "tokenizer_efficiency": 1.85
     },
     "claude-sonnet-4-6": {
       "name": "Claude Sonnet 4.6",
@@ -334,11 +620,20 @@
       "context_window": 1000000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 3, "output": 15, "cached_read": 0.3, "cached_write": 3.75 },
+      "zen_pricing": {
+        "input": 3,
+        "output": 15,
+        "cached_read": 0.3,
+        "cached_write": 3.75
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~48-50", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~48-50",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
@@ -346,7 +641,8 @@
       "speed_tok_per_s": null,
       "new_features": "1M context. Previous Sonnet gen.",
       "specialty": "Strong daily driver, one gen behind Sonnet 5",
-      "strategy_note": "Sonnet 5 is cheaper ($10 vs $15 out) and stronger. No reason to use 4.6 if 5 is available."
+      "strategy_note": "Sonnet 5 is cheaper ($10 vs $15 out) and stronger. No reason to use 4.6 if 5 is available.",
+      "tokenizer_efficiency": 1.85
     },
     "claude-haiku-4-5": {
       "name": "Claude Haiku 4.5",
@@ -358,11 +654,20 @@
       "context_window": 1000000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 1, "output": 5, "cached_read": 0.1, "cached_write": 1.25 },
+      "zen_pricing": {
+        "input": 1,
+        "output": 5,
+        "cached_read": 0.1,
+        "cached_write": 1.25
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~38-40", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~38-40",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
@@ -370,7 +675,8 @@
       "speed_tok_per_s": null,
       "new_features": "Fast, cheap Claude. 1M context.",
       "specialty": "Quick tasks, classification, structured output",
-      "strategy_note": "Good but DeepSeek V4 Pro ($3.48 out at AAII 44) beats it on value-to-capability ratio."
+      "strategy_note": "Good but DeepSeek V4 Pro ($3.48 out at AAII 44) beats it on value-to-capability ratio.",
+      "tokenizer_efficiency": 1.85
     },
     "gpt-5-5": {
       "name": "GPT-5.5",
@@ -391,27 +697,92 @@
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 55, "source": "AA v4.1 (xhigh reasoning)", "date": "2026-07" },
-        "swe_bench_verified": { "score": 88.7, "source": "SWE-bench Verified leaderboard (mid-2026)", "date": "2026-07" },
-        "swe_bench_pro": { "score": 58.6, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 83.4, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" },
-        "os_world_verified": { "score": 78.7, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "browse_comp": { "score": 84.4, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "gpqa_diamond": { "score": 93.6, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "hle_no_tools": { "score": 41.4, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "hle_with_tools": { "score": 52.2, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "arc_agi_1": { "score": 95.0, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "arc_agi_2": { "score": 85.0, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "tau2_bench_telecom": { "score": 98.0, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "mcp_atlas": { "score": 75.3, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "toolathlon": { "score": 55.6, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "frontier_math_t1_3": { "score": 51.7, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "frontier_math_t4": { "score": 35.4, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" }
+        "aa_intelligence_index": {
+          "score": 55,
+          "source": "AA v4.1 (xhigh reasoning)",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 88.7,
+          "source": "SWE-bench Verified leaderboard (mid-2026)",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": {
+          "score": 58.6,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 83.4,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "os_world_verified": {
+          "score": 78.7,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "browse_comp": {
+          "score": 84.4,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "gpqa_diamond": {
+          "score": 93.6,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "hle_no_tools": {
+          "score": 41.4,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "hle_with_tools": {
+          "score": 52.2,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "arc_agi_1": {
+          "score": 95.0,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "arc_agi_2": {
+          "score": 85.0,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "tau2_bench_telecom": {
+          "score": 98.0,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "mcp_atlas": {
+          "score": 75.3,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "toolathlon": {
+          "score": 55.6,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "frontier_math_t1_3": {
+          "score": 51.7,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "frontier_math_t4": {
+          "score": 35.4,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        }
       },
       "speed_tok_per_s": 75.6,
       "new_features": "Multimodal (text+image), 922K context, xhigh reasoning mode. Codex CLI agent scores #1 on Terminal-Bench.",
       "specialty": "Top-tier agentic coding. Best Terminal-Bench score.",
-      "strategy_note": "Best raw coding benchmark scores. Very expensive at $30/M out. Worth it if Terminal-Bench tasks match your workload. Otherwise, overpriced for your stack."
+      "strategy_note": "Best raw coding benchmark scores. Very expensive at $30/M out. Worth it if Terminal-Bench tasks match your workload. Otherwise, overpriced for your stack.",
+      "tokenizer_efficiency": 1.72
     },
     "gpt-5-5-pro": {
       "name": "GPT-5.5 Pro",
@@ -423,11 +794,19 @@
       "context_window": 922000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 30, "output": 180, "cached_read": 30 },
+      "zen_pricing": {
+        "input": 30,
+        "output": 180,
+        "cached_read": 30
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely >55, highest capability tier", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely >55, highest capability tier",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
@@ -435,7 +814,8 @@
       "speed_tok_per_s": null,
       "new_features": "Highest-tier OpenAI. Extreme pricing. Use only when nothing else works.",
       "specialty": "Maximum capability, no expense spared",
-      "strategy_note": "$180/M out. Strictly for problems no other model can solve. Unlikely to be worth it for your workflow."
+      "strategy_note": "$180/M out. Strictly for problems no other model can solve. Unlikely to be worth it for your workflow.",
+      "tokenizer_efficiency": 1.72
     },
     "gpt-5-4": {
       "name": "GPT-5.4",
@@ -456,27 +836,88 @@
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 51, "source": "AA v4.1 (High reasoning)", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": 51,
+          "source": "AA v4.1 (High reasoning)",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": { "score": 57.7, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 75.1, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" },
-        "os_world_verified": { "score": 75.0, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "browse_comp": { "score": 82.7, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "gpqa_diamond": { "score": 92.8, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "hle_no_tools": { "score": 39.8, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "hle_with_tools": { "score": 52.1, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "arc_agi_1": { "score": 93.7, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "arc_agi_2": { "score": 73.3, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "tau2_bench_telecom": { "score": 92.8, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "mcp_atlas": { "score": 70.6, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "toolathlon": { "score": 54.6, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "frontier_math_t1_3": { "score": 47.6, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "frontier_math_t4": { "score": 27.1, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" }
+        "swe_bench_pro": {
+          "score": 57.7,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 75.1,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "os_world_verified": {
+          "score": 75.0,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "browse_comp": {
+          "score": 82.7,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "gpqa_diamond": {
+          "score": 92.8,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "hle_no_tools": {
+          "score": 39.8,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "hle_with_tools": {
+          "score": 52.1,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "arc_agi_1": {
+          "score": 93.7,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "arc_agi_2": {
+          "score": 73.3,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "tau2_bench_telecom": {
+          "score": 92.8,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "mcp_atlas": {
+          "score": 70.6,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "toolathlon": {
+          "score": 54.6,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "frontier_math_t1_3": {
+          "score": 47.6,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "frontier_math_t4": {
+          "score": 27.1,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Strong all-rounder. Replaced by GPT-5.5 for frontier work.",
       "specialty": "Reliable general-purpose coding, reasoning",
-      "strategy_note": "Solid daily ($15 out, AAII 51) but Sonnet 5 beats it on price ($10 out) and capability (AAII 53)."
+      "strategy_note": "Solid daily ($15 out, AAII 51) but Sonnet 5 beats it on price ($10 out) and capability (AAII 53).",
+      "tokenizer_efficiency": 1.72
     },
     "gpt-5-4-mini": {
       "name": "GPT-5.4 Mini",
@@ -488,19 +929,32 @@
       "context_window": 922000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 0.75, "output": 4.5, "cached_read": 0.075 },
+      "zen_pricing": {
+        "input": 0.75,
+        "output": 4.5,
+        "cached_read": 0.075
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~42", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~42",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": { "score": 54.4, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
+        "swe_bench_pro": {
+          "score": 54.4,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
         "terminal_bench_2_1": null
       },
       "speed_tok_per_s": null,
       "new_features": "Smaller, faster GPT-5.4 variant",
       "specialty": "Fast coding, classification, structured extraction",
-      "strategy_note": "GLM 5.2 ($4.40 out, AAII 51) is cheaper and vastly more capable. No reason to use Mini."
+      "strategy_note": "GLM 5.2 ($4.40 out, AAII 51) is cheaper and vastly more capable. No reason to use Mini.",
+      "tokenizer_efficiency": 1.72
     },
     "gpt-5-4-nano": {
       "name": "GPT-5.4 Nano",
@@ -512,11 +966,19 @@
       "context_window": 922000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 0.2, "output": 1.25, "cached_read": 0.02 },
+      "zen_pricing": {
+        "input": 0.2,
+        "output": 1.25,
+        "cached_read": 0.02
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~35", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~35",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
@@ -524,7 +986,8 @@
       "speed_tok_per_s": null,
       "new_features": "Smallest GPT-5.4. Cheap but limited capability.",
       "specialty": "Ultra-cheap structured tasks, classification, formatting",
-      "strategy_note": "DeepSeek V4 Flash ($0.28 out, AAII 40) is cheaper AND stronger. Nano is only useful if you specifically need an OpenAI model."
+      "strategy_note": "DeepSeek V4 Flash ($0.28 out, AAII 40) is cheaper AND stronger. Nano is only useful if you specifically need an OpenAI model.",
+      "tokenizer_efficiency": 1.72
     },
     "gpt-5-nano": {
       "name": "GPT-5 Nano",
@@ -536,11 +999,19 @@
       "context_window": 128000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 0.05, "output": 0.4, "cached_read": 0.005 },
+      "zen_pricing": {
+        "input": 0.05,
+        "output": 0.4,
+        "cached_read": 0.005
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~30", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~30",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
@@ -548,7 +1019,8 @@
       "speed_tok_per_s": null,
       "new_features": "Oldest GPT variant. Very cheap, very limited.",
       "specialty": "Classification, simple extraction, formatting",
-      "strategy_note": "Worse than DeepSeek V4 Flash in every way except cost ($0.40 vs $0.28 out — wait, Flash is cheaper). No reason to use."
+      "strategy_note": "Worse than DeepSeek V4 Flash in every way except cost ($0.40 vs $0.28 out — wait, Flash is cheaper). No reason to use.",
+      "tokenizer_efficiency": 1.72
     },
     "gpt-5-2": {
       "name": "GPT-5.2",
@@ -560,21 +1032,50 @@
       "context_window": 128000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 1.75, "output": 14, "cached_read": 0.175 },
+      "zen_pricing": {
+        "input": 1.75,
+        "output": 14,
+        "cached_read": 0.175
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~48", "date": "2026-07" },
-        "swe_bench_verified": { "score": 72.8, "source": "SWE-bench Verified leaderboard (mid-2026)", "date": "2026-07" },
-        "swe_bench_pro": { "score": 55.6, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 62.2, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" },
-        "os_world_verified": { "score": 47.3, "source": "openai.com (GPT-5.4 announcement)", "date": "2026-03" },
-        "browse_comp": { "score": 65.8, "source": "openai.com (GPT-5.4 announcement)", "date": "2026-03" }
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~48",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 72.8,
+          "source": "SWE-bench Verified leaderboard (mid-2026)",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": {
+          "score": 55.6,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 62.2,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "os_world_verified": {
+          "score": 47.3,
+          "source": "openai.com (GPT-5.4 announcement)",
+          "date": "2026-03"
+        },
+        "browse_comp": {
+          "score": 65.8,
+          "source": "openai.com (GPT-5.4 announcement)",
+          "date": "2026-03"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Older GPT. Replaced by GPT-5.3 Codex and GPT-5.4. Still on Zen.",
       "specialty": "General reasoning, predecessor to GPT-5.3/5.4",
-      "strategy_note": "GPT-5.4 (AAII 51, $15 out) and GPT-5.3 Codex Spark ($14 out) both beat it. Only relevant as a pricing baseline."
+      "strategy_note": "GPT-5.4 (AAII 51, $15 out) and GPT-5.3 Codex Spark ($14 out) both beat it. Only relevant as a pricing baseline.",
+      "tokenizer_efficiency": 1.72
     },
     "gpt-5-3-codex-spark": {
       "name": "GPT-5.3 Codex Spark",
@@ -586,21 +1087,46 @@
       "context_window": 128000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 1.75, "output": 14, "cached_read": 0.175 },
+      "zen_pricing": {
+        "input": 1.75,
+        "output": 14,
+        "cached_read": 0.175
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Code-specialized ~48", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Code-specialized ~48",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": { "score": 56.8, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 77.3, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" },
-        "os_world_verified": { "score": 74.0, "source": "openai.com (GPT-5.4 announcement)", "date": "2026-03" },
-        "browse_comp": { "score": 77.3, "source": "openai.com (GPT-5.4 announcement)", "date": "2026-03" }
+        "swe_bench_pro": {
+          "score": 56.8,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 77.3,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "os_world_verified": {
+          "score": 74.0,
+          "source": "openai.com (GPT-5.4 announcement)",
+          "date": "2026-03"
+        },
+        "browse_comp": {
+          "score": 77.3,
+          "source": "openai.com (GPT-5.4 announcement)",
+          "date": "2026-03"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Code-specialized GPT. Codex lineage.",
       "specialty": "Code generation, agentic coding",
-      "strategy_note": "GPT-5.4 ($15 out) or Sonnet 5 ($10 out) are likely better at similar or lower cost."
+      "strategy_note": "GPT-5.4 ($15 out) or Sonnet 5 ($10 out) are likely better at similar or lower cost.",
+      "tokenizer_efficiency": 1.72
     },
     "gemini-3-1-pro": {
       "name": "Gemini 3.1 Pro",
@@ -621,25 +1147,78 @@
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~42-45", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": 57,
+          "source": "AA v4.1 (top tier, tied with Claude Opus 4.7)",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": { "score": 54.2, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 70.7, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" },
-        "browse_comp": { "score": 85.9, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "gpqa_diamond": { "score": 94.3, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "hle_no_tools": { "score": 44.4, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "hle_with_tools": { "score": 51.4, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "arc_agi_1": { "score": 98.0, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "arc_agi_2": { "score": 77.1, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "mcp_atlas": { "score": 78.2, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "toolathlon": { "score": 48.8, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "frontier_math_t1_3": { "score": 36.9, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" },
-        "frontier_math_t4": { "score": 16.7, "source": "openai.com (GPT-5.5 announcement)", "date": "2026-04" }
+        "swe_bench_pro": {
+          "score": 54.2,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 70.7,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "browse_comp": {
+          "score": 85.9,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "gpqa_diamond": {
+          "score": 94.3,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "hle_no_tools": {
+          "score": 44.4,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "hle_with_tools": {
+          "score": 51.4,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "arc_agi_1": {
+          "score": 98.0,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "arc_agi_2": {
+          "score": 77.1,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "mcp_atlas": {
+          "score": 78.2,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "toolathlon": {
+          "score": 48.8,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "frontier_math_t1_3": {
+          "score": 36.9,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        },
+        "frontier_math_t4": {
+          "score": 16.7,
+          "source": "openai.com (GPT-5.5 announcement)",
+          "date": "2026-04"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Multimodal (text+image+speech+video). 1M context. Gemini CLI tooling.",
       "specialty": "Google ecosystem, multimodal tasks, long context",
-      "strategy_note": "Good daily driver. Terminal-Bench 70.7% is respectable. If you work with video/audio, worth considering. Otherwise, GLM 5.2 or Sonnet 5 are better values."
+      "strategy_note": "Good daily driver. Terminal-Bench 70.7% is respectable. If you work with video/audio, worth considering. Otherwise, GLM 5.2 or Sonnet 5 are better values.",
+      "tokenizer_efficiency": 1.65
     },
     "gemini-3-5-flash": {
       "name": "Gemini 3.5 Flash",
@@ -651,19 +1230,36 @@
       "context_window": 1000000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 1.5, "output": 9, "cached_read": 0.15 },
+      "zen_pricing": {
+        "input": 1.5,
+        "output": 9,
+        "cached_read": 0.15
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~38-40 (Flash tier)", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~38-40 (Flash tier)",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": { "score": 55.1, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 76.2, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" }
+        "swe_bench_pro": {
+          "score": 55.1,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 76.2,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Latest Gemini Flash. Fast, cheap, 1M context, multimodal.",
       "specialty": "Fast multimodal, vision, audio tasks",
-      "strategy_note": "DeepSeek V4 Flash ($0.28 out, AAII 40) is cheaper. GLM 5.2 ($4.40 out, AAII 51) is stronger. Gemini Flash fills a niche if you need Google's multimodal capabilities."
+      "strategy_note": "DeepSeek V4 Flash ($0.28 out, AAII 40) is cheaper. GLM 5.2 ($4.40 out, AAII 51) is stronger. Gemini Flash fills a niche if you need Google's multimodal capabilities.",
+      "tokenizer_efficiency": 1.65
     },
     "gemini-3-flash": {
       "name": "Gemini 3 Flash",
@@ -675,11 +1271,19 @@
       "context_window": 1000000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 0.5, "output": 3, "cached_read": 0.05 },
+      "zen_pricing": {
+        "input": 0.5,
+        "output": 3,
+        "cached_read": 0.05
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~35", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~35",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
@@ -687,7 +1291,8 @@
       "speed_tok_per_s": null,
       "new_features": "Older Gemini Flash. Still available on Zen.",
       "specialty": "Budget multimodal, simple coding",
-      "strategy_note": "Superceded by 3.5 Flash. DeepSeek V4 Flash is cheaper and stronger."
+      "strategy_note": "Superceded by 3.5 Flash. DeepSeek V4 Flash is cheaper and stronger.",
+      "tokenizer_efficiency": 1.65
     },
     "glm-5-2": {
       "name": "GLM 5.2",
@@ -699,19 +1304,36 @@
       "context_window": 1000000,
       "parameters": "753B total / 40B active MoE",
       "zen_available": true,
-      "zen_pricing": { "input": 1.4, "output": 4.4, "cached_read": 0.26 },
+      "zen_pricing": {
+        "input": 1.4,
+        "output": 4.4,
+        "cached_read": 0.26
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 51, "source": "AA v4.1", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": 51,
+          "source": "AA v4.1",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": { "score": 62.1, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 81.0, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" }
+        "swe_bench_pro": {
+          "score": 62.1,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 81.0,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        }
       },
       "speed_tok_per_s": 208.6,
       "new_features": "753B/40B MoE, MIT license, #1 open-weights model, fastest at 208.6 tok/s. #9 Arena Agent (6.62% win rate). #2 Arena WebDev (1584 ELO).",
       "specialty": "Your complex planning/audit model. Open frontier intelligence at a fraction of proprietary cost.",
-      "strategy_note": "Your go-to for complex work. AAII 51 at $4.40/M out is unmatched value in its tier. Check for GLM 5.3 in every appraisal."
+      "strategy_note": "Your go-to for complex work. AAII 51 at $4.40/M out is unmatched value in its tier. Check for GLM 5.3 in every appraisal.",
+      "tokenizer_efficiency": 1.59
     },
     "kimi-k2-7-code": {
       "name": "Kimi K2.7 Code",
@@ -723,19 +1345,29 @@
       "context_window": 256000,
       "parameters": "1T total / 32B active MoE",
       "zen_available": true,
-      "zen_pricing": { "input": 0.95, "output": 4, "cached_read": 0.19 },
+      "zen_pricing": {
+        "input": 0.95,
+        "output": 4,
+        "cached_read": 0.19
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 42, "source": "AA v4.1", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": 42,
+          "source": "AA v4.1",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
       },
       "speed_tok_per_s": 46.5,
-      "new_features": "Code-specialized Kimi. 1T/32B MoE. Slow but capable.",
+      "thinking_token_ratio": 0,
+      "new_features": "Code-specialized Kimi. 1T/32B MoE. Slow but capable. Optimized for direct response — negligible thinking tokens.",
       "specialty": "Code generation, Chinese-language tasks, open-weight coding",
-      "strategy_note": "At $4/M out with AAII 42 and 46 tok/s, it's slower and less capable than GLM 5.2 ($4.40 out, AAII 51, 208 tok/s). Pass."
+      "strategy_note": "At $4/M out with AAII 42 and 46 tok/s, it's slower and less capable than GLM 5.2 ($4.40 out, AAII 51, 208 tok/s). Pass.",
+      "tokenizer_efficiency": 1.6
     },
     "kimi-k2-6": {
       "name": "Kimi K2.6",
@@ -747,19 +1379,40 @@
       "context_window": 256000,
       "parameters": "Proprietary MoE",
       "zen_available": true,
-      "zen_pricing": { "input": 0.95, "output": 4, "cached_read": 0.16 },
+      "zen_pricing": {
+        "input": 0.95,
+        "output": 4,
+        "cached_read": 0.16
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~38, predecessor to K2.7", "date": "2026-07" },
-        "swe_bench_verified": { "score": 80.2, "source": "SWE-bench Verified leaderboard (mid-2026)", "date": "2026-07" },
-        "swe_bench_pro": { "score": 58.6, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": null
+        "aa_intelligence_index": {
+          "score": 54,
+          "source": "AA v4.1 (predecessor to K2.7)",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 80.2,
+          "source": "SWE-bench Verified leaderboard (mid-2026)",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": {
+          "score": 58.6,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 66.7,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Previous Kimi gen. Same price as K2.7 Code but weaker.",
       "specialty": "General reasoning (weaker than K2.7 Code)",
-      "strategy_note": "K2.7 Code is better at the same price. No reason to use K2.6."
+      "strategy_note": "K2.7 Code is better at the same price. No reason to use K2.6.",
+      "tokenizer_efficiency": 1.6
     },
     "grok-4-5": {
       "name": "Grok 4.5",
@@ -780,15 +1433,28 @@
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": 54, "source": "AA v4.1 (high reasoning)", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": 54,
+          "source": "AA v4.1 (high reasoning)",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": null,
-        "terminal_bench_2_1": null
+        "swe_bench_pro": {
+          "score": 64.7,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 83.3,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        }
       },
       "speed_tok_per_s": 87.6,
       "new_features": "BRAND NEW (released today!). AAII 54 — #4 overall. Most concise frontier (60M output tokens).",
       "specialty": "Concise frontier intelligence. Complex reasoning at taskrunner pricing.",
-      "strategy_note": "**ALERT**: AAII 54 at $6/M out is the best value in this appraisal. Complex-level intelligence (beats Opus 4.8) at Taskrunner pricing. Only 500K context. Worth evaluating as a GLM 5.2 alternative for complex work."
+      "strategy_note": "**ALERT**: AAII 54 at $6/M out is the best value in this appraisal. Complex-level intelligence (beats Opus 4.8) at Taskrunner pricing. Only 500K context. Worth evaluating as a GLM 5.2 alternative for complex work.",
+      "tokenizer_efficiency": 2.46
     },
     "grok-build-0-1": {
       "name": "Grok Build 0.1",
@@ -800,11 +1466,19 @@
       "context_window": 128000,
       "parameters": "Proprietary",
       "zen_available": true,
-      "zen_pricing": { "input": 1, "output": 2, "cached_read": 0.2 },
+      "zen_pricing": {
+        "input": 1,
+        "output": 2,
+        "cached_read": 0.2
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "New model, not yet rated", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "New model, not yet rated",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
@@ -812,7 +1486,8 @@
       "speed_tok_per_s": null,
       "new_features": "New xAI build model. Cheap. Unknown benchmarks.",
       "specialty": "Experimental — watch for benchmark results",
-      "strategy_note": "Too new to evaluate. Re-check in next appraisal cycle."
+      "strategy_note": "Too new to evaluate. Re-check in next appraisal cycle.",
+      "tokenizer_efficiency": 2.46
     },
     "qwen3-7-max": {
       "name": "Qwen3.7 Max",
@@ -824,19 +1499,37 @@
       "context_window": 256000,
       "parameters": "Undisclosed",
       "zen_available": true,
-      "zen_pricing": { "input": 2.5, "output": 7.5, "cached_read": 0.5, "cached_write": 3.125 },
+      "zen_pricing": {
+        "input": 2.5,
+        "output": 7.5,
+        "cached_read": 0.5,
+        "cached_write": 3.125
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~35", "date": "2026-07" },
-        "swe_bench_verified": { "score": 80.4, "source": "SWE-bench Verified leaderboard (mid-2026)", "date": "2026-07" },
-        "swe_bench_pro": { "score": 60.6, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~35",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 80.4,
+          "source": "SWE-bench Verified leaderboard (mid-2026)",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": {
+          "score": 60.6,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
         "terminal_bench_2_1": null
       },
       "speed_tok_per_s": null,
       "new_features": "Alibaba's largest Qwen. Competitive with mid-tier models.",
       "specialty": "Chinese-language tasks, general reasoning",
-      "strategy_note": "SWE-bench Pro 60.6% at $7.50/M out is competitive. Still, GLM 5.2 (62.1% at $4.40) is better value."
+      "strategy_note": "SWE-bench Pro 60.6% at $7.50/M out is competitive. Still, GLM 5.2 (62.1% at $4.40) is better value.",
+      "tokenizer_efficiency": 1.6
     },
     "qwen3-7-plus": {
       "name": "Qwen3.7 Plus",
@@ -848,19 +1541,37 @@
       "context_window": 256000,
       "parameters": "Undisclosed",
       "zen_available": true,
-      "zen_pricing": { "input": 0.4, "output": 1.6, "cached_read": 0.04, "cached_write": 0.5 },
+      "zen_pricing": {
+        "input": 0.4,
+        "output": 1.6,
+        "cached_read": 0.04,
+        "cached_write": 0.5
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~35", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~35",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
-        "swe_bench_pro": { "score": 57.6, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 70.3, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" }
+        "swe_bench_pro": {
+          "score": 57.6,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 70.3,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Cheaper Qwen variant. Decent for budget work.",
       "specialty": "Budget coding, Chinese tasks",
-      "strategy_note": "SWE-bench Pro 57.6% and TB 70.3% at $1.60/M out is strong value. Best budget coding option after DS Flash."
+      "strategy_note": "SWE-bench Pro 57.6% and TB 70.3% at $1.60/M out is strong value. Best budget coding option after DS Flash.",
+      "tokenizer_efficiency": 1.6
     },
     "minimax-m3": {
       "name": "MiniMax M3",
@@ -872,19 +1583,40 @@
       "context_window": 256000,
       "parameters": "Undisclosed",
       "zen_available": true,
-      "zen_pricing": { "input": 0.3, "output": 1.2, "cached_read": 0.06 },
+      "zen_pricing": {
+        "input": 0.3,
+        "output": 1.2,
+        "cached_read": 0.06
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~30-33", "date": "2026-07" },
-        "swe_bench_verified": { "score": 80.5, "source": "SWE-bench Verified leaderboard (mid-2026)", "date": "2026-07" },
-        "swe_bench_pro": { "score": 59.0, "source": "SWE-bench Pro leaderboard (Jul 2026)", "date": "2026-07" },
-        "terminal_bench_2_1": { "score": 66.0, "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)", "date": "2026-07" }
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~30-33",
+          "date": "2026-07"
+        },
+        "swe_bench_verified": {
+          "score": 80.5,
+          "source": "SWE-bench Verified leaderboard (mid-2026)",
+          "date": "2026-07"
+        },
+        "swe_bench_pro": {
+          "score": 59.0,
+          "source": "SWE-bench Pro leaderboard (Jul 2026)",
+          "date": "2026-07"
+        },
+        "terminal_bench_2_1": {
+          "score": 66.0,
+          "source": "Terminal-Bench 2.1 leaderboard (Jul 2026)",
+          "date": "2026-07"
+        }
       },
       "speed_tok_per_s": null,
       "new_features": "Latest MiniMax. Cheap but limited.",
       "specialty": "Budget tasks, simple code generation",
-      "strategy_note": "SWE-bench Pro 59.0% / Verified 80.5% at $1.20/M out. Incredible budget value after DS Flash."
+      "strategy_note": "SWE-bench Pro 59.0% / Verified 80.5% at $1.20/M out. Incredible budget value after DS Flash.",
+      "tokenizer_efficiency": 2.29
     },
     "mimo-v2-5-free": {
       "name": "MiMo-V2.5 Free",
@@ -896,11 +1628,19 @@
       "context_window": 128000,
       "parameters": "Undisclosed",
       "zen_available": true,
-      "zen_pricing": { "input": 0, "output": 0, "cached_read": 0 },
+      "zen_pricing": {
+        "input": 0,
+        "output": 0,
+        "cached_read": 0
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Likely ~28-30", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Likely ~28-30",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
@@ -908,7 +1648,8 @@
       "speed_tok_per_s": null,
       "new_features": "Free MiniMax model. Limited availability (data may train model).",
       "specialty": "Free experimentation",
-      "strategy_note": "DeepSeek V4 Flash Free is stronger. Only use if DS Free is unavailable."
+      "strategy_note": "DeepSeek V4 Flash Free is stronger. Only use if DS Free is unavailable.",
+      "tokenizer_efficiency": 2.29
     },
     "big-pickle": {
       "name": "Big Pickle",
@@ -920,11 +1661,19 @@
       "context_window": 128000,
       "parameters": "Undisclosed (stealth model)",
       "zen_available": true,
-      "zen_pricing": { "input": 0, "output": 0, "cached_read": 0 },
+      "zen_pricing": {
+        "input": 0,
+        "output": 0,
+        "cached_read": 0
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Stealth — no public benchmarks", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Stealth — no public benchmarks",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
@@ -932,7 +1681,8 @@
       "speed_tok_per_s": null,
       "new_features": "Stealth model. Free on Zen. Provider uses data for training.",
       "specialty": "Unknown — experimental",
-      "strategy_note": "Free but data trains the model. Only use for non-sensitive experiments."
+      "strategy_note": "Free but data trains the model. Only use for non-sensitive experiments.",
+      "tokenizer_efficiency": 1.65
     },
     "north-mini-code-free": {
       "name": "North Mini Code Free",
@@ -944,11 +1694,19 @@
       "context_window": 128000,
       "parameters": "Undisclosed",
       "zen_available": true,
-      "zen_pricing": { "input": 0, "output": 0, "cached_read": 0 },
+      "zen_pricing": {
+        "input": 0,
+        "output": 0,
+        "cached_read": 0
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Unrated", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Unrated",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
@@ -956,7 +1714,8 @@
       "speed_tok_per_s": null,
       "new_features": "Free code model. Privacy warning — data trains Cohere models.",
       "specialty": "Free code generation",
-      "strategy_note": "Privacy warning: Cohere uses data for training. Skip unless you need a free model and DS Flash Free is down."
+      "strategy_note": "Privacy warning: Cohere uses data for training. Skip unless you need a free model and DS Flash Free is down.",
+      "tokenizer_efficiency": 1.65
     },
     "nemotron-3-ultra-free": {
       "name": "Nemotron 3 Ultra Free",
@@ -968,11 +1727,19 @@
       "context_window": 128000,
       "parameters": "Undisclosed",
       "zen_available": true,
-      "zen_pricing": { "input": 0, "output": 0, "cached_read": 0 },
+      "zen_pricing": {
+        "input": 0,
+        "output": 0,
+        "cached_read": 0
+      },
       "openrouter_pricing": null,
       "pricing_source": "zen",
       "benchmarks": {
-        "aa_intelligence_index": { "score": null, "source": "Unrated", "date": "2026-07" },
+        "aa_intelligence_index": {
+          "score": null,
+          "source": "Unrated",
+          "date": "2026-07"
+        },
         "swe_bench_verified": null,
         "swe_bench_pro": null,
         "terminal_bench_2_1": null
@@ -980,7 +1747,8 @@
       "speed_tok_per_s": null,
       "new_features": "NVIDIA free trial model. Limited availability.",
       "specialty": "Free NVIDIA-hosted experimentation",
-      "strategy_note": "NVIDIA trial terms — do not submit personal data. Only for curiosity."
+      "strategy_note": "NVIDIA trial terms — do not submit personal data. Only for curiosity.",
+      "tokenizer_efficiency": 1.65
     }
   }
 }

@@ -46,20 +46,70 @@ Every appraisal report must include:
 3. **Top 3 in each tier** — by AA Intelligence Index, then by output price (cheaper = better tiebreak)
 4. **New arrivals** — any model released since the last appraisal that doesn't fit existing slots
 
+## Blended Pricing Model
+
+All pricing comparisons use a **weighted blend** across three token types: cache-hit, input, output. This mirrors Artificial Analysis' industry-standard 7:2:1 ratio, extended to account for thinking tokens.
+
+### Baseline Blend (7:2:1)
+
+Weights: cache-hit=7, input=2, output=1. Total weight = 10.
+
+```
+Blended_$/M = (7 × P_cached + 2 × P_input + 1 × P_output) / 10
+```
+
+This is the default for non-reasoning models (thinking_token_ratio = 0). It reflects a realistic workload where most tokens hit the cache.
+
+### Thinking-Adjusted Blend (7:2:(1+R))
+
+For reasoning models that generate invisible chain-of-thought tokens, the output portion inflates:
+
+```
+Blended_$/M = (7 × P_cached + 2 × P_input + (1+R) × P_output) / (10 + R)
+```
+
+Where **R** = `thinking_token_ratio` from `models.json` (thinking tokens per visible output token).
+
+Example — DeepSeek V4 Pro (R=4, P_cached=$0.145, P_in=$1.74, P_out=$3.48):
+```
+Standard 7:2:1:  (7×0.145 + 2×1.74 + 1×3.48) / 10  = $0.756/M
+Thinking-adjusted: (7×0.145 + 2×1.74 + 5×3.48) / 14 = $1.564/M  (2.07× standard)
+```
+
+The thinking-adjusted blend is the **true cost comparison** when evaluating reasoning vs. non-reasoning models for the same task.
+
+### Tokenizer Efficiency
+
+Each model family tokenizes text differently. E = tokens per word. Two raw values (`code`, `prose`) measured via OpenRouter API on 200+ word samples (2026-07-08). The blend value in `models.json` is a 60:40 code:prose weighted average reflecting typical coding workloads.
+
+| Family | E code | E prose | E blend (60:40) | Measured | Notes |
+|--------|:-----:|:------:|:---------------:|:--------:|-------|
+| DeepSeek | 1.98 | 1.16 | 1.65 | Yes | DSL tokenizer, excellent prose efficiency |
+| Anthropic (Claude) | 2.25 | 1.25 | 1.85 | Yes (Haiku 4.5) | Most verbose code tokenizer in measured set |
+| GLM / Zhipu | 1.87 | 1.18 | 1.59 | Yes (GLM 5.2) | Best blend efficiency in measured set |
+| Kimi / Moonshot | 1.90 | 1.16 | 1.60 | Yes (K2.7 Code) | Similar to GLM, weaker on prose |
+| GPT (o200k) | 2.07 | 1.19 | 1.72 | Yes (5.4 Nano/Mini) | o200k tokenizer, all GPT-5.x/4.x models |
+| Gemini | — | — | 1.65 | No | Estimated — OpenRouter doesn't report usage for Gemini |
+| Grok / xAI | 2.89 | 1.81 | 2.46 | Yes (Grok 4.5) | Most verbose tokenizer — 2× DS tokens per word |
+| MiniMax | 2.67 | 1.72 | 2.29 | Yes (M3) | Second most verbose |
+| Qwen / Alibaba | — | — | 1.60 | No | Estimated — guardrail blocked measurement |
+
 ## Appraisal Table Template — Primary View
 
 **Primary benchmarks** (always shown): SWE-bench Pro, Terminal-Bench 2.1 — these are the most relevant for agentic coding workflows. SWE-bench Verified shown when available.
 
 Show top 3 per tier by default. When asked "show all models" or "full breakdown", show every model in the database.
 
-| Model | Tier | SWE-bench Pro | Terminal-Bench 2.1 | SWE-bench Verified | Input $/M | Output $/M | AAII | New Features | Specialty | Beats your stack? |
-|-------|:---:|:-----------:|:---------------:|:----------------:|:--------:|:--------:|:---:|-------------|-----------|:---------------:|
-|       |      |             |                  |                  |          |          |      |             |           |                  |
+| Model | Tier | SWE-bench Pro | TB 2.1 | Input $/M | Output $/M | Blend 7:2:1 | Blend w/ Think | AAII | Thinking Tax | Beats your stack? |
+|-------|:---:|:-----------:|:-----:|:--------:|:--------:|:----------:|:-------------:|:---:|:------------:|:---------------:|
+|       |      |             |       |          |          |            |               |      |              |                  |
 
 - **SWE-bench Pro**: Primary coding benchmark. Scores: [swebench.com](https://swebench.com). N/A if untested.
-- **Terminal-Bench 2.1**: Primary agentic benchmark. Scores: [tbench.ai](https://tbench.ai). N/A if untested.
-- **SWE-bench Verified**: Human-validated subset. Typically 5-15 pts higher than Pro.
-- **Beats your stack?**: "Yes" / "Maybe" / "No" based on whether this model outperforms the equivalent-tier pick in your current strategy at similar or lower cost.
+- **TB 2.1**: Terminal-Bench 2.1. Primary agentic benchmark. Scores: [tbench.ai](https://tbench.ai). N/A if untested.
+- **Blend 7:2:1**: Standard blended price (cache:input:output = 7:2:1). **Apples-to-apples across all models.**
+- **Blend w/ Think**: Thinking-adjusted blend (7:2:(1+R)). Shows true cost when a model burns hidden chain-of-thought tokens. Same as blend 7:2:1 for non-reasoning models.
+- **Thinking Tax**: Ratio of hidden thinking tokens per visible output token. "—" = none/negligible. "4×" = 4 thinking tokens per 1 visible. Models flagged with a tax cost more than their raw output price suggests.
+- **Beats your stack?**: "Yes" / "Maybe" / "No" based on whether this model outperforms the equivalent-tier pick in your current strategy at similar or lower cost (considering thinking-adjusted blend).
 
 ### Additional Benchmark Views
 
@@ -110,10 +160,10 @@ When asked to appraise:
    - Price changes (up or down)
    - Deprecated/sunset models
    - Unexpectedly strong benchmark results
-6. **Classify into tiers** by output $/M token
-7. **Produce the table** — top 3 per tier by default (or all if asked)
-8. **Strategy assessment** — for each tier, say whether any model beats the user's current pick
-9. **Update models.json** with verified findings
+ 6. **Classify into tiers** by output $/M token. For reasoning models with `thinking_token_ratio > 0`, also note the **effective tier** (output $/M × (1+R)) — a model may appear Taskrunner by raw price but actually land in Daily tier when thinking tax is applied.
+ 7. **Produce the table** — top 3 per tier by default (or all if asked). Include both Blend 7:2:1 and Blend w/ Think columns.
+ 8. **Strategy assessment** — for each tier, say whether any model beats the user's current pick. Use thinking-adjusted blend for reasoning models.
+ 9. **Update models.json** with verified findings
 
 ## Data Files
 
@@ -121,6 +171,28 @@ When asked to appraise:
 |------|---------|
 | `Skills/Research/Appraise-LLM/models.json` | Canonical model database with pricing, benchmarks, features |
 | `Skills/Research/Appraise-LLM/SKILL.md` | This file — skill instructions |
+
+## Pricing Methodology
+
+All pricing in `models.json` stores **raw Input $/M, Output $/M, Cached $/M** as three independent columns — the provider's advertised rates. For comparisons, apply the **Blended Pricing Model** above which normalizes across usage patterns (7:2:1 baseline, 7:2:(1+R) for thinking models).
+
+Each model also stores:
+- `thinking_token_ratio` — hidden chain-of-thought tokens per visible output token. 0 for direct-response models, >0 for reasoning models (DeepSeek V4 Pro, o-series, R1).
+- `tokenizer_efficiency` — composite blend value (60:40 code:prose weighted average, from family table above).
+
+**Normalized cost-per-task formula** (combines all three factors):
+
+```
+C_total = (W_in × E × Pin/10^6) + ((W_out × E + T_think) × Pout/10^6)
+```
+
+Where:
+- `W_in`, `W_out` = baseline input/output in words
+- `E` = tokenizer efficiency blend (tok/word, from `models.json`). For pure-code output, substitute `E_code` from the family table; for prose-heavy input, substitute `E_prose`.
+- `T_think` = W_out × E × thinking_token_ratio
+- `P_in`, `P_out` = provider price per million tokens
+
+For task-based costing: pick a specific task type, estimate typical word counts, apply the formula.
 
 ## Provider Notes
 
