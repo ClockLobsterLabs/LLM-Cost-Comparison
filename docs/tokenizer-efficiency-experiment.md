@@ -35,15 +35,15 @@ The tokenizer efficiency (E) normalizes cost comparisons by answering: **"How ma
 
 Two sample texts were prepared to reflect realistic coding workloads:
 
-**Code sample** (306 words in Sessions 1-3; 152 words in Session 4):
+**Code sample** (306 words in Sessions 1-2; ~380-382 words in Session 3; 152 words in Session 4):
 - Multi-function TypeScript module: async batch processing with generics, error handling, AbortController, Promise.all workers, type definitions
 - Rich in special characters: braces, semicolons, angle brackets, dot notation, arrow functions
 
-**Prose sample** (235 words in Sessions 1-3; 125 words in Session 4):
+**Prose sample** (235 words in Sessions 1-2; 244 words in Session 3; 125 words in Session 4):
 - Technical architecture paragraph: batch processing pattern description
 - Natural English with punctuation: dashes, colons, commas, periods
 
-> Session 4 used shorter samples (152/125 words) due to script constraints. Values from Session 4 are internally consistent but may undercount E by ~2-5% relative to Sessions 1-3 due to per-message token overhead being amortized over fewer words.
+> Session 4 used shorter samples (152/125 words) due to script constraints. Values from Session 4 are internally consistent but may undercount E by ~2-5% relative to Sessions 1-3 (306/235 words) due to per-message token overhead being amortized over fewer words. Note: Session 3 used longer samples (~382/244 words) than Sessions 1-2, so its E values are based on a different text and are comparable within family but not directly comparable word-for-word with Sessions 1-2.
 
 ### 3.2 API Configuration
 
@@ -302,15 +302,15 @@ Response field to read: `usage.prompt_tokens`
 
 ## Appendix C: Session Cost Breakdown
 
-| Session | Description | Calls | Cost |
-|:-------:|-------------|:-----:|:----:|
-| 1 | 8 families (short sample, ~77 words) | 18 | ~$0.002 |
-| 1 | Diagnostics & re-tests | 4 | ~$0.001 |
-| 2 | Long-sample re-tests (Grok, MiniMax) | 4 | ~$0.003 |
-| 2 | 8 newly measured models | 16 | ~$0.005 |
-| 2 | 5 guardrail-blocked models | 10 | $0 |
-| 3 | 9 expensive models (>$6/M out) | 18 | ~$0.06 |
-| 4 | 9 guardrail-unblocked models | 18 | ~$0.39* |
-| **Total** | **All sessions** | **88** | **~$0.46** |
+| Session | Description | Calls | Actual Cost | Notes |
+|:-------:|-------------|:-----:|:-----------:|-------|
+| 1 | 8 families (short sample, ~77 words) | 18 | ~$0.002 | |
+| 1 | Diagnostics & re-tests | 4 | ~$0.001 | |
+| 2 | Long-sample re-tests (Grok, MiniMax) | 4 | ~$0.003 | |
+| 2 | 8 newly measured models | 16 | ~$0.005 | |
+| 2 | 5 guardrail-blocked models | 10 | $0 | Not billed |
+| 3 | 9 expensive models (>$6/M out) | 18 | ~$0.043 | Verified from OpenRouter log |
+| 4 | 9 guardrail-unblocked models | 18 | ~$0.401 | Fugu $0.398, rest $0.003 |
+| **Total** | **All sessions** | **88** | **~$0.46** | |
 
-> *Session 4 cost dominated by Sakana Fugu Ultra ($0.39 for a single test call — 14.5k input + 10.7k output tokens at $30/M out). Excluding Fugu, Session 4 cost ~$0.003.
+> Fugu Ultra dominated Session 4 cost ($0.391 code + $0.007 probe = $0.398). Excluding it, the entire campaign cost ~$0.06. Data extracted from OpenRouter Generations dashboard (2026-07-08).

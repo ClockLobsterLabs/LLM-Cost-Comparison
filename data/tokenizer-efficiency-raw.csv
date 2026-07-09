@@ -29,22 +29,22 @@ microsoft/phi-4,Phi-4,microsoft,2,code,,,1.69,measured,Blend only
 microsoft/phi-4,Phi-4,microsoft,2,prose,,,1.69,measured,Blend only
 amazon/nova-pro-v1,Amazon Nova Pro,amazon,2,code,,,1.87,measured,Blend only
 amazon/nova-pro-v1,Amazon Nova Pro,amazon,2,prose,,,1.87,measured,Blend only
-perplexity/sonar-pro,Perplexity Sonar Pro,perplexity,3,code,306,679,2.22,1.79,measured,Sonar tokenizer (Pro and Pro Search identical)
-perplexity/sonar-pro,Perplexity Sonar Pro,perplexity,3,prose,235,270,1.15,1.79,measured,Sonar tokenizer (Pro and Pro Search identical)
-perplexity/sonar-pro-search,Perplexity Sonar Pro Search,perplexity,3,code,306,679,2.22,1.79,measured,Same tokenizer as Sonar Pro
-perplexity/sonar-pro-search,Perplexity Sonar Pro Search,perplexity,3,prose,235,270,1.15,1.79,measured,Same tokenizer as Sonar Pro
-amazon/nova-premier-v1,Amazon Nova Premier,amazon,3,code,306,881,2.88,2.24,measured,Very verbose; third most verbose measured
-amazon/nova-premier-v1,Amazon Nova Premier,amazon,3,prose,235,303,1.29,2.24,measured,Very verbose; third most verbose measured
-mistralai/mistral-large-2512,Mistral Large 3,mistral,4,code,152,310,2.04,1.68,measured,SentencePiece; same tokenizer as Codestral
-mistralai/mistral-large-2512,Mistral Large 3,mistral,4,prose,125,144,1.15,1.68,measured,SentencePiece; same tokenizer as Codestral
-mistralai/codestral-2508,Codestral,mistral,4,code,152,310,2.04,1.68,measured,SentencePiece; identical to Mistral Large 3
-mistralai/codestral-2508,Codestral,mistral,4,prose,125,144,1.15,1.68,measured,SentencePiece; identical to Mistral Large 3
-cohere/command-a,Command A,cohere,4,code,152,324,2.13,1.72,measured,C4 tokenizer
-cohere/command-a,Command A,cohere,4,prose,125,137,1.10,1.72,measured,C4 tokenizer
-ai21/jamba-large-1.7,Jamba Large 1.7,ai21,4,code,152,377,2.48,1.97,measured,Dense tokenizer; 3rd most verbose
-ai21/jamba-large-1.7,Jamba Large 1.7,ai21,4,prose,125,151,1.21,1.97,measured,Dense tokenizer; 3rd most verbose
-openai/o3-mini,o3-mini,openai,4,code,152,300,1.97,1.64,measured,o200k; slightly lower than GPT-5.x (2.07)
-openai/o3-mini,o3-mini,openai,4,prose,125,144,1.15,1.64,measured,o200k; similar prose efficiency
+perplexity/sonar-pro,Perplexity Sonar Pro,perplexity,3,code,380,844,2.22,1.79,verified,"OR log: 844 in tok; words back-calc'd from E=2.22"
+perplexity/sonar-pro,Perplexity Sonar Pro,perplexity,3,prose,244,281,1.15,1.79,verified,"OR log: 281 in tok; words back-calc'd from E=1.15"
+perplexity/sonar-pro-search,Perplexity Sonar Pro Search,perplexity,3,code,380,844,2.22,1.79,verified,"OR log: 844 in tok; same tokenizer as Sonar Pro"
+perplexity/sonar-pro-search,Perplexity Sonar Pro Search,perplexity,3,prose,244,281,1.15,1.79,verified,"OR log: 281 in tok; same tokenizer as Sonar Pro"
+amazon/nova-premier-v1,Amazon Nova Premier,amazon,3,code,382,1099,2.88,2.24,verified,"OR log: 1099 in tok; words back-calc'd from E=2.88"
+amazon/nova-premier-v1,Amazon Nova Premier,amazon,3,prose,244,315,1.29,2.24,verified,"OR log: 315 in tok; words back-calc'd from E=1.29"
+mistralai/mistral-large-2512,Mistral Large 3,mistral,4,code,152,310,2.04,1.68,verified,"OR log: 310 in tok; SentencePiece"
+mistralai/mistral-large-2512,Mistral Large 3,mistral,4,prose,125,144,1.15,1.68,verified,"OR log: 144 in tok; SentencePiece"
+mistralai/codestral-2508,Codestral,mistral,4,code,152,310,2.04,1.68,verified,"OR log: 310 in tok; SentencePiece"
+mistralai/codestral-2508,Codestral,mistral,4,prose,125,144,1.15,1.68,verified,"OR log: 144 in tok; SentencePiece"
+cohere/command-a,Command A,cohere,4,code,152,324,2.13,1.72,verified,"OR log: 324 in tok; C4 tokenizer"
+cohere/command-a,Command A,cohere,4,prose,125,137,1.10,1.72,verified,"OR log: 137 in tok; C4 tokenizer"
+ai21/jamba-large-1.7,Jamba Large 1.7,ai21,4,code,152,377,2.48,1.97,verified,"OR log: 377 in tok; dense tokenizer"
+ai21/jamba-large-1.7,Jamba Large 1.7,ai21,4,prose,125,151,1.21,1.97,verified,"OR log: 151 in tok; dense tokenizer"
+openai/o3-mini,o3-mini,openai,4,code,152,300,1.97,1.64,verified,"OR log: 300 in tok; o200k"
+openai/o3-mini,o3-mini,openai,4,prose,125,144,1.15,1.64,verified,"OR log: 144 in tok; o200k"
 openai/o4-mini,o4-mini,openai,2,code,,,,1.72,blocked,Encrypted reasoning; no usage field returned
 openai/o4-mini,o4-mini,openai,2,prose,,,,1.72,blocked,Encrypted reasoning; no usage field returned
 openai/o4-mini,o4-mini,openai,4,code,,,,1.72,failed,OpenAI Responses API; no prompt_tokens field

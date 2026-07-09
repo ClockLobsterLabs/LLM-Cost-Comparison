@@ -1,0 +1,25 @@
+index,model,route_id,input_tokens,output_tokens,cost_usd,tokens_per_sec,timestamp,session,sample_type,notes
+1,o3-mini,openai/o3-mini,300,16,0.000396,23.0,2026-07-08T22:58:00Z,4,code,
+2,o3-mini,openai/o3-mini,144,16,0.000227,21.6,2026-07-08T22:58:00Z,4,prose,
+3,Jamba Large 1.7,ai21/jamba-large-1.7,377,1,0.000754,1.7,2026-07-08T22:56:00Z,4,code,
+4,Jamba Large 1.7,ai21/jamba-large-1.7,151,1,0.000307,1.9,2026-07-08T22:56:00Z,4,prose,
+5,Command A,cohere/command-a,324,0,0.000802,-,2026-07-08T22:54:00Z,4,code,output=0 (empty response)
+6,Command A,cohere/command-a,137,0,0.000339,-,2026-07-08T22:54:00Z,4,prose,output=0 (empty response)
+7,Codestral 2508,mistralai/codestral-2508,310,1,0.000093,3.4,2026-07-08T22:54:00Z,4,code,
+8,Codestral 2508,mistralai/codestral-2508,144,1,0.0000437,3.7,2026-07-08T22:54:00Z,4,prose,
+9,Mistral Large 3 2512,mistralai/mistral-large-2512,310,1,0.000155,2.4,2026-07-08T22:54:00Z,4,code,
+10,Mistral Large 3 2512,mistralai/mistral-large-2512,144,1,0.0000728,0.8,2026-07-08T22:54:00Z,4,prose,
+11,Command A (test),cohere/command-a,2,0,0.00000495,-,2026-07-08T22:53:00Z,4,test,"probe: ""Hello test one two three"""
+12,Mistral Nemo,mistralai/mistral-nemo,5,1,0.00000013,1.1,2026-07-08T22:41:00Z,4,test,"probe: working model check"
+13,Fugu Ultra,sakana/fugu-ultra,14529,10729,0.391,64.8,2026-07-08T22:59:00Z,4,code,non-standard counting; guardrail bypassed via code route
+14,Fugu Ultra (test),sakana/fugu-ultra,1268,16,0.00675,2.9,2026-07-08T22:59:00Z,4,test,"probe: ""Hello test"""
+15,o4-mini (failure),openai/o4-mini,,,,,2026-07-08T22:54:00Z,4,code,Responses API; no prompt_tokens field returned
+16,o4-mini (failure),openai/o4-mini,,,,,2026-07-08T22:54:00Z,4,prose,Responses API; no prompt_tokens field returned
+17,Inflection 3 Pi (failure),inflection/inflection-3-pi,,,,,2026-07-08T22:55:00Z,4,code,Provider returns empty response (502)
+18,Inflection 3 Productivity (failure),inflection/inflection-3-productivity,,,,,2026-07-08T22:55:00Z,4,code,Provider returns empty response (502)
+19,Amazon Nova Premier 1.0,amazon/nova-premier-v1,1099,20,0.003,20.7,2026-07-08T21:56:00Z,3,code,Session 3 model
+20,Amazon Nova Premier 1.0,amazon/nova-premier-v1,315,20,0.00104,27.9,2026-07-08T21:57:00Z,3,prose,Session 3 model
+21,Perplexity Sonar Pro,perplexity/sonar-pro,844,11,0.0087,6.2,2026-07-08T21:54:00Z,3,code,Session 3 model
+22,Perplexity Sonar Pro,perplexity/sonar-pro,281,11,0.00701,6.8,2026-07-08T21:57:00Z,3,prose,Session 3 model
+23,Perplexity Sonar Pro Search,perplexity/sonar-pro-search,844,11,0.0127,10.7,2026-07-08T21:54:00Z,3,code,Session 3 model
+24,Perplexity Sonar Pro Search,perplexity/sonar-pro-search,281,11,0.011,9.9,2026-07-08T21:57:00Z,3,prose,Session 3 model

@@ -76,13 +76,15 @@ For task-specific estimates, substitute the raw code or prose value from the fam
 | Codestral | — | — | 1.74 | Blocked — privacy guardrail |
 | Cohere Command A | — | — | 1.74 | Blocked — privacy guardrail |
 
-### Session 3 (2026-07-08, later) — Expensive models (> $6/M out)
+### Session 3 (2026-07-08) — Expensive models (> $6/M out)
+
+Session 3 used longer sample texts than Sessions 1-2 and omitted the shorter ~306/235-word samples. Code sample: ~382 words. Prose sample: ~244 words. These were independently submitted and verified — not the same samples as Session 1.
 
 | Model | Code E | Prose E | Blend | Status |
 |-------|:-----:|:------:|:-----:|--------|
-| Perplexity Sonar Pro Search | 2.22 | 1.15 | 1.79 | Measured (long sample) |
-| Perplexity Sonar Pro | 2.22 | 1.15 | 1.79 | Measured (long sample, same tokenizer) |
-| Amazon Nova Premier | 2.88 | 1.29 | 2.24 | Measured (long sample) |
+| Perplexity Sonar Pro Search | 2.22 | 1.15 | 1.79 | Verified via OpenRouter log |
+| Perplexity Sonar Pro | 2.22 | 1.15 | 1.79 | Verified via OpenRouter log |
+| Amazon Nova Premier | 2.88 | 1.29 | 2.24 | Verified via OpenRouter log |
 | Sakana Fugu Ultra | — | — | — | Blocked — privacy guardrail |
 | Inflection-3 Pi | — | — | — | Blocked — privacy guardrail |
 | Inflection-3 Productivity | — | — | — | Blocked — privacy guardrail |
@@ -120,31 +122,39 @@ Gemini 2.5 Pro does report usage — the limitation is specific to Gemini 3.x on
 
 ## Cost Breakdown
 
-All API calls used `max_tokens=20` with minimal output text, making input tokens the dominant cost. Total expenditure across both sessions:
+All API calls used `max_tokens=20` with minimal output text, making input tokens the dominant cost (except Fugu). Total expenditure across all four sessions:
 
-| Component | Calls | Est. Cost |
-|-----------|:-----:|:---------:|
-| Session 1 — 8 families (short sample) | 18 | ~$0.002 |
-| Session 1 — diagnostics & re-tests | 4 | ~$0.001 |
-| Session 2 — long-sample re-tests | 4 | ~$0.003 |
-| Session 2 — 8 newly measured models | 16 | ~$0.005 |
-| Session 2 — 5 guardrail-blocked models | 10 | $0 (not billed) |
-| Session 3 — 9 expensive models (> $6/M out) | 18 | ~$0.06 |
-| **Total** | **70** | **~$0.07** |
+| Component | Calls | Est. Cost | Notes |
+|-----------|:-----:|:---------:|-------|
+| Session 1 — 8 families (short sample) | 18 | ~$0.002 | |
+| Session 1 — diagnostics & re-tests | 4 | ~$0.001 | |
+| Session 2 — long-sample re-tests | 4 | ~$0.003 | |
+| Session 2 — 8 newly measured models | 16 | ~$0.005 | |
+| Session 2 — 5 guardrail-blocked models | 10 | $0 | Not billed |
+| Session 3 — 9 expensive models | 18 | ~$0.043 | Verified from OpenRouter log |
+| Session 4 — 9 guardrail-unblocked | 18 | ~$0.003 | Excluding Fugu |
+| Session 4 — Fugu Ultra | 2 | ~$0.398 | $0.391 (code) + $0.007 (probe) |
+| **Total** | **90** | **~$0.46** | |
 
-The entire measurement campaign cost approximately **1 cent (USD)** on OpenRouter. This is why the methodology is sustainable: measuring a new model costs about $0.0003–0.002 per family.
+The Fugu Ultra call ($0.391 for 14,529 input + 10,729 output) dominated the campaign cost at 86% of total. Excluding it, the entire campaign cost ~$0.06 — about the price of a single API call for most production models. Measuring a new standard model costs about $0.0001–0.002 per family.
 
-### Cost Per Model (detailed)
+### Cost Per Model (from actual OpenRouter billing data)
 
-Most expensive calls:
-- Perplexity Sonar Pro: ~$0.015 (2 calls) — $3.00/M input + $15/M output, verbose code (2.22)
-- Amazon Nova Premier: ~$0.008 (2 calls) — $2.50/M input + $12.50/M output, very verbose (2.88 code)
-- Gemini 2.5 Pro: ~$0.002 (2 calls) — $1.25/M input + $10/M output
-
-Cheapest calls:
-- Phi-4: ~$0.00009 (2 calls) — $0.07/M input
-- DeepSeek V4 Flash: ~$0.00003 (2 calls) — $0.07/M input
-- Llama 3.3 70B: ~$0.00013 (2 calls) — $0.10/M input
+| Model | 2-call cost | Input price | Output price | Avg E |
+|-------|:----------:|:-----------:|:------------:|:-----:|
+| Perplexity Sonar Pro | $0.01571 | $3.00/M | $15/M | 1.79 |
+| Perplexity Sonar Pro Search | $0.02370 | $3.00/M | $15/M | 1.79 |
+| Amazon Nova Premier | $0.00404 | $2.50/M | $12.50/M | 2.24 |
+| Command A | $0.00114 | $1.50/M (pro) | $4.50/M (pro) | 1.72 |
+| Jamba Large 1.7 | $0.00106 | $0.50/M | $1.50/M | 1.97 |
+| Gemini 2.5 Pro | ~$0.002 | $1.25/M | $10/M | 1.83 |
+| o3-mini | $0.00062 | $0.28/M (t1) | $1.10/M (t1) | 1.64 |
+| Mistral Large 3 | $0.00023 | $0.30/M (pro) | $0.90/M (pro) | 1.68 |
+| Codestral | $0.00014 | $0.30/M (pro) | $0.90/M (pro) | 1.68 |
+| Fugu Ultra | $0.39775 | — | $30/M | ~95 tok/word |
+| Llama 3.3 70B | ~$0.00013 | $0.10/M | — | 1.72 |
+| DeepSeek V4 Flash | ~$0.00003 | $0.07/M | — | 1.65 |
+| Phi-4 | ~$0.00009 | $0.07/M | — | 1.69 |
 
 ## How E Values Are Used
 
