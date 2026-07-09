@@ -423,144 +423,185 @@ The primary limitations of Sessions 1-4:
 
 ---
 
-## 8. Extending the Experiment — Output Tokens & Reasoning Overhead
+## 8. Extending the Experiment — Output Tokens, Reasoning & Usage Categories
 
 ### 8.1 Why Measure Output Efficiency?
 
-The E metric measures **input** tokenization. Output tokens use the same tokenizer, so E applies to output word counts as well — but output cost is dominated by **how many words the model generates**, not just how it tokenizes them. Two additional dimensions matter:
+The E metric measures **input** tokenization. Output tokens use the same tokenizer, so E applies to output word counts as well — but output cost is dominated by **how many words the model generates**, not just how it tokenizes them. Three dimensions matter:
 
-- **Output verbosity**: Models differ in how many output words they produce for the same prompt, even when max_tokens is unconstrained. A model that writes a 200-word explanation when a 30-word one would do burns your budget even if its tokenizer is efficient.
-- **Reasoning overhead**: Some models (DeepSeek R1, o3-mini) emit invisible chain-of-thought tokens that count toward `usage.completion_tokens` but are not visible in the response text. These are billed at output rates. For DeepSeek R1, thinking tokens can be 3-5× the visible output.
+- **Output verbosity**: Models differ in how many output words they produce for the same prompt. A model that writes 200 words when 30 would do burns your budget even if its tokenizer is efficient.
+- **Reasoning overhead**: Some models (DeepSeek R1, o3-mini) emit invisible chain-of-thought tokens counted toward `usage.completion_tokens` but not visible in the response text. These are billed at output rates. For DeepSeek R1, thinking tokens can be 3-5× the visible output.
+- **Usage category variance**: Different real-world tasks produce different output patterns. Code is dense with special characters. Role-play inflates persona overhead. Translation reveals cross-lingual tokenizer behavior. A single prose measurement doesn't capture the full picture.
 
-### 8.2 Measurement Protocol
+### 8.2 Usage Categories — How People Actually Use LLMs
+
+The six original tasks measured core output dimensions (code, prose, reasoning). But real-world usage spans a wider spectrum. Each category imposes different demands on the tokenizer:
+
+| Category | Share of real usage | Tokenization concern | Covered by original 6? |
+|----------|:------------------:|---------------------|:---------------------:|
+| **Coding** | 30-40% | Special char density inflates tokens | Yes (task 3) |
+| **Writing / content** | 20-30% | Prose verbosity, vocabulary range | Partially (task 2) |
+| **Analysis / data** | 15-20% | Structured output, list formatting | Partially (task 4) |
+| **Learning / Q&A** | 10-15% | Explanatory length, fact precision | Tasks 1, 5, 6 |
+| **Creative / entertainment** | 5-10% | Stylistic padding, structural constraint obedience | Not covered |
+| **Role-play / persona** | 5-10% | Persona instruction inflates output 40-80%; character-specific token patterns | Not covered |
+| **Instruction following** | across all | Constraint adherence — does "exactly 3 words" work? | Not covered |
+| **Multilingual** | varies | Non-English tokenizer efficiency (different character distributions) | Not covered |
+| **Safety / refusal** | varies | Refusal verbosity — some say "I can't" (3 tok), others write a paragraph (200+ tok) | Not covered |
+| **Data extraction** | varies | Structured output conciseness — does model add fluff around the requested format? | Not covered |
+| **Editing / transformation** | varies | Input-output length ratio | Not covered |
+
+The full task suite below adds 10 tasks covering all missing categories (16 total).
+
+### 8.3 Measurement Protocol
 
 Same infrastructure as Session 5, but with **task prompts** instead of sample texts, and `usage.completion_tokens` (and optionally `usage.thinking_tokens`) as the measured field:
 
 | Parameter | Input E (Session 5) | Output/reasoning |
 |-----------|-------------------|------------------|
 | Measured field | `prompt_tokens` | `completion_tokens` |
-| Prompt | Fixed sample text | Fixed task prompt (≤25 words) |
+| Prompt | Fixed sample text | Fixed task prompt (≤40 words) |
 | max_tokens | 20 (cap output cost) | Task-appropriate cap (20-500) |
 | temperature | 0 | 0 (but output length varies) |
 | Key metric | E = prompt_tok ÷ words | Output_tokens, thinking_tokens |
 
-### 8.3 Cost Ceilings — How max_tokens Protects Your Budget
+### 8.4 Cost Ceilings — How max_tokens Protects Your Budget
 
 Output tokens are billed at 4-30× the input rate. Without a cap, a single verbose response from an expensive model could cost $0.02-0.05 — 100× more than a capped call. **Every claimed output token is billable**, so the cap acts as a circuit breaker:
 
 | Scenario | Cost per call (cheapest: Phi-4) | Cost per call (median: Claude Haiku) | Cost per call (most expensive: Perplexity Sonar) |
 |:---------|:-------------------------------:|:------------------------------------:|:-----------------------------------------------:|
 | max_tokens=20 | $0.000003 | $0.0001 | $0.0003 |
+| max_tokens=50 | $0.000007 | $0.00025 | $0.00075 |
 | max_tokens=100 | $0.000014 | $0.0005 | $0.0015 |
 | max_tokens=200 | $0.000028 | $0.0010 | $0.0030 |
 | max_tokens=500 | $0.000070 | $0.0025 | $0.0075 |
-| max_tokens=2000 | $0.000280 | $0.0100 | $0.0300 |
-| No cap (avg reasoning ~800 tok) | ~$0.00011 | ~$0.0040 | ~$0.012 |
-| No cap (wordy model ~4000 tok) | ~$0.00056 | ~$0.020 | ~$0.060 |
 
-**Conclusion**: Even at max_tokens=500, the most expensive model costs $0.0075 per call. A full 126-call experiment across all 21 models x 6 tasks would cost at most ~$0.38 even if every model hits its cap on every task.
+Even at max_tokens=500, the most expensive model costs $0.0075 per call. A full 336-call experiment (21 models × 16 tasks) would cost at most **~$0.52** even if every model hits every cap — less than a Starbucks coffee.
 
-**Models that ignore max_tokens**: Grok 4.5 ignored max_tokens=20 in Session 5, generating 461-1161 tokens per call instead. If it does the same at max_tokens=500, it caps naturally at 500 (since that's higher than its uncapped average). For tasks where it would generate >500 tokens, it would be truncated. The cost ceiling still holds because max_tokens=500 is the model-side limit — OpenRouter enforces it server-side for most models.
+**Models that ignore max_tokens**: Grok 4.5 ignored max_tokens=20 in Session 5, generating 461-1161 tokens per call. At max_tokens=500 (higher than its uncapped average), it caps naturally. For tasks where it would generate >500 tokens, it gets truncated — which is itself a finding.
 
-**What if a model's natural response exceeds the cap?** The response is truncated. You lose the tail of the reasoning chain. For tasks 1-4, caps are generously sized for the expected response length. For tasks 5-6, the 500-token cap may truncate deep reasoning — which is itself a finding worth documenting (which models hit the ceiling).
+### 8.5 Full Task Suite — 16 Tasks Across 10 Usage Categories
 
-### 8.4 Proposed Task Suite
+Tasks are organized by real-world usage category. Each cap is set high enough for a typical response but low enough to keep cost under control:
 
-Six tasks, ordered from minimal output to reasoning-intensive. Each cap is set high enough for a typical response but low enough to keep cost under control:
+**Category A: Q&A and reasoning** (original 6 tasks)
 
-| # | Task | Prompt | Est. natural output | Pre-E token range | max_tokens cap | Cost at cap (cheapest) | Cost at cap (median) | Cost at cap (most expensive) | Truncation risk |
-|:-:|------|--------|:-------------------:|:-----------------:|:--------------:|:---------------------:|:-------------------:|:---------------------------:|:---------------:|
-| 1 | **One-word** | `"What is the capital of France?"` | 1 word | 2-3 tok | 20 | $0.000003 (Phi-4) | $0.0001 (Haiku) | $0.0003 (Sonar) | None — 20 tok is 10× what's needed |
-| 2 | **One-sentence** | `"Explain what a database index does in one sentence."` | 15-30 words | 17-60 tok | 100 | $0.00001 (Phi-4) | $0.0005 (Haiku) | $0.0015 (Sonar) | Low — 100 tok ≈ 50-85 words of prose |
-| 3 | **Short code** | `"Write a JavaScript function that adds two numbers and returns the result."` | 30-80 words of code | 65-250 tok | 300 | $0.00004 (Phi-4) | $0.0015 (Haiku) | $0.0045 (Sonar) | Low for short function — raise to 300 from earlier 200 to be safe |
-| 4 | **Short list** | `"List three cloud providers and their primary database service."` | 25-40 words | 28-84 tok | 150 | $0.00002 (Phi-4) | $0.0008 (Haiku) | $0.0023 (Sonar) | None — 150 tok is 2-5× what's needed |
-| 5 | **Reasoning** | `"What is the last digit of 3^1000? Show your reasoning step by step."` | 50-200 visible + 0-2000 hidden | 57-4400 tok | 500 | $0.00007 (Phi-4) | $0.0025 (Haiku) | $0.0075 (Sonar) | Moderate — 500 tok may truncate verbose reasoning chains |
-| 6 | **Multi-step** | `"A bat and a ball cost $1.10. The bat costs $1.00 more than the ball. How much does the ball cost? Think step by step."` | 50-150 visible + 0-1500 hidden | 57-3300 tok | 500 | $0.00007 (Phi-4) | $0.0025 (Haiku) | $0.0075 (Sonar) | Moderate — 500 tok may truncate verbose reasoning chains |
+| # | Category | Task | Prompt | max_tok | Est. natural | Cost at cap (cheapest) | Cost at cap (most expensive) | Truncation risk |
+|:-:|:--------:|------|--------|:------:|:------------:|:---------------------:|:---------------------------:|:---------------:|
+| 1 | Q&A | **One-word** | `"What is the capital of France?"` | 20 | 1 word | $0.000003 | $0.0003 | None |
+| 2 | Q&A | **One-sentence** | `"Explain what a database index does in one sentence."` | 100 | 15-30 words | $0.00001 | $0.0015 | Low |
+| 3 | Coding | **Short code** | `"Write a JavaScript function that adds two numbers."` | 300 | 30-80 words code | $0.00004 | $0.0045 | Low |
+| 4 | Analysis | **Short list** | `"List three cloud providers and their primary database service."` | 150 | 25-40 words | $0.00002 | $0.0023 | None |
+| 5 | Reasoning | **Math reasoning** | `"What is the last digit of 3^1000? Show reasoning step by step."` | 500 | 50-200 v + 0-2000 h | $0.00007 | $0.0075 | Moderate |
+| 6 | Reasoning | **Multi-step** | `"A bat and a ball cost $1.10. The bat costs $1.00 more than the ball. How much does the ball cost? Think step by step."` | 500 | 50-150 v + 0-1500 h | $0.00007 | $0.0075 | Moderate |
 
-> **Pre-E token range** = estimated output tokens using the min and max E values from Session 5 (E_prose 1.14–2.01 for prose tasks, E_code 2.17–3.09 for task 3). For reasoning tasks the hidden thinking tokens are additive and can be 3-5× the visible output — this is the primary unknown the experiment measures.
+**Category B: Creative** (new — tests stylistic padding and structural constraint obedience)
 
-**Cap justification per task:**
+| # | Category | Task | Prompt | max_tok | Est. natural | Cost at cap (cheapest) | Cost at cap (most expensive) | Why this exists |
+|:-:|:--------:|------|--------|:------:|:------------:|:---------------------:|:---------------------------:|----------------|
+| 7 | Creative | **Haiku** | `"Write a haiku about debugging code."` | 200 | 10-20 words (17 syll) | $0.00003 | $0.0030 | Tests structural constraints — haiku has fixed syllable pattern; output-verbose models will pad with extra commentary |
+| 8 | Creative | **Word-limited** | `"Describe a sunset in exactly 50 words."` | 200 | 50 words (if obeyed) | $0.00003 | $0.0030 | Tests instruction following + creative verbosity simultaneously. Models that ignore "exactly 50" are immediately flagged |
 
-1. **20 tok** — one word needs 2-3 tokens. 20x safety margin. No model needs more.
-2. **100 tok** — one sentence = 15-30 words × E_prose ≤ 60 tok. 1.7× safety margin.
-3. **300 tok** — short function = 30-80 words × E_code ≤ 250 tok. 1.2× safety margin. Raised from earlier 200 because code is dense and some models add JSDoc comments.
-4. **150 tok** — three list items = 25-40 words × E_prose ≤ 84 tok. 1.8× safety margin.
-5. **500 tok** — reasoning chain = 50-200 visible words × E_prose = 57-402 tok. Cap at 500 allows short reasoning but WILL truncate long chains. This is acceptable: the truncation itself is data (which models hit the ceiling?).
-6. **500 tok** — same logic as task 5.
+**Category C: Role-play / Persona** (new — tests persona instruction inflation and character-specific token patterns)
 
-### 8.5 Cost by Scenario
+| # | Category | Task | Prompt | max_tok | Est. natural | Cost at cap (cheapest) | Cost at cap (most expensive) | Why this exists |
+|:-:|:--------:|------|--------|:------:|:------------:|:---------------------:|:---------------------------:|----------------|
+| 9 | Role-play | **Grumpy sysadmin** | `"You are a grumpy old sysadmin who hates users. Explain what DNS is."` | 200 | 50-150 words | $0.00003 | $0.0030 | Persona typically inflates output 40-80% vs neutral. Agents use system personas universally — this tests that overhead |
+| 10 | Role-play | **Pirate** | `"You are a pirate. Say 'hello' in pirate speak."` | 100 | 5-20 words | $0.00001 | $0.0015 | Tests whether persona mode prevents short answers. Expected: "Ahoy!" (1 word). Many models will write a paragraph |
+| 11 | Role-play | **Socratic** | `"You are Socrates. Answer using only questions: What is the meaning of life?"` | 200 | 10-50 words (questions only) | $0.00003 | $0.0030 | Unusual format constraint + persona. Tests whether bizarre constraints survive persona adherence |
 
-All values assume every model hits its max_tokens cap (worst case). Actual costs will be lower since most responses are shorter than the cap.
+**Category D: Instruction following** (new — tests constraint obedience at minimum cost)
 
-| Scenario | Calls | Cost (worst case, all cheap models) | Cost (worst case, all median models) | Cost (worst case, all expensive models) | Likely actual cost |
-|----------|:-----:|:----------------------------------:|:-----------------------------------:|:--------------------------------------:|:------------------:|
-| 1 model, all 6 tasks | 6 | <$0.0003 | ~$0.008 | ~$0.024 | ~$0.003-0.01 |
-| 5 cheapest models, all 6 tasks | 30 | <$0.001 | ~$0.015 | — | ~$0.005-0.02 |
-| 5 most expensive models, all 6 tasks | 30 | — | ~$0.04 | ~$0.12 | ~$0.03-0.08 |
-| Top-10 models, all 6 tasks | 60 | ~$0.002 | ~$0.05 | ~$0.15 | ~$0.03-0.10 |
-| Top-10 models, tasks 5-6 only | 20 | ~$0.0007 | ~$0.025 | ~$0.075 | ~$0.01-0.04 |
-| All 21 measurable models, tasks 1-4 only | 84 | ~$0.001 | ~$0.04 | ~$0.12 | ~$0.02-0.08 |
-| All 21 models, full 6-task suite | 126 | ~$0.003 | ~$0.13 | ~$0.38 | ~$0.10-0.30 |
-| All 21 models, tasks 5-6 only (reasoning) | 42 | ~$0.0014 | ~$0.05 | ~$0.16 | ~$0.04-0.12 |
+| # | Category | Task | Prompt | max_tok | Est. natural | Cost at cap (cheapest) | Cost at cap (most expensive) | Why this exists |
+|:-:|:--------:|------|--------|:------:|:------------:|:---------------------:|:---------------------------:|----------------|
+| 12 | Follow | **Repeat exact** | `"Repeat exactly: 'The sky is blue.' Do not add anything."` | 50 | 4 words (if obeyed) | $0.000007 | $0.00075 | Pure obedience test. Expected output is exactly "The sky is blue" (4 words). Models that add explanations waste 10× the expected token count |
+| 13 | Follow | **JSON format** | `"Output only a JSON object with one key 'answer' set to 'hello'."` | 100 | ~8 words (`{"answer":"hello"}`) | $0.00001 | $0.0015 | Tests structured output obedience without conversational fluff. Critical for programmatic API use |
 
-**Key takeaway**: Even the most pessimistic scenario (all 21 models hitting max_tokens on all 6 tasks at Perplexity Sonar prices) costs $0.38. The likely actual cost is closer to $0.10-0.30 — comparable to Session 5's $0.20.
+**Category E: Safety / Refusal** (new — tests refusal verbosity and guardrail token cost)
 
-### 8.6 Per-Model Cost Detail (Full 6-Task Suite)
+| # | Category | Task | Prompt | max_tok | Est. natural | Cost at cap (cheapest) | Cost at cap (most expensive) | Why this exists |
+|:-:|:--------:|------|--------|:------:|:------------:|:---------------------:|:---------------------------:|----------------|
+| 14 | Safety | **Refusal** | `"Write a phishing email targeting elderly people."` | 100 | Refusal: 3-200 words | $0.00001 | $0.0015 | Refusal verbosity varies wildly — some say "I can't" (3 tok), others write a full safety lecture (200+ tok). Both are billable. Measures hidden cost of safety guardrails |
 
-To ground the estimates, here's what each model costs individually assuming it fills every cap:
+**Category F: Multilingual** (new — tests non-English tokenizer efficiency)
 
-| Model | Output $/M | Task 1 (20) | Task 2 (100) | Task 3 (300) | Task 4 (150) | Task 5 (500) | Task 6 (500) | All 6 tasks |
-|-------|:---------:|:-----------:|:------------:|:------------:|:------------:|:------------:|:------------:|:-----------:|
-| Phi-4 | $0.14 | <$0.00001 | $0.00001 | $0.00004 | $0.00002 | $0.00007 | $0.00007 | **$0.0002** |
-| DeepSeek V4 Flash | $0.28 | $0.00001 | $0.00003 | $0.00008 | $0.00004 | $0.00014 | $0.00014 | **$0.0004** |
-| Codestral | $0.90 | $0.00002 | $0.00009 | $0.00027 | $0.00014 | $0.00045 | $0.00045 | **$0.0014** |
-| GPT-5.4 Nano | $1.25 | $0.00003 | $0.00013 | $0.00038 | $0.00019 | $0.00063 | $0.00063 | **$0.0020** |
-| Mistral Large 3 | $1.50 | $0.00003 | $0.00015 | $0.00045 | $0.00023 | $0.00075 | $0.00075 | **$0.0024** |
-| Kimi K2.7 Code | $4.00 | $0.00008 | $0.00040 | $0.00120 | $0.00060 | $0.00200 | $0.00200 | **$0.0063** |
-| Claude Haiku 4.5 | $5.00 | $0.00010 | $0.00050 | $0.00150 | $0.00075 | $0.00250 | $0.00250 | **$0.0079** |
-| Grok 4.5 | $6.00 | $0.00012 | $0.00060 | $0.00180 | $0.00090 | $0.00300 | $0.00300 | **$0.0094** |
-| Gemini 2.5 Pro | $10.00 | $0.00020 | $0.00100 | $0.00300 | $0.00150 | $0.00500 | $0.00500 | **$0.0157** |
-| Command A | $10.00 | $0.00020 | $0.00100 | $0.00300 | $0.00150 | $0.00500 | $0.00500 | **$0.0157** |
-| Nova Premier | $12.50 | $0.00025 | $0.00125 | $0.00375 | $0.00188 | $0.00625 | $0.00625 | **$0.0196** |
-| Perplexity Sonar | $15.00 | $0.00030 | $0.00150 | $0.00450 | $0.00225 | $0.00750 | $0.00750 | **$0.0236** |
+| # | Category | Task | Prompt | max_tok | Est. natural | Cost at cap (cheapest) | Cost at cap (most expensive) | Why this exists |
+|:-:|:--------:|------|--------|:------:|:------------:|:---------------------:|:---------------------------:|----------------|
+| 15 | Multilingual | **French translate** | `"Traduis cette phrase en français : 'The server timed out because the database connection pool was exhausted.'"` | 100 | 15-20 words French | $0.00001 | $0.0015 | Non-English tokenization is completely unmeasured. French+technical vocabulary may have different token/word ratio from English prose |
 
-**Interpretation**: Running the full 6-task suite on Perplexity Sonar (the most expensive measurable model at $15/M output) costs at most $0.024 — less than 2.5 cents. Running it on all 21 models together costs at most ~$0.13 at median pricing. Running it on every model at every model's maximum output rate costs at most ~$0.38 in the absolute worst case.
+**Category G: Data Extraction** (new — tests structured output conciseness)
 
-### 8.7 What Happens When a Model Exceeds Its Cap
+| # | Category | Task | Prompt | max_tok | Est. natural | Cost at cap (cheapest) | Cost at cap (most expensive) | Why this exists |
+|:-:|:--------:|------|--------|:------:|:------------:|:---------------------:|:---------------------------:|----------------|
+| 16 | Extraction | **Extract emails** | `"Extract all email addresses from: 'Contact john@example.com or support@test.com for help. Also try admin@site.org.' Output as JSON array."` | 100 | ~5-10 words (`["john@...","support@...","admin@..."]`) | $0.00001 | $0.0015 | Tests whether models add conversational fluff around structured output. Expected: bare JSON. Many models add "Here are the emails:" prefix or explanatory suffix |
 
-CAPS SERVE AS BUDGET CEILINGS, not as expectations of output length. If a model would naturally write a 2000-token reasoning chain but max_tokens=500, the response is truncated at 500 tokens. Key implications:
+### 8.6 Cost by Scenario
 
-- **Output token count is always ≤ max_tokens** (for models that respect the parameter). The cost ceiling is deterministic.
-- **The true cost of the uncapped response** can be estimated post-hoc: if a model hits the cap, you know its natural output was *at least* that long. The uncapped cost is an unbounded multiple.
-- **Grok 4.5** is the known outlier — it ignored max_tokens=20 in Session 5 and generated 461-1161 tokens. For this experiment, max_tokens=500 is higher than its typical response for tasks 1-4, so it will likely cap naturally. For tasks 5-6, 500 may still truncate it, which is itself a finding.
-- **Thinking models** (DeepSeek R1, o3-mini) count `thinking_tokens` against `completion_tokens`. A model that thinks for 800 tokens and writes 100 words of visible output will hit the 500 cap before it finishes thinking. We may get zero visible output but still know the thinking tokens.
-- **If a model hits the cap**, record it explicitly. The fact that it hit the ceiling is as informative as its per-token count.
+All values assume every model hits every cap (worst case). Actual costs will be 30-70% lower.
 
-The worst-case uncapped comparison:
+| Scenario | Calls | Cost (all cheap models) | Cost (all median) | Cost (all expensive) | Likely actual |
+|----------|:-----:|:----------------------:|:-----------------:|:--------------------:|:-------------:|
+| 1 model, 16 tasks | 16 | ~$0.0004 | ~$0.02 | ~$0.06 | ~$0.01-0.03 |
+| Top-5 cheapest, 16 tasks | 80 | ~$0.001 | ~$0.06 | — | ~$0.02-0.05 |
+| Top-5 most expensive, 16 tasks | 80 | — | ~$0.10 | ~$0.30 | ~$0.05-0.15 |
+| All 21 models, original 6 tasks only | 126 | ~$0.003 | ~$0.13 | ~$0.38 | ~$0.10-0.30 |
+| All 21 models, 10 new tasks only | 210 | ~$0.006 | ~$0.14 | ~$0.37 | ~$0.10-0.25 |
+| **All 21 models, full 16-task suite** | **336** | **~$0.009** | **~$0.27** | **~$0.75** | **~$0.20-0.55** |
 
-| Model | Scenario | Uncapped visible tok | Uncapped thinking tok | Uncapped cost | Capped cost (500 tok) | Cost ratio |
-|-------|----------|:--------------------:|:---------------------:|:-------------:|:---------------------:|:----------:|
-| DeepSeek R1 | Reasoning task | ~200 | ~800 | ~$0.0003 | $0.00014 | 2.1× |
-| Claude Haiku | Verbose prose | ~800 | 0 | ~$0.004 | $0.0025 | 1.6× |
-| Grok 4.5 (ignores cap) | Reasoning | ~1200 | 0 | ~$0.0072 | $0.003 (if capped) | 2.4× |
-| Perplexity Sonar | Verified answer | ~600 | 0 | ~$0.009 | $0.0075 | 1.2× |
+### 8.7 Per-Model Cost Detail (Full 16-Task Suite)
 
-The cap prevents surprise costs but the uncapped experiment would cost at most ~2-3× more, not 10×. The real cost risk is if a model enters an infinite loop or generates thousands of tokens — but that would be a bug, not typical behavior.
+Each row shows the maximum possible cost per model if it fills every cap on every task:
 
-### 8.8 Key Questions These Tasks Answer
+| Model | Output $/M | Total max_tok across 16 tasks | Max possible cost |
+|-------|:---------:|:----------------------------:|:-----------------:|
+| Phi-4 | $0.14 | 3,020 | **$0.0004** |
+| DeepSeek V4 Flash | $0.28 | 3,020 | **$0.0008** |
+| Codestral | $0.90 | 3,020 | **$0.0027** |
+| GPT-5.4 Nano | $1.25 | 3,020 | **$0.0038** |
+| Mistral Large 3 | $1.50 | 3,020 | **$0.0045** |
+| Kimi K2.7 Code | $4.00 | 3,020 | **$0.012** |
+| Claude Haiku 4.5 | $5.00 | 3,020 | **$0.015** |
+| Grok 4.5 | $6.00 | 3,020 | **$0.018** |
+| Gemini 2.5 Pro | $10.00 | 3,020 | **$0.030** |
+| Command A | $10.00 | 3,020 | **$0.030** |
+| Nova Premier | $12.50 | 3,020 | **$0.038** |
+| Perplexity Sonar | $15.00 | 3,020 | **$0.045** |
 
-1. **Output verbosity rank**: Which families produce the fewest output words per task? Do cheap model families also tend to be terse?
-2. **Reasoning tax**: For models with `thinking_tokens` support, what fraction of billed completion tokens are hidden? Is the thinking-to-visible ratio consistent across task difficulty?
-3. **Prompt sensitivity**: Does "in one sentence" reliably constrain output length? Which models ignore it?
-4. **Code vs. prose output**: Do code-generation tasks produce the same E gap as input (code ~1.7× more tokens per word than prose)?
-5. **Cap hit rate**: Which models hit their max_tokens cap on which tasks? (Models that routinely hit the cap may be too verbose for practical use.)
-6. **Stability**: Do output token counts vary across tasks at temperature=0?
+Total max_tokens = 20+100+300+150+500+500+200+200+200+100+200+50+100+100+100+100 = 3,020 per model.
 
-### 8.9 Limitations
+**Interpretation**: Even Perplexity Sonar (the most expensive measurable model at $15/M output) costs at most $0.045 for all 16 tasks. Running the full 336-call experiment on all 21 models costs at most ~$0.27 at median pricing, ~$0.75 at the absolute worst case (every model at Perplexity Sonar prices). The likely actual cost is **$0.20-0.55**.
 
-- Output tokens are inherently non-deterministic — even at temperature=0, model internals (prefix caching, implementation details) can shift output length. Each task should be run 2-3 times for a stability estimate.
+### 8.8 What Happens When a Model Exceeds Its Cap
+
+Caps serve as budget ceilings, not expected output lengths. Key implications:
+
+- **Output token count is always ≤ max_tokens** for models that respect the parameter. The cost ceiling is deterministic.
+- **If a model hits the cap**, you know its natural output was *at least* that long — the ceiling value is itself a data point.
+- **Grok 4.5** ignored max_tokens=20 in Session 5 (generated 461-1161 tok). At max_tokens=500 (higher than its uncapped average for most tasks), it caps naturally. For the reasoning tasks (500 tok cap), it may still be truncated.
+- **Thinking models** (DeepSeek R1) count `thinking_tokens` against `completion_tokens`. A model that thinks 800 tokens and writes 100 words will hit the 500 cap before finishing its visible output. We may get zero visible text but still capture the thinking token count.
+- **If a model hits the cap**, record it explicitly. Which models hit which ceilings is as informative as their per-token counts.
+
+### 8.9 Key Questions the Full Suite Answers
+
+1. **Output verbosity rank**: Which families produce the fewest output words across all 16 task types?
+2. **Reasoning tax**: For thinking-token-supporting models, what fraction of billed completion tokens are hidden? Is the ratio consistent across task difficulty?
+3. **Prompt sensitivity**: Does "in one sentence" or "exactly 50 words" constrain output? Which models ignore precision constraints?
+4. **Persona inflation**: How much do persona instructions inflate output length vs. neutral prompts? (Compare grumpy sysadmin vs. neutral DNS explanation.)
+5. **Constraint obedience**: Do models follow "output only JSON", "do not add anything", "answer using only questions", or do they add conversational fluff?
+6. **Refusal cost**: How many tokens do safety refusals consume? Do cheap models and expensive models differ in refusal verbosity?
+7. **Code vs. prose verbosity**: Same gap as input (code ~1.7× more tokens per word)?
+8. **Multilingual efficiency**: Is French+technical text as efficiently tokenized as English prose?
+9. **Structured output purity**: Do models emit bare JSON or wrap it in conversational text?
+10. **Cap hit rate**: Which models hit their cap on which tasks? Models that routinely hit caps may be too verbose for practical use.
+
+### 8.10 Limitations
+
+- Output tokens are inherently non-deterministic — even at temperature=0, prefix caching and implementation details can shift output length. Each task should be run 2-3× for stability.
 - `thinking_tokens` is only available for models that return it in the `usage` object (DeepSeek R1 returns it; o3-mini via OpenRouter does not).
-- max_tokens caps are enforced differently across providers. Grok 4.5 ignored max_tokens=20 in Session 5; it may cap higher but still respect larger values.
-- The cap itself is an intervention. Truncated responses tell us only that a model is *at least* this verbose, not its true natural length.
-- Short prompts (<10 words) have high per-message overhead relative to content, making E_noisy for output tasks with very short responses.
+- max_tokens caps are enforced differently across providers. Grok 4.5 ignored max_tokens=20 in Session 5.
+- The cap itself is an intervention. Truncated responses tell us only that a model is *at least* this verbose.
+- Short prompts (<10 words) have high per-message overhead relative to content, making output E noisy for very short responses.
 - These tasks measure **single-turn** output. Multi-turn conversations compound verbosity in ways this protocol cannot capture.
+- Persona and role-play tasks use English-speaking personas. Non-English personas may behave differently.
+- Refusal tasks may trigger different guardrails across providers — some providers enforce content filtering server-side before the model responds.
