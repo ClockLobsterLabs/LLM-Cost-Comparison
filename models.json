@@ -1,6 +1,6 @@
 {
   "$schema": "./models.schema.json",
-  "last_updated": "2026-07-09 (Session 5: Live SWE-bench data validated from BenchLM.ai + swebench.com. Corrected 6 model entries. See SWE-bench section in docs.)",
+  "last_updated": "2026-07-09 (Session 6: Output verbosity experiment across 24 models. Session 6b: Compression experiments for DS V4 Flash/Pro with 5 methods.)",
   "pricing_sources": {
     "primary": {
       "name": "OpenCode Zen",
@@ -122,7 +122,117 @@
       "new_features": "Multi-Token Prediction, MoE 284B/13B, Deep EP optimization, 1M context",
       "specialty": "Cost-sensitive daily coding, general-purpose agent work",
       "strategy_note": "Your daily driver on Zen. Best value in the market. No reason to switch within tier.",
-      "tokenizer_efficiency": 1.65
+      "tokenizer_efficiency": 1.65,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 157.2,
+        "avg_words_per_call": 49.2,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 260.0,
+            "max_tokens": 260.0,
+            "min_tokens": 260.0,
+            "avg_words": 100.0
+          },
+          "short-list": {
+            "avg_tokens": 113.0,
+            "max_tokens": 113.0,
+            "min_tokens": 113.0,
+            "avg_words": 71.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 353.0,
+            "max_tokens": 353.0,
+            "min_tokens": 353.0,
+            "avg_words": 236.0
+          },
+          "json-format": {
+            "avg_tokens": 7.0,
+            "max_tokens": 7.0,
+            "min_tokens": 7.0,
+            "avg_words": 2.0
+          },
+          "short-code": {
+            "avg_tokens": 245.0,
+            "max_tokens": 245.0,
+            "min_tokens": 245.0,
+            "avg_words": 80.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 63.0,
+            "max_tokens": 63.0,
+            "min_tokens": 63.0,
+            "avg_words": 48.0
+          },
+          "reasoning": {
+            "avg_tokens": 347.0,
+            "max_tokens": 347.0,
+            "min_tokens": 347.0,
+            "avg_words": 71.0
+          },
+          "extract-emails": {
+            "avg_tokens": 233.0,
+            "max_tokens": 233.0,
+            "min_tokens": 233.0,
+            "avg_words": 1.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 62.0,
+            "max_tokens": 62.0,
+            "min_tokens": 62.0,
+            "avg_words": 2.0
+          },
+          "french-translate": {
+            "avg_tokens": 37.0,
+            "max_tokens": 37.0,
+            "min_tokens": 37.0,
+            "avg_words": 24.0
+          },
+          "haiku": {
+            "avg_tokens": 65.0,
+            "max_tokens": 65.0,
+            "min_tokens": 65.0,
+            "avg_words": 12.0
+          },
+          "one-sentence": {
+            "avg_tokens": 95.0,
+            "max_tokens": 95.0,
+            "min_tokens": 95.0,
+            "avg_words": 30.0
+          },
+          "multi-step": {
+            "avg_tokens": 343.0,
+            "max_tokens": 343.0,
+            "min_tokens": 343.0,
+            "avg_words": 62.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 34.0,
+            "max_tokens": 34.0,
+            "min_tokens": 34.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 124.0,
+            "max_tokens": 124.0,
+            "min_tokens": 124.0,
+            "avg_words": 13.0
+          },
+          "one-word": {
+            "avg_tokens": 134.0,
+            "max_tokens": 134.0,
+            "min_tokens": 134.0,
+            "avg_words": 32.0
+          }
+        }
+      }
     },
     "deepseek-v4-flash-max": {
       "name": "DeepSeek V4 Flash Max",
@@ -201,7 +311,117 @@
       "new_features": "1.6T MoE, 1M context, strong reasoning at low cost",
       "specialty": "Stronger reasoning than Flash, good for complex coding tasks",
       "strategy_note": "Strong Taskrunner. Cheaper than GLM 5.2 ($3.48 vs $4.40 out) but lower AAII (44 vs 51). Good when GLM is overkill. Warning: 4× thinking tax inflates effective output cost to $17.40/M (5× $3.48), jumping from Taskrunner to Daily tier.",
-      "tokenizer_efficiency": 1.65
+      "tokenizer_efficiency": 1.65,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 418.2,
+        "avg_words_per_call": 75.1,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 136.0,
+            "max_tokens": 136.0,
+            "min_tokens": 136.0,
+            "avg_words": 52.0
+          },
+          "short-list": {
+            "avg_tokens": 467.0,
+            "max_tokens": 467.0,
+            "min_tokens": 467.0,
+            "avg_words": 100.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 1071.0,
+            "max_tokens": 1071.0,
+            "min_tokens": 1071.0,
+            "avg_words": 518.0
+          },
+          "json-format": {
+            "avg_tokens": 44.0,
+            "max_tokens": 44.0,
+            "min_tokens": 44.0,
+            "avg_words": 2.0
+          },
+          "short-code": {
+            "avg_tokens": 244.0,
+            "max_tokens": 244.0,
+            "min_tokens": 244.0,
+            "avg_words": 86.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 1121.0,
+            "max_tokens": 1121.0,
+            "min_tokens": 1121.0,
+            "avg_words": 50.0
+          },
+          "reasoning": {
+            "avg_tokens": 593.0,
+            "max_tokens": 593.0,
+            "min_tokens": 593.0,
+            "avg_words": 152.0
+          },
+          "extract-emails": {
+            "avg_tokens": 188.0,
+            "max_tokens": 188.0,
+            "min_tokens": 188.0,
+            "avg_words": 1.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 121.0,
+            "max_tokens": 121.0,
+            "min_tokens": 121.0,
+            "avg_words": 1.0
+          },
+          "french-translate": {
+            "avg_tokens": 1486.0,
+            "max_tokens": 1486.0,
+            "min_tokens": 1486.0,
+            "avg_words": 17.0
+          },
+          "haiku": {
+            "avg_tokens": 84.0,
+            "max_tokens": 84.0,
+            "min_tokens": 84.0,
+            "avg_words": 10.0
+          },
+          "one-sentence": {
+            "avg_tokens": 298.0,
+            "max_tokens": 298.0,
+            "min_tokens": 298.0,
+            "avg_words": 21.0
+          },
+          "multi-step": {
+            "avg_tokens": 365.0,
+            "max_tokens": 365.0,
+            "min_tokens": 365.0,
+            "avg_words": 105.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 44.0,
+            "max_tokens": 44.0,
+            "min_tokens": 44.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 231.0,
+            "max_tokens": 231.0,
+            "min_tokens": 231.0,
+            "avg_words": 24.0
+          },
+          "one-word": {
+            "avg_tokens": 198.0,
+            "max_tokens": 198.0,
+            "min_tokens": 198.0,
+            "avg_words": 58.0
+          }
+        }
+      }
     },
     "deepseek-v4-pro-max": {
       "name": "DeepSeek V4 Pro Max",
@@ -688,7 +908,117 @@
       "new_features": "Fast, cheap Claude. 1M context.",
       "specialty": "Quick tasks, classification, structured output",
       "strategy_note": "Good but DeepSeek V4 Pro ($3.48 out at AAII 44) beats it on value-to-capability ratio.",
-      "tokenizer_efficiency": 1.85
+      "tokenizer_efficiency": 1.85,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 131.1,
+        "avg_words_per_call": 73.0,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 55.0,
+            "max_tokens": 55.0,
+            "min_tokens": 55.0,
+            "avg_words": 37.0
+          },
+          "short-list": {
+            "avg_tokens": 117.0,
+            "max_tokens": 117.0,
+            "min_tokens": 117.0,
+            "avg_words": 63.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 272.0,
+            "max_tokens": 272.0,
+            "min_tokens": 272.0,
+            "avg_words": 199.0
+          },
+          "json-format": {
+            "avg_tokens": 19.0,
+            "max_tokens": 19.0,
+            "min_tokens": 19.0,
+            "avg_words": 6.0
+          },
+          "short-code": {
+            "avg_tokens": 365.0,
+            "max_tokens": 365.0,
+            "min_tokens": 365.0,
+            "avg_words": 155.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 77.0,
+            "max_tokens": 77.0,
+            "min_tokens": 77.0,
+            "avg_words": 55.0
+          },
+          "reasoning": {
+            "avg_tokens": 501.0,
+            "max_tokens": 501.0,
+            "min_tokens": 501.0,
+            "avg_words": 251.0
+          },
+          "extract-emails": {
+            "avg_tokens": 73.0,
+            "max_tokens": 73.0,
+            "min_tokens": 73.0,
+            "avg_words": 40.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 19.0,
+            "max_tokens": 19.0,
+            "min_tokens": 19.0,
+            "avg_words": 3.0
+          },
+          "french-translate": {
+            "avg_tokens": 74.0,
+            "max_tokens": 74.0,
+            "min_tokens": 74.0,
+            "avg_words": 43.0
+          },
+          "haiku": {
+            "avg_tokens": 28.0,
+            "max_tokens": 28.0,
+            "min_tokens": 28.0,
+            "avg_words": 16.0
+          },
+          "one-sentence": {
+            "avg_tokens": 30.0,
+            "max_tokens": 30.0,
+            "min_tokens": 30.0,
+            "avg_words": 26.0
+          },
+          "multi-step": {
+            "avg_tokens": 232.0,
+            "max_tokens": 232.0,
+            "min_tokens": 232.0,
+            "avg_words": 111.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 8.0,
+            "max_tokens": 8.0,
+            "min_tokens": 8.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 116.0,
+            "max_tokens": 116.0,
+            "min_tokens": 116.0,
+            "avg_words": 85.0
+          },
+          "one-word": {
+            "avg_tokens": 112.0,
+            "max_tokens": 112.0,
+            "min_tokens": 112.0,
+            "avg_words": 74.0
+          }
+        }
+      }
     },
     "gpt-5-5": {
       "name": "GPT-5.5",
@@ -1003,7 +1333,117 @@
       "new_features": "Smallest GPT-5.4. Cheap but limited capability.",
       "specialty": "Ultra-cheap structured tasks, classification, formatting",
       "strategy_note": "DeepSeek V4 Flash ($0.28 out, AAII 40) is cheaper AND stronger. Nano is only useful if you specifically need an OpenAI model.",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.72,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 73.4,
+        "avg_words_per_call": 41.5,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 95.0,
+            "max_tokens": 95.0,
+            "min_tokens": 95.0,
+            "avg_words": 63.0
+          },
+          "short-list": {
+            "avg_tokens": 51.0,
+            "max_tokens": 51.0,
+            "min_tokens": 51.0,
+            "avg_words": 26.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 231.0,
+            "max_tokens": 231.0,
+            "min_tokens": 231.0,
+            "avg_words": 150.0
+          },
+          "json-format": {
+            "avg_tokens": 9.0,
+            "max_tokens": 9.0,
+            "min_tokens": 9.0,
+            "avg_words": 1.0
+          },
+          "short-code": {
+            "avg_tokens": 22.0,
+            "max_tokens": 22.0,
+            "min_tokens": 22.0,
+            "avg_words": 11.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 67.0,
+            "max_tokens": 67.0,
+            "min_tokens": 67.0,
+            "avg_words": 48.0
+          },
+          "reasoning": {
+            "avg_tokens": 352.0,
+            "max_tokens": 352.0,
+            "min_tokens": 352.0,
+            "avg_words": 177.0
+          },
+          "extract-emails": {
+            "avg_tokens": 17.0,
+            "max_tokens": 17.0,
+            "min_tokens": 17.0,
+            "avg_words": 1.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 13.0,
+            "max_tokens": 13.0,
+            "min_tokens": 13.0,
+            "avg_words": 4.0
+          },
+          "french-translate": {
+            "avg_tokens": 27.0,
+            "max_tokens": 27.0,
+            "min_tokens": 27.0,
+            "avg_words": 18.0
+          },
+          "haiku": {
+            "avg_tokens": 25.0,
+            "max_tokens": 25.0,
+            "min_tokens": 25.0,
+            "avg_words": 13.0
+          },
+          "one-sentence": {
+            "avg_tokens": 32.0,
+            "max_tokens": 32.0,
+            "min_tokens": 32.0,
+            "avg_words": 27.0
+          },
+          "multi-step": {
+            "avg_tokens": 129.0,
+            "max_tokens": 129.0,
+            "min_tokens": 129.0,
+            "avg_words": 60.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 9.0,
+            "max_tokens": 9.0,
+            "min_tokens": 9.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 21.0,
+            "max_tokens": 21.0,
+            "min_tokens": 21.0,
+            "avg_words": 12.0
+          },
+          "one-word": {
+            "avg_tokens": 74.0,
+            "max_tokens": 74.0,
+            "min_tokens": 74.0,
+            "avg_words": 49.0
+          }
+        }
+      }
     },
     "gpt-5-nano": {
       "name": "GPT-5 Nano",
@@ -1349,7 +1789,117 @@
       "new_features": "753B/40B MoE, MIT license, #1 open-weights model, fastest at 208.6 tok/s. #9 Arena Agent (6.62% win rate). #2 Arena WebDev (1584 ELO).",
       "specialty": "Your complex planning/audit model. Open frontier intelligence at a fraction of proprietary cost.",
       "strategy_note": "Your go-to for complex work. AAII 51 at $4.40/M out is unmatched value in its tier. Check for GLM 5.3 in every appraisal.",
-      "tokenizer_efficiency": 1.59
+      "tokenizer_efficiency": 1.59,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 585.8,
+        "avg_words_per_call": 101.2,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 940.0,
+            "max_tokens": 940.0,
+            "min_tokens": 940.0,
+            "avg_words": 487.0
+          },
+          "short-list": {
+            "avg_tokens": 633.0,
+            "max_tokens": 633.0,
+            "min_tokens": 633.0,
+            "avg_words": 133.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 1424.0,
+            "max_tokens": 1424.0,
+            "min_tokens": 1424.0,
+            "avg_words": 303.0
+          },
+          "json-format": {
+            "avg_tokens": 151.0,
+            "max_tokens": 151.0,
+            "min_tokens": 151.0,
+            "avg_words": 2.0
+          },
+          "short-code": {
+            "avg_tokens": 329.0,
+            "max_tokens": 329.0,
+            "min_tokens": 329.0,
+            "avg_words": 70.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 876.0,
+            "max_tokens": 876.0,
+            "min_tokens": 876.0,
+            "avg_words": 50.0
+          },
+          "reasoning": {
+            "avg_tokens": 817.0,
+            "max_tokens": 817.0,
+            "min_tokens": 817.0,
+            "avg_words": 248.0
+          },
+          "extract-emails": {
+            "avg_tokens": 374.0,
+            "max_tokens": 374.0,
+            "min_tokens": 374.0,
+            "avg_words": 5.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 163.0,
+            "max_tokens": 163.0,
+            "min_tokens": 163.0,
+            "avg_words": 2.0
+          },
+          "french-translate": {
+            "avg_tokens": 749.0,
+            "max_tokens": 749.0,
+            "min_tokens": 749.0,
+            "avg_words": 55.0
+          },
+          "haiku": {
+            "avg_tokens": 721.0,
+            "max_tokens": 721.0,
+            "min_tokens": 721.0,
+            "avg_words": 11.0
+          },
+          "one-sentence": {
+            "avg_tokens": 509.0,
+            "max_tokens": 509.0,
+            "min_tokens": 509.0,
+            "avg_words": 28.0
+          },
+          "multi-step": {
+            "avg_tokens": 611.0,
+            "max_tokens": 611.0,
+            "min_tokens": 611.0,
+            "avg_words": 121.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 289.0,
+            "max_tokens": 289.0,
+            "min_tokens": 289.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 577.0,
+            "max_tokens": 577.0,
+            "min_tokens": 577.0,
+            "avg_words": 59.0
+          },
+          "one-word": {
+            "avg_tokens": 210.0,
+            "max_tokens": 210.0,
+            "min_tokens": 210.0,
+            "avg_words": 42.0
+          }
+        }
+      }
     },
     "kimi-k2-7-code": {
       "name": "Kimi K2.7 Code",
@@ -1383,7 +1933,117 @@
       "new_features": "Code-specialized Kimi. 1T/32B MoE. Slow but capable. Optimized for direct response — negligible thinking tokens.",
       "specialty": "Code generation, Chinese-language tasks, open-weight coding",
       "strategy_note": "At $4/M out with AAII 42 and 46 tok/s, it's slower and less capable than GLM 5.2 ($4.40 out, AAII 51, 208 tok/s). Pass.",
-      "tokenizer_efficiency": 1.6
+      "tokenizer_efficiency": 1.6,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 241.9,
+        "avg_words_per_call": 68.9,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 302.0,
+            "max_tokens": 302.0,
+            "min_tokens": 302.0,
+            "avg_words": 81.0
+          },
+          "short-list": {
+            "avg_tokens": 200.0,
+            "max_tokens": 200.0,
+            "min_tokens": 200.0,
+            "avg_words": 74.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 750.0,
+            "max_tokens": 750.0,
+            "min_tokens": 750.0,
+            "avg_words": 426.0
+          },
+          "json-format": {
+            "avg_tokens": 46.0,
+            "max_tokens": 46.0,
+            "min_tokens": 46.0,
+            "avg_words": 6.0
+          },
+          "short-code": {
+            "avg_tokens": 162.0,
+            "max_tokens": 162.0,
+            "min_tokens": 162.0,
+            "avg_words": 57.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 376.0,
+            "max_tokens": 376.0,
+            "min_tokens": 376.0,
+            "avg_words": 50.0
+          },
+          "reasoning": {
+            "avg_tokens": 405.0,
+            "max_tokens": 405.0,
+            "min_tokens": 405.0,
+            "avg_words": 161.0
+          },
+          "extract-emails": {
+            "avg_tokens": 173.0,
+            "max_tokens": 173.0,
+            "min_tokens": 173.0,
+            "avg_words": 3.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 84.0,
+            "max_tokens": 84.0,
+            "min_tokens": 84.0,
+            "avg_words": 4.0
+          },
+          "french-translate": {
+            "avg_tokens": 248.0,
+            "max_tokens": 248.0,
+            "min_tokens": 248.0,
+            "avg_words": 40.0
+          },
+          "haiku": {
+            "avg_tokens": 350.0,
+            "max_tokens": 350.0,
+            "min_tokens": 350.0,
+            "avg_words": 12.0
+          },
+          "one-sentence": {
+            "avg_tokens": 118.0,
+            "max_tokens": 118.0,
+            "min_tokens": 118.0,
+            "avg_words": 33.0
+          },
+          "multi-step": {
+            "avg_tokens": 268.0,
+            "max_tokens": 268.0,
+            "min_tokens": 268.0,
+            "avg_words": 82.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 42.0,
+            "max_tokens": 42.0,
+            "min_tokens": 42.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 244.0,
+            "max_tokens": 244.0,
+            "min_tokens": 244.0,
+            "avg_words": 42.0
+          },
+          "one-word": {
+            "avg_tokens": 103.0,
+            "max_tokens": 103.0,
+            "min_tokens": 103.0,
+            "avg_words": 27.0
+          }
+        }
+      }
     },
     "kimi-k2-6": {
       "name": "Kimi K2.6",
@@ -1470,7 +2130,117 @@
       "new_features": "BRAND NEW (released today!). AAII 54 — #4 overall. Most concise frontier (60M output tokens).",
       "specialty": "Concise frontier intelligence. Complex reasoning at taskrunner pricing.",
       "strategy_note": "**ALERT**: AAII 54 at $6/M out is the best value in this appraisal. Complex-level intelligence (beats Opus 4.8) at Taskrunner pricing. Only 500K context. Worth evaluating as a GLM 5.2 alternative for complex work.",
-      "tokenizer_efficiency": 2.46
+      "tokenizer_efficiency": 2.46,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 383.3,
+        "avg_words_per_call": 53.7,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 0.0,
+            "max_tokens": 0.0,
+            "min_tokens": 0.0,
+            "avg_words": 0.0
+          },
+          "short-list": {
+            "avg_tokens": 347.0,
+            "max_tokens": 347.0,
+            "min_tokens": 347.0,
+            "avg_words": 37.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 466.0,
+            "max_tokens": 466.0,
+            "min_tokens": 466.0,
+            "avg_words": 267.0
+          },
+          "json-format": {
+            "avg_tokens": 147.0,
+            "max_tokens": 147.0,
+            "min_tokens": 147.0,
+            "avg_words": 2.0
+          },
+          "short-code": {
+            "avg_tokens": 99.0,
+            "max_tokens": 99.0,
+            "min_tokens": 99.0,
+            "avg_words": 11.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 1296.0,
+            "max_tokens": 1296.0,
+            "min_tokens": 1296.0,
+            "avg_words": 50.0
+          },
+          "reasoning": {
+            "avg_tokens": 605.0,
+            "max_tokens": 605.0,
+            "min_tokens": 605.0,
+            "avg_words": 188.0
+          },
+          "extract-emails": {
+            "avg_tokens": 227.0,
+            "max_tokens": 227.0,
+            "min_tokens": 227.0,
+            "avg_words": 1.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 126.0,
+            "max_tokens": 126.0,
+            "min_tokens": 126.0,
+            "avg_words": 1.0
+          },
+          "french-translate": {
+            "avg_tokens": 902.0,
+            "max_tokens": 902.0,
+            "min_tokens": 902.0,
+            "avg_words": 44.0
+          },
+          "haiku": {
+            "avg_tokens": 690.0,
+            "max_tokens": 690.0,
+            "min_tokens": 690.0,
+            "avg_words": 12.0
+          },
+          "one-sentence": {
+            "avg_tokens": 118.0,
+            "max_tokens": 118.0,
+            "min_tokens": 118.0,
+            "avg_words": 29.0
+          },
+          "multi-step": {
+            "avg_tokens": 383.0,
+            "max_tokens": 383.0,
+            "min_tokens": 383.0,
+            "avg_words": 123.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 104.0,
+            "max_tokens": 104.0,
+            "min_tokens": 104.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 283.0,
+            "max_tokens": 283.0,
+            "min_tokens": 283.0,
+            "avg_words": 42.0
+          },
+          "one-word": {
+            "avg_tokens": 340.0,
+            "max_tokens": 340.0,
+            "min_tokens": 340.0,
+            "avg_words": 48.0
+          }
+        }
+      }
     },
     "grok-build-0-1": {
       "name": "Grok Build 0.1",
@@ -1632,7 +2402,117 @@
       "new_features": "Latest MiniMax. Cheap but limited.",
       "specialty": "Budget tasks, simple code generation",
       "strategy_note": "SWE-bench Pro 59.0% / Verified 80.5% at $1.20/M out. Incredible budget value after DS Flash.",
-      "tokenizer_efficiency": 2.29
+      "tokenizer_efficiency": 2.29,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 18,
+        "error_calls": 0,
+        "maxed_out_1500": 4,
+        "still_maxed_4096": 2,
+        "avg_output_tokens": 976.6,
+        "avg_words_per_call": 44.5,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 359.0,
+            "max_tokens": 359.0,
+            "min_tokens": 359.0,
+            "avg_words": 181.0
+          },
+          "short-list": {
+            "avg_tokens": 741.0,
+            "max_tokens": 741.0,
+            "min_tokens": 741.0,
+            "avg_words": 140.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 2798.0,
+            "max_tokens": 4096.0,
+            "min_tokens": 1500.0,
+            "avg_words": 0.0
+          },
+          "json-format": {
+            "avg_tokens": 177.0,
+            "max_tokens": 177.0,
+            "min_tokens": 177.0,
+            "avg_words": 1.0
+          },
+          "short-code": {
+            "avg_tokens": 298.0,
+            "max_tokens": 298.0,
+            "min_tokens": 298.0,
+            "avg_words": 80.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 977.0,
+            "max_tokens": 977.0,
+            "min_tokens": 977.0,
+            "avg_words": 50.0
+          },
+          "reasoning": {
+            "avg_tokens": 2798.0,
+            "max_tokens": 4096.0,
+            "min_tokens": 1500.0,
+            "avg_words": 0.0
+          },
+          "extract-emails": {
+            "avg_tokens": 527.0,
+            "max_tokens": 527.0,
+            "min_tokens": 527.0,
+            "avg_words": 3.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 139.0,
+            "max_tokens": 139.0,
+            "min_tokens": 139.0,
+            "avg_words": 47.0
+          },
+          "french-translate": {
+            "avg_tokens": 201.0,
+            "max_tokens": 201.0,
+            "min_tokens": 201.0,
+            "avg_words": 22.0
+          },
+          "haiku": {
+            "avg_tokens": 734.0,
+            "max_tokens": 734.0,
+            "min_tokens": 734.0,
+            "avg_words": 15.0
+          },
+          "one-sentence": {
+            "avg_tokens": 216.0,
+            "max_tokens": 216.0,
+            "min_tokens": 216.0,
+            "avg_words": 27.0
+          },
+          "multi-step": {
+            "avg_tokens": 618.0,
+            "max_tokens": 618.0,
+            "min_tokens": 618.0,
+            "avg_words": 119.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 168.0,
+            "max_tokens": 168.0,
+            "min_tokens": 168.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 778.0,
+            "max_tokens": 778.0,
+            "min_tokens": 778.0,
+            "avg_words": 79.0
+          },
+          "one-word": {
+            "avg_tokens": 454.0,
+            "max_tokens": 454.0,
+            "min_tokens": 454.0,
+            "avg_words": 33.0
+          }
+        }
+      }
     },
     "mimo-v2-5-free": {
       "name": "MiMo-V2.5 Free",
@@ -1861,7 +2741,117 @@
       "new_features": "Predecessor to o4-mini. Older reasoning model.",
       "specialty": "Cheap reasoning, coding",
       "strategy_note": "o4-mini is better at the same price. No reason to use o3-mini if o4-mini is available.",
-      "tokenizer_efficiency": 1.64
+      "tokenizer_efficiency": 1.64,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 752.6,
+        "avg_words_per_call": 52.8,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 693.0,
+            "max_tokens": 693.0,
+            "min_tokens": 693.0,
+            "avg_words": 8.0
+          },
+          "short-list": {
+            "avg_tokens": 735.0,
+            "max_tokens": 735.0,
+            "min_tokens": 735.0,
+            "avg_words": 163.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 862.0,
+            "max_tokens": 862.0,
+            "min_tokens": 862.0,
+            "avg_words": 144.0
+          },
+          "json-format": {
+            "avg_tokens": 197.0,
+            "max_tokens": 197.0,
+            "min_tokens": 197.0,
+            "avg_words": 2.0
+          },
+          "short-code": {
+            "avg_tokens": 322.0,
+            "max_tokens": 322.0,
+            "min_tokens": 322.0,
+            "avg_words": 77.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 1108.0,
+            "max_tokens": 1108.0,
+            "min_tokens": 1108.0,
+            "avg_words": 50.0
+          },
+          "reasoning": {
+            "avg_tokens": 675.0,
+            "max_tokens": 675.0,
+            "min_tokens": 675.0,
+            "avg_words": 137.0
+          },
+          "extract-emails": {
+            "avg_tokens": 854.0,
+            "max_tokens": 854.0,
+            "min_tokens": 854.0,
+            "avg_words": 5.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 458.0,
+            "max_tokens": 458.0,
+            "min_tokens": 458.0,
+            "avg_words": 6.0
+          },
+          "french-translate": {
+            "avg_tokens": 970.0,
+            "max_tokens": 970.0,
+            "min_tokens": 970.0,
+            "avg_words": 20.0
+          },
+          "haiku": {
+            "avg_tokens": 1465.0,
+            "max_tokens": 1465.0,
+            "min_tokens": 1465.0,
+            "avg_words": 11.0
+          },
+          "one-sentence": {
+            "avg_tokens": 734.0,
+            "max_tokens": 734.0,
+            "min_tokens": 734.0,
+            "avg_words": 25.0
+          },
+          "multi-step": {
+            "avg_tokens": 561.0,
+            "max_tokens": 561.0,
+            "min_tokens": 561.0,
+            "avg_words": 88.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 694.0,
+            "max_tokens": 694.0,
+            "min_tokens": 694.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 997.0,
+            "max_tokens": 997.0,
+            "min_tokens": 997.0,
+            "avg_words": 64.0
+          },
+          "one-word": {
+            "avg_tokens": 717.0,
+            "max_tokens": 717.0,
+            "min_tokens": 717.0,
+            "avg_words": 41.0
+          }
+        }
+      }
     },
     "deepseek-r1": {
       "name": "DeepSeek R1",
@@ -1917,7 +2907,117 @@
       "new_features": "Original reasoning pioneer. 671B MoE. Open weights. RL-trained reasoning.",
       "specialty": "Reasoning, math, coding — the model that kicked off the reasoning era",
       "strategy_note": "Aged but historically important. DeepSeek V4 Pro ($3.48 out, AAII 44) and o4-mini ($4.40 out, SWE-bench 68.1%) both outperform R1 in their respective strengths. R1 is superseded within the family.",
-      "tokenizer_efficiency": 1.8
+      "tokenizer_efficiency": 1.8,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 20,
+        "error_calls": 0,
+        "maxed_out_1500": 4,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 905.8,
+        "avg_words_per_call": 152.5,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 712.0,
+            "max_tokens": 712.0,
+            "min_tokens": 712.0,
+            "avg_words": 186.0
+          },
+          "short-list": {
+            "avg_tokens": 1254.5,
+            "max_tokens": 1500.0,
+            "min_tokens": 1009.0,
+            "avg_words": 75.5
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 1402.5,
+            "max_tokens": 1521.0,
+            "min_tokens": 1284.0,
+            "avg_words": 632.0
+          },
+          "json-format": {
+            "avg_tokens": 357.0,
+            "max_tokens": 357.0,
+            "min_tokens": 357.0,
+            "avg_words": 4.0
+          },
+          "short-code": {
+            "avg_tokens": 1380.5,
+            "max_tokens": 1500.0,
+            "min_tokens": 1261.0,
+            "avg_words": 201.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 232.0,
+            "max_tokens": 232.0,
+            "min_tokens": 232.0,
+            "avg_words": 50.0
+          },
+          "reasoning": {
+            "avg_tokens": 1912.5,
+            "max_tokens": 2325.0,
+            "min_tokens": 1500.0,
+            "avg_words": 158.0
+          },
+          "extract-emails": {
+            "avg_tokens": 1046.0,
+            "max_tokens": 1046.0,
+            "min_tokens": 1046.0,
+            "avg_words": 30.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 144.0,
+            "max_tokens": 144.0,
+            "min_tokens": 144.0,
+            "avg_words": 11.0
+          },
+          "french-translate": {
+            "avg_tokens": 915.0,
+            "max_tokens": 915.0,
+            "min_tokens": 915.0,
+            "avg_words": 156.0
+          },
+          "haiku": {
+            "avg_tokens": 358.0,
+            "max_tokens": 358.0,
+            "min_tokens": 358.0,
+            "avg_words": 27.0
+          },
+          "one-sentence": {
+            "avg_tokens": 391.0,
+            "max_tokens": 391.0,
+            "min_tokens": 391.0,
+            "avg_words": 63.0
+          },
+          "multi-step": {
+            "avg_tokens": 1058.0,
+            "max_tokens": 1058.0,
+            "min_tokens": 1058.0,
+            "avg_words": 210.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 185.0,
+            "max_tokens": 185.0,
+            "min_tokens": 185.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 627.0,
+            "max_tokens": 627.0,
+            "min_tokens": 627.0,
+            "avg_words": 103.0
+          },
+          "one-word": {
+            "avg_tokens": 191.0,
+            "max_tokens": 191.0,
+            "min_tokens": 191.0,
+            "avg_words": 73.0
+          }
+        }
+      }
     },
     "deepseek-v3-2": {
       "name": "DeepSeek V3.2",
@@ -1953,7 +3053,117 @@
       "new_features": "Latest V3 generation. Strong reasoning and agent performance. Open weights.",
       "specialty": "Budget powerful coding, predecessor to V4 Flash",
       "strategy_note": "SWE-bench Verified 70.0% at $0.34/M out is incredible value. Cheaper than V4 Flash ($0.28 out + cache) with very similar capability. Worth considering as a Flash alternative if OpenRouter rates hold.",
-      "tokenizer_efficiency": 1.84
+      "tokenizer_efficiency": 1.84,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 148.0,
+        "avg_words_per_call": 88.7,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 111.0,
+            "max_tokens": 111.0,
+            "min_tokens": 111.0,
+            "avg_words": 96.0
+          },
+          "short-list": {
+            "avg_tokens": 310.0,
+            "max_tokens": 310.0,
+            "min_tokens": 310.0,
+            "avg_words": 146.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 499.0,
+            "max_tokens": 499.0,
+            "min_tokens": 499.0,
+            "avg_words": 334.0
+          },
+          "json-format": {
+            "avg_tokens": 12.0,
+            "max_tokens": 12.0,
+            "min_tokens": 12.0,
+            "avg_words": 6.0
+          },
+          "short-code": {
+            "avg_tokens": 413.0,
+            "max_tokens": 413.0,
+            "min_tokens": 413.0,
+            "avg_words": 218.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 68.0,
+            "max_tokens": 68.0,
+            "min_tokens": 68.0,
+            "avg_words": 49.0
+          },
+          "reasoning": {
+            "avg_tokens": 500.0,
+            "max_tokens": 500.0,
+            "min_tokens": 500.0,
+            "avg_words": 301.0
+          },
+          "extract-emails": {
+            "avg_tokens": 30.0,
+            "max_tokens": 30.0,
+            "min_tokens": 30.0,
+            "avg_words": 7.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 11.0,
+            "max_tokens": 11.0,
+            "min_tokens": 11.0,
+            "avg_words": 4.0
+          },
+          "french-translate": {
+            "avg_tokens": 24.0,
+            "max_tokens": 24.0,
+            "min_tokens": 24.0,
+            "avg_words": 16.0
+          },
+          "haiku": {
+            "avg_tokens": 20.0,
+            "max_tokens": 20.0,
+            "min_tokens": 20.0,
+            "avg_words": 13.0
+          },
+          "one-sentence": {
+            "avg_tokens": 32.0,
+            "max_tokens": 32.0,
+            "min_tokens": 32.0,
+            "avg_words": 25.0
+          },
+          "multi-step": {
+            "avg_tokens": 175.0,
+            "max_tokens": 175.0,
+            "min_tokens": 175.0,
+            "avg_words": 95.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 6.0,
+            "max_tokens": 6.0,
+            "min_tokens": 6.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 38.0,
+            "max_tokens": 38.0,
+            "min_tokens": 38.0,
+            "avg_words": 31.0
+          },
+          "one-word": {
+            "avg_tokens": 119.0,
+            "max_tokens": 119.0,
+            "min_tokens": 119.0,
+            "avg_words": 74.0
+          }
+        }
+      }
     },
     "deepseek-chat-v3": {
       "name": "DeepSeek Chat V3",
@@ -1985,7 +3195,117 @@
       "new_features": "Original V3 chat model. Superseded by V3.2.",
       "specialty": "Legacy budget coding",
       "strategy_note": "Superseded by DeepSeek V3.2 ($0.34 out, SWE-bench Verified 70.0%) and V4 Flash ($0.28 out). No reason to use.",
-      "tokenizer_efficiency": 1.78
+      "tokenizer_efficiency": 1.78,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 186.6,
+        "avg_words_per_call": 118.2,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 106.0,
+            "max_tokens": 106.0,
+            "min_tokens": 106.0,
+            "avg_words": 79.0
+          },
+          "short-list": {
+            "avg_tokens": 170.0,
+            "max_tokens": 170.0,
+            "min_tokens": 170.0,
+            "avg_words": 111.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 435.0,
+            "max_tokens": 435.0,
+            "min_tokens": 435.0,
+            "avg_words": 278.0
+          },
+          "json-format": {
+            "avg_tokens": 13.0,
+            "max_tokens": 13.0,
+            "min_tokens": 13.0,
+            "avg_words": 6.0
+          },
+          "short-code": {
+            "avg_tokens": 118.0,
+            "max_tokens": 118.0,
+            "min_tokens": 118.0,
+            "avg_words": 69.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 75.0,
+            "max_tokens": 75.0,
+            "min_tokens": 75.0,
+            "avg_words": 53.0
+          },
+          "reasoning": {
+            "avg_tokens": 894.0,
+            "max_tokens": 894.0,
+            "min_tokens": 894.0,
+            "avg_words": 583.0
+          },
+          "extract-emails": {
+            "avg_tokens": 27.0,
+            "max_tokens": 27.0,
+            "min_tokens": 27.0,
+            "avg_words": 15.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 52.0,
+            "max_tokens": 52.0,
+            "min_tokens": 52.0,
+            "avg_words": 24.0
+          },
+          "french-translate": {
+            "avg_tokens": 223.0,
+            "max_tokens": 223.0,
+            "min_tokens": 223.0,
+            "avg_words": 107.0
+          },
+          "haiku": {
+            "avg_tokens": 23.0,
+            "max_tokens": 23.0,
+            "min_tokens": 23.0,
+            "avg_words": 11.0
+          },
+          "one-sentence": {
+            "avg_tokens": 24.0,
+            "max_tokens": 24.0,
+            "min_tokens": 24.0,
+            "avg_words": 21.0
+          },
+          "multi-step": {
+            "avg_tokens": 612.0,
+            "max_tokens": 612.0,
+            "min_tokens": 612.0,
+            "avg_words": 392.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 5.0,
+            "max_tokens": 5.0,
+            "min_tokens": 5.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 121.0,
+            "max_tokens": 121.0,
+            "min_tokens": 121.0,
+            "avg_words": 76.0
+          },
+          "one-word": {
+            "avg_tokens": 88.0,
+            "max_tokens": 88.0,
+            "min_tokens": 88.0,
+            "avg_words": 63.0
+          }
+        }
+      }
     },
     "gemini-2-5-pro": {
       "name": "Gemini 2.5 Pro",
@@ -2052,7 +3372,117 @@
       "new_features": "1M context, thinking mode, multimodal (text+image+video+audio). Very strong GPQA (86.4%).",
       "specialty": "Google flagship reasoning, long context, multimodal",
       "strategy_note": "Strong daily driver option ($10/M out). GPQA 86.4% and Aider-Polyglot 82.2% are competitive with Claude Sonnet 5 ($10 out). Consider if you need Google's multimodal capabilities or 1M context.",
-      "tokenizer_efficiency": 1.83
+      "tokenizer_efficiency": 1.83,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 1185.2,
+        "avg_words_per_call": 38.6,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 1496.0,
+            "max_tokens": 1496.0,
+            "min_tokens": 1496.0,
+            "avg_words": 49.0
+          },
+          "short-list": {
+            "avg_tokens": 1496.0,
+            "max_tokens": 1496.0,
+            "min_tokens": 1496.0,
+            "avg_words": 37.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 1496.0,
+            "max_tokens": 1496.0,
+            "min_tokens": 1496.0,
+            "avg_words": 115.0
+          },
+          "json-format": {
+            "avg_tokens": 339.0,
+            "max_tokens": 339.0,
+            "min_tokens": 339.0,
+            "avg_words": 6.0
+          },
+          "short-code": {
+            "avg_tokens": 1496.0,
+            "max_tokens": 1496.0,
+            "min_tokens": 1496.0,
+            "avg_words": 44.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 902.0,
+            "max_tokens": 902.0,
+            "min_tokens": 902.0,
+            "avg_words": 49.0
+          },
+          "reasoning": {
+            "avg_tokens": 1496.0,
+            "max_tokens": 1496.0,
+            "min_tokens": 1496.0,
+            "avg_words": 40.0
+          },
+          "extract-emails": {
+            "avg_tokens": 693.0,
+            "max_tokens": 693.0,
+            "min_tokens": 693.0,
+            "avg_words": 7.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 810.0,
+            "max_tokens": 810.0,
+            "min_tokens": 810.0,
+            "avg_words": 2.0
+          },
+          "french-translate": {
+            "avg_tokens": 1496.0,
+            "max_tokens": 1496.0,
+            "min_tokens": 1496.0,
+            "avg_words": 39.0
+          },
+          "haiku": {
+            "avg_tokens": 1459.0,
+            "max_tokens": 1459.0,
+            "min_tokens": 1459.0,
+            "avg_words": 15.0
+          },
+          "one-sentence": {
+            "avg_tokens": 1472.0,
+            "max_tokens": 1472.0,
+            "min_tokens": 1472.0,
+            "avg_words": 31.0
+          },
+          "multi-step": {
+            "avg_tokens": 1496.0,
+            "max_tokens": 1496.0,
+            "min_tokens": 1496.0,
+            "avg_words": 37.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 236.0,
+            "max_tokens": 236.0,
+            "min_tokens": 236.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 1496.0,
+            "max_tokens": 1496.0,
+            "min_tokens": 1496.0,
+            "avg_words": 59.0
+          },
+          "one-word": {
+            "avg_tokens": 1085.0,
+            "max_tokens": 1085.0,
+            "min_tokens": 1085.0,
+            "avg_words": 84.0
+          }
+        }
+      }
     },
     "llama-3-3-70b": {
       "name": "Llama 3.3 70B",
@@ -2094,7 +3524,117 @@
       "new_features": "Most popular open-weight model. 70B dense. Strong for self-hosting.",
       "specialty": "Open-weight general-purpose, self-hosting",
       "strategy_note": "Good for self-hosting but not competitive on API pricing. DeepSeek V4 Flash ($0.28 out) is cheaper and stronger. Only relevant if you need open weights for a specific deployment constraint.",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.72,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 132.1,
+        "avg_words_per_call": 92.9,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 321.0,
+            "max_tokens": 321.0,
+            "min_tokens": 321.0,
+            "avg_words": 254.0
+          },
+          "short-list": {
+            "avg_tokens": 174.0,
+            "max_tokens": 174.0,
+            "min_tokens": 174.0,
+            "avg_words": 130.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 483.0,
+            "max_tokens": 483.0,
+            "min_tokens": 483.0,
+            "avg_words": 389.0
+          },
+          "json-format": {
+            "avg_tokens": 14.0,
+            "max_tokens": 14.0,
+            "min_tokens": 14.0,
+            "avg_words": 6.0
+          },
+          "short-code": {
+            "avg_tokens": 114.0,
+            "max_tokens": 114.0,
+            "min_tokens": 114.0,
+            "avg_words": 63.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 57.0,
+            "max_tokens": 57.0,
+            "min_tokens": 57.0,
+            "avg_words": 46.0
+          },
+          "reasoning": {
+            "avg_tokens": 362.0,
+            "max_tokens": 362.0,
+            "min_tokens": 362.0,
+            "avg_words": 201.0
+          },
+          "extract-emails": {
+            "avg_tokens": 168.0,
+            "max_tokens": 168.0,
+            "min_tokens": 168.0,
+            "avg_words": 113.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 36.0,
+            "max_tokens": 36.0,
+            "min_tokens": 36.0,
+            "avg_words": 17.0
+          },
+          "french-translate": {
+            "avg_tokens": 37.0,
+            "max_tokens": 37.0,
+            "min_tokens": 37.0,
+            "avg_words": 25.0
+          },
+          "haiku": {
+            "avg_tokens": 16.0,
+            "max_tokens": 16.0,
+            "min_tokens": 16.0,
+            "avg_words": 11.0
+          },
+          "one-sentence": {
+            "avg_tokens": 45.0,
+            "max_tokens": 45.0,
+            "min_tokens": 45.0,
+            "avg_words": 41.0
+          },
+          "multi-step": {
+            "avg_tokens": 217.0,
+            "max_tokens": 217.0,
+            "min_tokens": 217.0,
+            "avg_words": 130.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 6.0,
+            "max_tokens": 6.0,
+            "min_tokens": 6.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 21.0,
+            "max_tokens": 21.0,
+            "min_tokens": 21.0,
+            "avg_words": 18.0
+          },
+          "one-word": {
+            "avg_tokens": 43.0,
+            "max_tokens": 43.0,
+            "min_tokens": 43.0,
+            "avg_words": 39.0
+          }
+        }
+      }
     },
     "llama-4-maverick": {
       "name": "Llama 4 Maverick",
@@ -2155,7 +3695,117 @@
       "new_features": "Natively multimodal MoE. 1M context. 128 experts. Open weights.",
       "specialty": "Open-weight multimodal, 1M context budget coding",
       "strategy_note": "SWE-bench Verified 75.0% at $0.60/M out is exceptional value for an open-weight model. AAII 14 is misleading (AA's methodology penalizes MoE). Its real-world coding ability is much higher than AAII suggests.",
-      "tokenizer_efficiency": 1.75
+      "tokenizer_efficiency": 1.75,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 156.4,
+        "avg_words_per_call": 103.9,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 7.0,
+            "max_tokens": 7.0,
+            "min_tokens": 7.0,
+            "avg_words": 5.0
+          },
+          "short-list": {
+            "avg_tokens": 105.0,
+            "max_tokens": 105.0,
+            "min_tokens": 105.0,
+            "avg_words": 74.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 456.0,
+            "max_tokens": 456.0,
+            "min_tokens": 456.0,
+            "avg_words": 348.0
+          },
+          "json-format": {
+            "avg_tokens": 7.0,
+            "max_tokens": 7.0,
+            "min_tokens": 7.0,
+            "avg_words": 2.0
+          },
+          "short-code": {
+            "avg_tokens": 333.0,
+            "max_tokens": 333.0,
+            "min_tokens": 333.0,
+            "avg_words": 207.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 64.0,
+            "max_tokens": 64.0,
+            "min_tokens": 64.0,
+            "avg_words": 49.0
+          },
+          "reasoning": {
+            "avg_tokens": 529.0,
+            "max_tokens": 529.0,
+            "min_tokens": 529.0,
+            "avg_words": 337.0
+          },
+          "extract-emails": {
+            "avg_tokens": 533.0,
+            "max_tokens": 533.0,
+            "min_tokens": 533.0,
+            "avg_words": 328.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 31.0,
+            "max_tokens": 31.0,
+            "min_tokens": 31.0,
+            "avg_words": 17.0
+          },
+          "french-translate": {
+            "avg_tokens": 34.0,
+            "max_tokens": 34.0,
+            "min_tokens": 34.0,
+            "avg_words": 26.0
+          },
+          "haiku": {
+            "avg_tokens": 21.0,
+            "max_tokens": 21.0,
+            "min_tokens": 21.0,
+            "avg_words": 15.0
+          },
+          "one-sentence": {
+            "avg_tokens": 29.0,
+            "max_tokens": 29.0,
+            "min_tokens": 29.0,
+            "avg_words": 27.0
+          },
+          "multi-step": {
+            "avg_tokens": 278.0,
+            "max_tokens": 278.0,
+            "min_tokens": 278.0,
+            "avg_words": 163.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 6.0,
+            "max_tokens": 6.0,
+            "min_tokens": 6.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 11.0,
+            "max_tokens": 11.0,
+            "min_tokens": 11.0,
+            "avg_words": 9.0
+          },
+          "one-word": {
+            "avg_tokens": 59.0,
+            "max_tokens": 59.0,
+            "min_tokens": 59.0,
+            "avg_words": 51.0
+          }
+        }
+      }
     },
     "mistral-large-3": {
       "name": "Mistral Large 3",
@@ -2207,7 +3857,117 @@
       "new_features": "Mistral flagship. 675B MoE. Open weights. Competitive with DeepSeek V3.2.",
       "specialty": "Open-weight European model, multilingual, enterprise",
       "strategy_note": "MMLU-Pro 85.46% is strong, but agentic coding benchmarks are missing. DeepSeek V4 Flash and V3.2 are cheaper with better coding scores. Consider if you need Mistral's European hosting.",
-      "tokenizer_efficiency": 1.68
+      "tokenizer_efficiency": 1.68,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 202.2,
+        "avg_words_per_call": 119.8,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 97.0,
+            "max_tokens": 97.0,
+            "min_tokens": 97.0,
+            "avg_words": 72.0
+          },
+          "short-list": {
+            "avg_tokens": 286.0,
+            "max_tokens": 286.0,
+            "min_tokens": 286.0,
+            "avg_words": 141.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 851.0,
+            "max_tokens": 851.0,
+            "min_tokens": 851.0,
+            "avg_words": 526.0
+          },
+          "json-format": {
+            "avg_tokens": 14.0,
+            "max_tokens": 14.0,
+            "min_tokens": 14.0,
+            "avg_words": 6.0
+          },
+          "short-code": {
+            "avg_tokens": 219.0,
+            "max_tokens": 219.0,
+            "min_tokens": 219.0,
+            "avg_words": 144.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 81.0,
+            "max_tokens": 81.0,
+            "min_tokens": 81.0,
+            "avg_words": 55.0
+          },
+          "reasoning": {
+            "avg_tokens": 1052.0,
+            "max_tokens": 1052.0,
+            "min_tokens": 1052.0,
+            "avg_words": 578.0
+          },
+          "extract-emails": {
+            "avg_tokens": 60.0,
+            "max_tokens": 60.0,
+            "min_tokens": 60.0,
+            "avg_words": 35.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 27.0,
+            "max_tokens": 27.0,
+            "min_tokens": 27.0,
+            "avg_words": 13.0
+          },
+          "french-translate": {
+            "avg_tokens": 140.0,
+            "max_tokens": 140.0,
+            "min_tokens": 140.0,
+            "avg_words": 93.0
+          },
+          "haiku": {
+            "avg_tokens": 24.0,
+            "max_tokens": 24.0,
+            "min_tokens": 24.0,
+            "avg_words": 16.0
+          },
+          "one-sentence": {
+            "avg_tokens": 29.0,
+            "max_tokens": 29.0,
+            "min_tokens": 29.0,
+            "avg_words": 27.0
+          },
+          "multi-step": {
+            "avg_tokens": 209.0,
+            "max_tokens": 209.0,
+            "min_tokens": 209.0,
+            "avg_words": 95.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 6.0,
+            "max_tokens": 6.0,
+            "min_tokens": 6.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 63.0,
+            "max_tokens": 63.0,
+            "min_tokens": 63.0,
+            "avg_words": 56.0
+          },
+          "one-word": {
+            "avg_tokens": 77.0,
+            "max_tokens": 77.0,
+            "min_tokens": 77.0,
+            "avg_words": 55.0
+          }
+        }
+      }
     },
     "codestral": {
       "name": "Codestral",
@@ -2248,7 +4008,117 @@
       "new_features": "Code-specialized model. 80+ programming languages. 256K context. Superseded by Codestral 2.0.",
       "specialty": "Code generation, multi-language completion",
       "strategy_note": "Weak SWE-bench Verified (40%) vs DeepSeek V4 Flash. Only relevant if you want a dedicated code model on Mistral's platform.",
-      "tokenizer_efficiency": 1.68
+      "tokenizer_efficiency": 1.68,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 165.9,
+        "avg_words_per_call": 100.1,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 76.0,
+            "max_tokens": 76.0,
+            "min_tokens": 76.0,
+            "avg_words": 57.0
+          },
+          "short-list": {
+            "avg_tokens": 136.0,
+            "max_tokens": 136.0,
+            "min_tokens": 136.0,
+            "avg_words": 88.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 440.0,
+            "max_tokens": 440.0,
+            "min_tokens": 440.0,
+            "avg_words": 288.0
+          },
+          "json-format": {
+            "avg_tokens": 11.0,
+            "max_tokens": 11.0,
+            "min_tokens": 11.0,
+            "avg_words": 4.0
+          },
+          "short-code": {
+            "avg_tokens": 150.0,
+            "max_tokens": 150.0,
+            "min_tokens": 150.0,
+            "avg_words": 100.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 78.0,
+            "max_tokens": 78.0,
+            "min_tokens": 78.0,
+            "avg_words": 58.0
+          },
+          "reasoning": {
+            "avg_tokens": 545.0,
+            "max_tokens": 545.0,
+            "min_tokens": 545.0,
+            "avg_words": 261.0
+          },
+          "extract-emails": {
+            "avg_tokens": 30.0,
+            "max_tokens": 30.0,
+            "min_tokens": 30.0,
+            "avg_words": 15.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 32.0,
+            "max_tokens": 32.0,
+            "min_tokens": 32.0,
+            "avg_words": 13.0
+          },
+          "french-translate": {
+            "avg_tokens": 74.0,
+            "max_tokens": 74.0,
+            "min_tokens": 74.0,
+            "avg_words": 53.0
+          },
+          "haiku": {
+            "avg_tokens": 20.0,
+            "max_tokens": 20.0,
+            "min_tokens": 20.0,
+            "avg_words": 10.0
+          },
+          "one-sentence": {
+            "avg_tokens": 28.0,
+            "max_tokens": 28.0,
+            "min_tokens": 28.0,
+            "avg_words": 25.0
+          },
+          "multi-step": {
+            "avg_tokens": 918.0,
+            "max_tokens": 918.0,
+            "min_tokens": 918.0,
+            "avg_words": 547.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 6.0,
+            "max_tokens": 6.0,
+            "min_tokens": 6.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 8.0,
+            "max_tokens": 8.0,
+            "min_tokens": 8.0,
+            "avg_words": 6.0
+          },
+          "one-word": {
+            "avg_tokens": 102.0,
+            "max_tokens": 102.0,
+            "min_tokens": 102.0,
+            "avg_words": 72.0
+          }
+        }
+      }
     },
     "command-a": {
       "name": "Command A",
@@ -2295,7 +4165,117 @@
       "new_features": "Enterprise-focused. 256K context. Strong tool use and RAG. Open weights (non-commercial).",
       "specialty": "Enterprise tool use, RAG, long-context",
       "strategy_note": "Expensive ($10/M out) for its capability level. Cohere's strength is enterprise RAG and tool use, not raw coding. Skip unless you need Cohere's platform.",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.72,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 133.8,
+        "avg_words_per_call": 83.4,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 118.0,
+            "max_tokens": 118.0,
+            "min_tokens": 118.0,
+            "avg_words": 100.0
+          },
+          "short-list": {
+            "avg_tokens": 198.0,
+            "max_tokens": 198.0,
+            "min_tokens": 198.0,
+            "avg_words": 122.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 404.0,
+            "max_tokens": 404.0,
+            "min_tokens": 404.0,
+            "avg_words": 275.0
+          },
+          "json-format": {
+            "avg_tokens": 10.0,
+            "max_tokens": 10.0,
+            "min_tokens": 10.0,
+            "avg_words": 4.0
+          },
+          "short-code": {
+            "avg_tokens": 156.0,
+            "max_tokens": 156.0,
+            "min_tokens": 156.0,
+            "avg_words": 96.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 65.0,
+            "max_tokens": 65.0,
+            "min_tokens": 65.0,
+            "avg_words": 51.0
+          },
+          "reasoning": {
+            "avg_tokens": 421.0,
+            "max_tokens": 421.0,
+            "min_tokens": 421.0,
+            "avg_words": 212.0
+          },
+          "extract-emails": {
+            "avg_tokens": 171.0,
+            "max_tokens": 171.0,
+            "min_tokens": 171.0,
+            "avg_words": 94.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 14.0,
+            "max_tokens": 14.0,
+            "min_tokens": 14.0,
+            "avg_words": 6.0
+          },
+          "french-translate": {
+            "avg_tokens": 121.0,
+            "max_tokens": 121.0,
+            "min_tokens": 121.0,
+            "avg_words": 79.0
+          },
+          "haiku": {
+            "avg_tokens": 23.0,
+            "max_tokens": 23.0,
+            "min_tokens": 23.0,
+            "avg_words": 16.0
+          },
+          "one-sentence": {
+            "avg_tokens": 38.0,
+            "max_tokens": 38.0,
+            "min_tokens": 38.0,
+            "avg_words": 37.0
+          },
+          "multi-step": {
+            "avg_tokens": 281.0,
+            "max_tokens": 281.0,
+            "min_tokens": 281.0,
+            "avg_words": 141.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 5.0,
+            "max_tokens": 5.0,
+            "min_tokens": 5.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 62.0,
+            "max_tokens": 62.0,
+            "min_tokens": 62.0,
+            "avg_words": 52.0
+          },
+          "one-word": {
+            "avg_tokens": 53.0,
+            "max_tokens": 53.0,
+            "min_tokens": 53.0,
+            "avg_words": 45.0
+          }
+        }
+      }
     },
     "phi-4": {
       "name": "Phi-4",
@@ -2342,7 +4322,117 @@
       "new_features": "Small but mighty. 14B dense. MIT license. Uses tiktoken tokenizer.",
       "specialty": "Ultra-cheap open-weight, local deployment, low latency",
       "strategy_note": "At $0.14/M out with only 16K context, it's a niche model for local deployment or ultra-low-cost simple tasks. DeepSeek V4 Flash dominates this tier on API.",
-      "tokenizer_efficiency": 1.69
+      "tokenizer_efficiency": 1.69,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 137.3,
+        "avg_words_per_call": 93.2,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 293.0,
+            "max_tokens": 293.0,
+            "min_tokens": 293.0,
+            "avg_words": 233.0
+          },
+          "short-list": {
+            "avg_tokens": 157.0,
+            "max_tokens": 157.0,
+            "min_tokens": 157.0,
+            "avg_words": 111.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 293.0,
+            "max_tokens": 293.0,
+            "min_tokens": 293.0,
+            "avg_words": 239.0
+          },
+          "json-format": {
+            "avg_tokens": 14.0,
+            "max_tokens": 14.0,
+            "min_tokens": 14.0,
+            "avg_words": 6.0
+          },
+          "short-code": {
+            "avg_tokens": 116.0,
+            "max_tokens": 116.0,
+            "min_tokens": 116.0,
+            "avg_words": 69.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 77.0,
+            "max_tokens": 77.0,
+            "min_tokens": 77.0,
+            "avg_words": 56.0
+          },
+          "reasoning": {
+            "avg_tokens": 438.0,
+            "max_tokens": 438.0,
+            "min_tokens": 438.0,
+            "avg_words": 239.0
+          },
+          "extract-emails": {
+            "avg_tokens": 293.0,
+            "max_tokens": 293.0,
+            "min_tokens": 293.0,
+            "avg_words": 157.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 21.0,
+            "max_tokens": 21.0,
+            "min_tokens": 21.0,
+            "avg_words": 13.0
+          },
+          "french-translate": {
+            "avg_tokens": 25.0,
+            "max_tokens": 25.0,
+            "min_tokens": 25.0,
+            "avg_words": 16.0
+          },
+          "haiku": {
+            "avg_tokens": 62.0,
+            "max_tokens": 62.0,
+            "min_tokens": 62.0,
+            "avg_words": 45.0
+          },
+          "one-sentence": {
+            "avg_tokens": 50.0,
+            "max_tokens": 50.0,
+            "min_tokens": 50.0,
+            "avg_words": 47.0
+          },
+          "multi-step": {
+            "avg_tokens": 169.0,
+            "max_tokens": 169.0,
+            "min_tokens": 169.0,
+            "avg_words": 101.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 6.0,
+            "max_tokens": 6.0,
+            "min_tokens": 6.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 57.0,
+            "max_tokens": 57.0,
+            "min_tokens": 57.0,
+            "avg_words": 45.0
+          },
+          "one-word": {
+            "avg_tokens": 126.0,
+            "max_tokens": 126.0,
+            "min_tokens": 126.0,
+            "avg_words": 110.0
+          }
+        }
+      }
     },
     "nova-pro": {
       "name": "Amazon Nova Pro",
@@ -2389,7 +4479,117 @@
       "new_features": "AWS flagship multimodal model. 300K context. Vision, video, tool use.",
       "specialty": "AWS ecosystem, multimodal, long-context",
       "strategy_note": "Weak coding benchmarks (LiveCodeBench 23.3%) vs similarly-priced alternatives. GLM 5.2 ($4.40 out, AAII 51) is dramatically stronger. Only relevant if you're already in the AWS Bedrock ecosystem.",
-      "tokenizer_efficiency": 1.87
+      "tokenizer_efficiency": 1.87,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 117.5,
+        "avg_words_per_call": 76.6,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 0.0,
+            "max_tokens": 0.0,
+            "min_tokens": 0.0,
+            "avg_words": 11.0
+          },
+          "short-list": {
+            "avg_tokens": 228.0,
+            "max_tokens": 228.0,
+            "min_tokens": 228.0,
+            "avg_words": 166.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 399.0,
+            "max_tokens": 399.0,
+            "min_tokens": 399.0,
+            "avg_words": 293.0
+          },
+          "json-format": {
+            "avg_tokens": 14.0,
+            "max_tokens": 14.0,
+            "min_tokens": 14.0,
+            "avg_words": 6.0
+          },
+          "short-code": {
+            "avg_tokens": 154.0,
+            "max_tokens": 154.0,
+            "min_tokens": 154.0,
+            "avg_words": 78.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 87.0,
+            "max_tokens": 87.0,
+            "min_tokens": 87.0,
+            "avg_words": 67.0
+          },
+          "reasoning": {
+            "avg_tokens": 327.0,
+            "max_tokens": 327.0,
+            "min_tokens": 327.0,
+            "avg_words": 173.0
+          },
+          "extract-emails": {
+            "avg_tokens": 88.0,
+            "max_tokens": 88.0,
+            "min_tokens": 88.0,
+            "avg_words": 56.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 58.0,
+            "max_tokens": 58.0,
+            "min_tokens": 58.0,
+            "avg_words": 33.0
+          },
+          "french-translate": {
+            "avg_tokens": 79.0,
+            "max_tokens": 79.0,
+            "min_tokens": 79.0,
+            "avg_words": 53.0
+          },
+          "haiku": {
+            "avg_tokens": 19.0,
+            "max_tokens": 19.0,
+            "min_tokens": 19.0,
+            "avg_words": 12.0
+          },
+          "one-sentence": {
+            "avg_tokens": 17.0,
+            "max_tokens": 17.0,
+            "min_tokens": 17.0,
+            "avg_words": 15.0
+          },
+          "multi-step": {
+            "avg_tokens": 288.0,
+            "max_tokens": 288.0,
+            "min_tokens": 288.0,
+            "avg_words": 167.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 6.0,
+            "max_tokens": 6.0,
+            "min_tokens": 6.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 12.0,
+            "max_tokens": 12.0,
+            "min_tokens": 12.0,
+            "avg_words": 10.0
+          },
+          "one-word": {
+            "avg_tokens": 104.0,
+            "max_tokens": 104.0,
+            "min_tokens": 104.0,
+            "avg_words": 81.0
+          }
+        }
+      }
     },
     "perplexity-sonar-pro-search": {
       "name": "Perplexity Sonar Pro Search",
@@ -2420,7 +4620,117 @@
       "new_features": "Search-augmented model. Real-time web search + answer generation. 200K context.",
       "specialty": "Search-based Q&A, research, citations",
       "strategy_note": "Expensive ($15/M out) for a search model. Use only when you need verified citations with LLM synthesis. Not a general coding model.",
-      "tokenizer_efficiency": 1.79
+      "tokenizer_efficiency": 1.79,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 146.4,
+        "avg_words_per_call": 96.1,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 292.0,
+            "max_tokens": 292.0,
+            "min_tokens": 292.0,
+            "avg_words": 215.0
+          },
+          "short-list": {
+            "avg_tokens": 114.0,
+            "max_tokens": 114.0,
+            "min_tokens": 114.0,
+            "avg_words": 73.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 889.0,
+            "max_tokens": 889.0,
+            "min_tokens": 889.0,
+            "avg_words": 585.0
+          },
+          "json-format": {
+            "avg_tokens": 5.0,
+            "max_tokens": 5.0,
+            "min_tokens": 5.0,
+            "avg_words": 1.0
+          },
+          "short-code": {
+            "avg_tokens": 42.0,
+            "max_tokens": 42.0,
+            "min_tokens": 42.0,
+            "avg_words": 18.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 62.0,
+            "max_tokens": 62.0,
+            "min_tokens": 62.0,
+            "avg_words": 49.0
+          },
+          "reasoning": {
+            "avg_tokens": 210.0,
+            "max_tokens": 210.0,
+            "min_tokens": 210.0,
+            "avg_words": 116.0
+          },
+          "extract-emails": {
+            "avg_tokens": 11.0,
+            "max_tokens": 11.0,
+            "min_tokens": 11.0,
+            "avg_words": 3.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 17.0,
+            "max_tokens": 17.0,
+            "min_tokens": 17.0,
+            "avg_words": 6.0
+          },
+          "french-translate": {
+            "avg_tokens": 42.0,
+            "max_tokens": 42.0,
+            "min_tokens": 42.0,
+            "avg_words": 23.0
+          },
+          "haiku": {
+            "avg_tokens": 19.0,
+            "max_tokens": 19.0,
+            "min_tokens": 19.0,
+            "avg_words": 14.0
+          },
+          "one-sentence": {
+            "avg_tokens": 34.0,
+            "max_tokens": 34.0,
+            "min_tokens": 34.0,
+            "avg_words": 27.0
+          },
+          "multi-step": {
+            "avg_tokens": 210.0,
+            "max_tokens": 210.0,
+            "min_tokens": 210.0,
+            "avg_words": 102.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 6.0,
+            "max_tokens": 6.0,
+            "min_tokens": 6.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 285.0,
+            "max_tokens": 285.0,
+            "min_tokens": 285.0,
+            "avg_words": 232.0
+          },
+          "one-word": {
+            "avg_tokens": 105.0,
+            "max_tokens": 105.0,
+            "min_tokens": 105.0,
+            "avg_words": 70.0
+          }
+        }
+      }
     },
     "perplexity-sonar-pro": {
       "name": "Perplexity Sonar Pro",
@@ -2443,7 +4753,117 @@
       "new_features": "Search-augmented model. Predecessor to Sonar Pro Search.",
       "specialty": "Search-based Q&A",
       "strategy_note": "Superseded by Sonar Pro Search at same price. Same tokenizer.",
-      "tokenizer_efficiency": 1.79
+      "tokenizer_efficiency": 1.79,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 234.4,
+        "avg_words_per_call": 130.3,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 713.0,
+            "max_tokens": 713.0,
+            "min_tokens": 713.0,
+            "avg_words": 445.0
+          },
+          "short-list": {
+            "avg_tokens": 137.0,
+            "max_tokens": 137.0,
+            "min_tokens": 137.0,
+            "avg_words": 90.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 1249.0,
+            "max_tokens": 1249.0,
+            "min_tokens": 1249.0,
+            "avg_words": 701.0
+          },
+          "json-format": {
+            "avg_tokens": 5.0,
+            "max_tokens": 5.0,
+            "min_tokens": 5.0,
+            "avg_words": 1.0
+          },
+          "short-code": {
+            "avg_tokens": 94.0,
+            "max_tokens": 94.0,
+            "min_tokens": 94.0,
+            "avg_words": 59.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 68.0,
+            "max_tokens": 68.0,
+            "min_tokens": 68.0,
+            "avg_words": 48.0
+          },
+          "reasoning": {
+            "avg_tokens": 723.0,
+            "max_tokens": 723.0,
+            "min_tokens": 723.0,
+            "avg_words": 292.0
+          },
+          "extract-emails": {
+            "avg_tokens": 11.0,
+            "max_tokens": 11.0,
+            "min_tokens": 11.0,
+            "avg_words": 3.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 8.0,
+            "max_tokens": 8.0,
+            "min_tokens": 8.0,
+            "avg_words": 2.0
+          },
+          "french-translate": {
+            "avg_tokens": 114.0,
+            "max_tokens": 114.0,
+            "min_tokens": 114.0,
+            "avg_words": 72.0
+          },
+          "haiku": {
+            "avg_tokens": 22.0,
+            "max_tokens": 22.0,
+            "min_tokens": 22.0,
+            "avg_words": 15.0
+          },
+          "one-sentence": {
+            "avg_tokens": 37.0,
+            "max_tokens": 37.0,
+            "min_tokens": 37.0,
+            "avg_words": 29.0
+          },
+          "multi-step": {
+            "avg_tokens": 247.0,
+            "max_tokens": 247.0,
+            "min_tokens": 247.0,
+            "avg_words": 115.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 5.0,
+            "max_tokens": 5.0,
+            "min_tokens": 5.0,
+            "avg_words": 4.0
+          },
+          "socratic": {
+            "avg_tokens": 118.0,
+            "max_tokens": 118.0,
+            "min_tokens": 118.0,
+            "avg_words": 82.0
+          },
+          "one-word": {
+            "avg_tokens": 200.0,
+            "max_tokens": 200.0,
+            "min_tokens": 200.0,
+            "avg_words": 127.0
+          }
+        }
+      }
     },
     "nova-premier-v1": {
       "name": "Amazon Nova Premier",
@@ -2474,7 +4894,117 @@
       "new_features": "AWS highest-tier model. 1M context. Multimodal (text+image+video).",
       "specialty": "AWS ecosystem premium, long-context, multimodal",
       "strategy_note": "Very verbose tokenizer (E=2.24). Nova Pro ($3.20 out, E=1.87) is cheaper AND more efficient. Nova Premier's $12.50/M out with 20% more tokens per word makes it poor value vs alternatives.",
-      "tokenizer_efficiency": 2.24
+      "tokenizer_efficiency": 2.24,
+      "output_verbosity": {
+        "session": 6,
+        "date": "2026-07-09",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "total_calls": 16,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0,
+        "avg_output_tokens": 181.0,
+        "avg_words_per_call": 113.6,
+        "per_task": {
+          "phishing-refusal": {
+            "avg_tokens": 193.0,
+            "max_tokens": 193.0,
+            "min_tokens": 193.0,
+            "avg_words": 157.0
+          },
+          "short-list": {
+            "avg_tokens": 267.0,
+            "max_tokens": 267.0,
+            "min_tokens": 267.0,
+            "avg_words": 184.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 215.0,
+            "max_tokens": 215.0,
+            "min_tokens": 215.0,
+            "avg_words": 168.0
+          },
+          "json-format": {
+            "avg_tokens": 204.0,
+            "max_tokens": 204.0,
+            "min_tokens": 204.0,
+            "avg_words": 145.0
+          },
+          "short-code": {
+            "avg_tokens": 584.0,
+            "max_tokens": 584.0,
+            "min_tokens": 584.0,
+            "avg_words": 328.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 70.0,
+            "max_tokens": 70.0,
+            "min_tokens": 70.0,
+            "avg_words": 50.0
+          },
+          "reasoning": {
+            "avg_tokens": 327.0,
+            "max_tokens": 327.0,
+            "min_tokens": 327.0,
+            "avg_words": 166.0
+          },
+          "extract-emails": {
+            "avg_tokens": 163.0,
+            "max_tokens": 163.0,
+            "min_tokens": 163.0,
+            "avg_words": 72.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 60.0,
+            "max_tokens": 60.0,
+            "min_tokens": 60.0,
+            "avg_words": 38.0
+          },
+          "french-translate": {
+            "avg_tokens": 256.0,
+            "max_tokens": 256.0,
+            "min_tokens": 256.0,
+            "avg_words": 160.0
+          },
+          "haiku": {
+            "avg_tokens": 23.0,
+            "max_tokens": 23.0,
+            "min_tokens": 23.0,
+            "avg_words": 15.0
+          },
+          "one-sentence": {
+            "avg_tokens": 21.0,
+            "max_tokens": 21.0,
+            "min_tokens": 21.0,
+            "avg_words": 19.0
+          },
+          "multi-step": {
+            "avg_tokens": 333.0,
+            "max_tokens": 333.0,
+            "min_tokens": 333.0,
+            "avg_words": 170.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 43.0,
+            "max_tokens": 43.0,
+            "min_tokens": 43.0,
+            "avg_words": 33.0
+          },
+          "socratic": {
+            "avg_tokens": 49.0,
+            "max_tokens": 49.0,
+            "min_tokens": 49.0,
+            "avg_words": 42.0
+          },
+          "one-word": {
+            "avg_tokens": 88.0,
+            "max_tokens": 88.0,
+            "min_tokens": 88.0,
+            "avg_words": 71.0
+          }
+        }
+      }
     }
   }
 }
