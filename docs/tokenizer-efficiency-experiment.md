@@ -1,7 +1,7 @@
 # Tokenizer Efficiency Experiment
 
 **Date**: 2026-07-08 (Sessions 1-4); 2026-07-09 (Session 5 — standardized re-test)
-**Author**: OpenClaw Coder agent
+**Author**: OpenCode DeepSeek V4 Flash Max Agent c/o Victor Salmon
 **Platform**: OpenRouter API
 **Total cost**: ~$0.66 (Session 5: ~$0.20)
 
@@ -50,7 +50,23 @@ Three sample texts were used, all submitted to every model:
 - Mix of natural language and code-like patterns: backtick-enclosed identifiers, `PascalCase` names, `UPPER_CASE` constants, `/api/v1/` endpoints, type annotations like `Array<number>`
 - Tests how tokenizers handle technical vocabulary with special characters embedded in prose
 
-### 3.2 API Configuration
+### 3.2 Standardized Conditions
+
+All measurements in Session 5 share these fixed conditions. Changing any one may shift E values (see §6.3):
+
+| Condition | Fixed value | Why it matters |
+|-----------|-------------|----------------|
+| API key | `OPENROUTER_CODE_KEY` (single workspace) | Different keys route to different inference providers; Session 1-4 used 3 different keys with divergent results |
+| API endpoint | `https://openrouter.ai/api/v1/chat/completions` | Direct provider APIs (AWS Bedrock, Azure, GCP) may report different token counts for the same model |
+| max_tokens | 20 | Must be small enough to minimize output cost but large enough for the model to return `usage`; 20 works for all measurable models |
+| temperature | 0 | Deterministic — prompt_tokens is deterministic regardless, but zero eliminates edge cases |
+| message format | Single `user` message only | No system prompt, no assistant prefix — measures raw input tokenization only |
+| Sample word counts | Code=306, Prose=235, Blended=250 | Long enough to amortize per-message overhead, short enough to keep cost at ~$0.003/call |
+| Sample content | Fixed .txt files per type | Identical text across all models — only the tokenizer changes |
+| Order of calls | Alphabetical by model, then code→prose→blended | Models tested within minutes of each other (no provider drift) |
+| Date | 2026-07-09 | All 69 calls in one afternoon — no version drift |
+
+### 3.3 API Configuration
 
 | Parameter | Value |
 |-----------|-------|
@@ -64,7 +80,7 @@ Three sample texts were used, all submitted to every model:
 | Total calls | 69 (23 models × 3 samples) |
 | Date | 2026-07-09 |
 
-### 3.3 Data Processing
+### 3.4 Data Processing
 
 ```
 E_code = prompt_tokens(code_sample) / 306
@@ -218,6 +234,9 @@ Total cost to reproduce: ~$0.20 at current OpenRouter pricing.
 Raw data CSV: [`../data/experiment-session5-raw.csv`](../data/experiment-session5-raw.csv)
 Consolidated CSV: [`../data/experiment-session5-consolidated.csv`](../data/experiment-session5-consolidated.csv)
 Summary CSV: [`../data/experiment-session5-summary.csv`](../data/experiment-session5-summary.csv)
+Canonical sample texts: [`../data/samples/`](../data/samples/)
+Experiment runner: [`../experiment-runner.ps1`](../experiment-runner.ps1)
+User config template: [`../example-config.env`](../example-config.env)
 
 Columns (raw):
 - `trial_id`: Unique identifier per call
@@ -401,3 +420,77 @@ The primary limitations of Sessions 1-4:
 - Different API keys routed to different inference providers
 - max_tokens=16 for o3-mini/o4-mini in Session 4
 - 11 models blocked by workspace guardrails in Session 2
+
+---
+
+## 8. Extending the Experiment — Output Tokens & Reasoning Overhead
+
+### 8.1 Why Measure Output Efficiency?
+
+The E metric measures **input** tokenization. Output tokens use the same tokenizer, so E applies to output word counts as well — but output cost is dominated by **how many words the model generates**, not just how it tokenizes them. Two additional dimensions matter:
+
+- **Output verbosity**: Models differ in how many output words they produce for the same prompt, even when max_tokens is unconstrained
+- **Reasoning overhead**: Some models (DeepSeek R1, o3-mini) emit invisible chain-of-thought tokens that count toward `usage.completion_tokens` but are not visible in the response text. These are billed at output rates.
+
+### 8.2 Proposed Measurement Protocol
+
+Same infrastructure as Session 5, but with small **task prompts** instead of sample texts, and `usage.completion_tokens` as the measured field:
+
+| Parameter | Input E (Session 5) | Output/reasoning measurement |
+|-----------|-------------------|------------------------------|
+| Measured field | `prompt_tokens` | `completion_tokens` |
+| Prompt | Sample text (word count fixed) | Task instruction (word count fixed) |
+| max_tokens | 20 (cap output cost) | Varies by task (see below) |
+| Expected response | Short/ignored | Measured output |
+| Key metric | E = tokens_per_word(input) | Output_tokens, thinking_tokens |
+
+**Critical: cap max_tokens to minimize cost.** Each output token is billed at the model's output rate (typically 4-30× the input rate). Keeping max_tokens small is essential:
+
+| max_tokens | Cost per call (DeepSeek V4 Flash) | Cost per call (Claude Haiku 4.5) | Cost per call (Gemini 2.5 Pro) |
+|:----------:|:---------------------------------:|:-------------------------------:|:-----------------------------:|
+| 20 | ~$0.000006 | ~$0.00002 | ~$0.0002 |
+| 100 | ~$0.000028 | ~$0.00010 | ~$0.0010 |
+| 500 | ~$0.000140 | ~$0.00050 | ~$0.0050 |
+| 2000 | ~$0.00056 | ~$0.0020 | ~$0.020 |
+
+Even at 500 tokens, individual calls cost fractions of a cent. A full 21-model test at max_tokens=500 costs ~$0.10-0.40.
+
+### 8.3 Proposed Task Suite (Output Efficiency)
+
+Six tasks designed to measure different output and reasoning dimensions. Each is a short prompt (≤25 words) eliciting a specific-length response:
+
+| # | Task | Prompt | Expected output | max_tokens | What it measures |
+|:-:|------|--------|----------------|:----------:|------------------|
+| 1 | One-word | `"What is the capital of France?"` | ~1 word | 20 | Minimum output verbosity per model |
+| 2 | One-sentence | `"Explain what a database index does in one sentence."` | ~15-30 words | 100 | Single-sentence efficiency |
+| 3 | Short code | `"Write a JavaScript function that adds two numbers and returns the result."` | ~30-50 words | 200 | Code generation verbosity |
+| 4 | Short list | `"List three cloud providers and their primary database service."` | ~25-40 words | 150 | Structured output verbosity |
+| 5 | Reasoning | `"What is the last digit of 3^1000? Show your reasoning step by step."` | ~50-200 words | 500 | Reasoning token overhead; visible reasoning vs. hidden thinking_tokens |
+| 6 | Multi-step | `"A bat and a ball cost $1.10. The bat costs $1.00 more than the ball. How much does the ball cost? Think step by step."` | ~50-150 words | 500 | Classic reasoning test; measures thinking_tokens vs. visible reasoning |
+
+### 8.4 Cost Estimates
+
+| Scenario | Calls | max_tokens | Est. cost | Notes |
+|----------|:-----:|:----------:|:---------:|-------|
+| Single model, all 6 tasks | 6 | 20-500 | ~$0.003-0.01 | Quick spot-check |
+| Top-10 models, all 6 tasks | 60 | 20-500 | ~$0.03-0.10 | Good coverage for ~$0.10 |
+| All 21 measurable models, tasks 1-4 only | 84 | 20-200 | ~$0.05-0.15 | Output efficiency only, no reasoning |
+| All 21 models, full 6-task suite | 126 | 20-500 | ~$0.15-0.50 | Full output + reasoning map |
+| All 21 models, tasks 5-6 only (reasoning) | 42 | 500 | ~$0.10-0.30 | Reasoning overhead only |
+
+All estimates assume OpenRouter PAYG pricing. Actual costs depend on model choice — cheap models (DeepSeek V4 Flash at $0.07/M out) dominate the call volume. Running tasks 5-6 alone on the 5 cheapest models costs <$0.01.
+
+### 8.5 Key Questions These Tasks Answer
+
+1. **Output verbosity rank**: Which families produce the fewest output words per task?
+2. **Reasoning tax**: For models with `thinking_tokens` support (DeepSeek R1, o-series), what fraction of billed completion tokens are hidden?
+3. **Prompt sensitivity**: Does a one-sentence constraint reliably limit output, or do some models ignore it?
+4. **Code vs. prose output**: Same gap as input (code is ~1.7× more tokens per word)?
+5. **Stability**: Do output token counts vary across runs at temperature=0?
+
+### 8.6 Limitations
+
+- Output tokens are inherently non-deterministic — even at temperature=0, model internals (prefix caching, implementation details) can shift output length
+- `thinking_tokens` is only available for models that return it in the `usage` object (DeepSeek R1 returns it; o3-mini via OpenRouter does not)
+- max_tokens caps are enforced differently across providers — Grok 4.5 ignored max_tokens=20 (generated 461-1161 tokens); it may similarly ignore caps for output tasks
+- Short prompts (<10 words) have high per-message overhead relative to content, making E noisy for output tasks

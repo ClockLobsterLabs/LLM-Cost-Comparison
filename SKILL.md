@@ -103,6 +103,8 @@ Each model family tokenizes text differently. E = tokens per word. Three raw val
 | 17 | Grok / xAI | Grok 4.5 | 3.09 | 2.01 | 2.54 | **2.66** |
 
 > **Session 5 (2026-07-09):** Full standardized re-test of all 23 measurable models with identical samples, same API key (OPENROUTER_CODE_KEY), same max_tokens=20. 69 calls, ~$0.20 total. Replaces all earlier Sessions 1-4 data. Unmeasurable models: Fugu Ultra (ignores max_tokens, ~95 tok/word), o4-mini (Responses API, no usage field), Inflection 3 Pi/Productivity (502 errors), Qwen 3.7 Plus/Max (guardrail), Sonar Reasoning Pro/Deep Research (timeout). See `data/experiment-session5-raw.csv` and `docs/tokenizer-efficiency-experiment.md` for full data.
+>
+> **Output & reasoning extension (proposed):** Section 8 of the experiment doc defines 6 task prompts (one-word, one-sentence, short code, short list, reasoning, multi-step) for measuring output verbosity and hidden reasoning tokens. Full 21-model run costs ~$0.15-0.50. See [`docs/tokenizer-efficiency-experiment.md §8`](docs/tokenizer-efficiency-experiment.md).
 
 ## Appraisal Table Template — Primary View
 
@@ -181,9 +183,16 @@ When asked to appraise:
 |------|---------|
 | `models.json` | Canonical model database with pricing, benchmarks, features |
 | `SKILL.md` | This file — skill instructions |
-| `docs/tokenizer-efficiency-methodology.md` | Measurement protocol reference |
-| `docs/tokenizer-efficiency-experiment.md` | Full experiment write-up: hypothesis, method, results, discussion |
-| `data/tokenizer-efficiency-raw.csv` | Raw measurement data: per-call prompt_tokens, E values, status for all 51 models |
+| `docs/tokenizer-efficiency-experiment.md` | Full experiment write-up: hypothesis, standardized conditions, method, results, discussion, proposed output/reasoning extension |
+| `data/experiment-session5-raw.csv` | Raw measurement data: 69 calls, per-call prompt_tokens, E values, status |
+| `data/experiment-session5-consolidated.csv` | Cleaned & corrected results for all 21 measurable models |
+| `data/experiment-session5-summary.csv` | Ranked E values with 60:40 and 33:33:33 blend scores |
+| `data/samples/code-sample.txt` | Canonical TypeScript code sample (306 words) |
+| `data/samples/prose-sample.txt` | Canonical prose sample (235 words) |
+| `data/samples/blended-sample.txt` | Canonical blended documentation sample (250 words) |
+| `experiment-runner.ps1` | Reusable measurement script — dot-sources `experiment-config.ps1` |
+| `experiment-config.ps1` | Gitignored user config file (API key, optional overrides) |
+| `example-config.env` | Template file — copy to `experiment-config.ps1` and fill in |
 
 ## Pricing Methodology
 
