@@ -80,24 +80,29 @@ The thinking-adjusted blend is the **true cost comparison** when evaluating reas
 
 ### Tokenizer Efficiency
 
-Each model family tokenizes text differently. E = tokens per word. Two raw values (`code`, `prose`) measured via OpenRouter API on 200+ word samples (2026-07-08). The blend value in `models.json` is a 60:40 code:prose weighted average reflecting typical coding workloads.
+Each model family tokenizes text differently. E = tokens per word. Three raw values (`code`, `prose`, `blended`) measured via OpenRouter API on fixed sample texts (Session 5, 2026-07-09, 306-word code / 235-word prose / 250-word blended, max_tokens=20, temperature=0, same key for all 23 models). The blend value is a 60:40 code:prose weighted average reflecting typical coding workloads. The blended-sample E provides a third reference point for technical prose.
 
-| Family | E code | E prose | E blend (60:40) | Measured | Notes |
-|--------|:-----:|:------:|:---------------:|:--------:|-------|
-| DeepSeek | 1.98 | 1.16 | 1.65 | Yes | DSL tokenizer, excellent prose efficiency |
-| Anthropic (Claude) | 2.25 | 1.25 | 1.85 | Yes (Haiku 4.5) | Most verbose code tokenizer in measured set |
-| GLM / Zhipu | 1.87 | 1.18 | 1.59 | Yes (GLM 5.2) | Best blend efficiency in measured set |
-| Kimi / Moonshot | 1.90 | 1.16 | 1.60 | Yes (K2.7 Code) | Similar to GLM, weaker on prose |
-| GPT (o200k) | 2.07 | 1.19 | 1.72 | Yes (5.4 Nano/Mini) | o200k tokenizer, all GPT-5.x/4.x/o-series |
-| Gemini | — | — | 1.65 | No | Estimated — OpenRouter doesn't report usage for Gemini |
-| Grok / xAI | 2.89 | 1.81 | 2.46 | Yes (Grok 4.5) | Most verbose tokenizer — 2× DS tokens per word |
-| MiniMax | 2.67 | 1.72 | 2.29 | Yes (M3) | Second most verbose |
-| Qwen / Alibaba | — | — | 1.60 | No | Estimated — guardrail blocked measurement |
-| Perplexity Sonar | 2.22 | 1.15 | 1.79 | Yes (Sonar Pro) | Search-augmented, distinctive code/prose split |
-| Amazon Nova Premier | 2.88 | 1.29 | 2.24 | Yes (Premier v1) | Very verbose — third most verbose measured |
-| Mistral | 2.04 | 1.15 | 1.68 | Yes (Large 3, Codestral) | SentencePiece, Llama-like efficiency |
-| Cohere | 2.13 | 1.10 | 1.72 | Yes (Command A) | C4 tokenizer, mid-efficiency |
-| AI21 Jamba | 2.48 | 1.21 | 1.97 | Yes (Jamba Large 1.7) | Third most verbose measured — dense tokenizer |
+| Rank | Family | Model | E code | E prose | E blended | E blend (60:40) |
+|:----:|--------|-------|:-----:|:------:|:---------:|:---------------:|
+| 1 | Perplexity | Sonar Pro / Pro Search | 2.17 | 1.14 | 1.68 | **1.76** |
+| 2 | OpenAI (GPT) | GPT-5.4 Nano, o3-mini | 2.20 | 1.16 | 1.71 | **1.78** |
+| 3 | Microsoft | Phi-4 | 2.19 | 1.17 | 1.71 | **1.78** |
+| 4 | Kimi / Moonshot | K2.7 Code | 2.21 | 1.16 | 1.71 | **1.79** |
+| 5 | Meta | Llama 3.3 70B | 2.20 | 1.19 | 1.82 | **1.80** |
+| 6 | Meta | Llama 4 Maverick | 2.22 | 1.19 | 1.72 | **1.81** |
+| 7 | GLM / Zhipu | GLM 5.2 | 2.21 | 1.20 | 1.73 | **1.81** |
+| 8 | Mistral | Large 3, Codestral | 2.27 | 1.18 | 1.73 | **1.83** |
+| 9 | DeepSeek | V4 Flash, R1, Chat V3 | 2.28–2.29 | 1.19–1.20 | 1.76–1.83 | **1.84–1.85** |
+| 10 | MiniMax | M3 | 2.33 | 1.29 | 1.84 | **1.91** |
+| 11 | Amazon | Nova Pro | 2.45 | 1.16 | 1.76 | **1.93** |
+| 12 | Cohere | Command A | 2.50 | 1.13 | 1.71 | **1.95** |
+| 13 | Gemini | 2.5 Pro | 2.68 | 1.14 | 1.72 | **2.06** |
+| 14 | AI21 | Jamba Large 1.7 | 2.82 | 1.22 | 1.90 | **2.18** |
+| 15 | Anthropic | Claude Haiku 4.5 | 2.82 | 1.30 | 1.88 | **2.21** |
+| 16 | Amazon | Nova Premier | 2.92 | 1.31 | 1.92 | **2.28** |
+| 17 | Grok / xAI | Grok 4.5 | 3.09 | 2.01 | 2.54 | **2.66** |
+
+> **Session 5 (2026-07-09):** Full standardized re-test of all 23 measurable models with identical samples, same API key (OPENROUTER_CODE_KEY), same max_tokens=20. 69 calls, ~$0.20 total. Replaces all earlier Sessions 1-4 data. Unmeasurable models: Fugu Ultra (ignores max_tokens, ~95 tok/word), o4-mini (Responses API, no usage field), Inflection 3 Pi/Productivity (502 errors), Qwen 3.7 Plus/Max (guardrail), Sonar Reasoning Pro/Deep Research (timeout). See `data/experiment-session5-raw.csv` and `docs/tokenizer-efficiency-experiment.md` for full data.
 
 ## Appraisal Table Template — Primary View
 
