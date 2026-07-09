@@ -1,0 +1,61 @@
+model_id,model_name,family,session,sample_type,word_count,prompt_tokens,tokens_per_word,blend_E,status,notes
+deepseek/deepseek-chat-v4-flash,DeepSeek V4 Flash,deepseek,1,code,306,606,1.98,1.65,measured,DSL tokenizer
+deepseek/deepseek-chat-v4-flash,DeepSeek V4 Flash,deepseek,1,prose,235,273,1.16,1.65,measured,DSL tokenizer
+anthropic/claude-haiku-4.5,Claude Haiku 4.5,anthropic,1,code,306,689,2.25,1.85,measured,Anthropic tokenizer
+anthropic/claude-haiku-4.5,Claude Haiku 4.5,anthropic,1,prose,235,294,1.25,1.85,measured,Anthropic tokenizer
+openai/gpt-5.4-nano,GPT-5.4 Nano,openai,1,code,306,633,2.07,1.72,measured,o200k tokenizer; max_tokens>=16
+openai/gpt-5.4-nano,GPT-5.4 Nano,openai,1,prose,235,280,1.19,1.72,measured,o200k tokenizer; max_tokens>=16
+z-ai/glm-5.2,GLM 5.2,glm,1,code,306,572,1.87,1.59,measured,Zhipu tokenizer
+z-ai/glm-5.2,GLM 5.2,glm,1,prose,235,277,1.18,1.59,measured,Zhipu tokenizer
+moonshotai/kimi-k2.5-code,Kimi K2.7 Code,kimi,1,code,306,581,1.90,1.60,measured,Moonshot tokenizer
+moonshotai/kimi-k2.5-code,Kimi K2.7 Code,kimi,1,prose,235,273,1.16,1.60,measured,Moonshot tokenizer
+x-ai/grok-4.5,Grok 4.5,grok,2,code,306,884,2.89,2.46,measured,Most verbose measured
+x-ai/grok-4.5,Grok 4.5,grok,2,prose,235,425,1.81,2.46,measured,Most verbose measured
+minimax/minimax-m2.5,MiniMax M3,minimax,2,code,306,817,2.67,2.29,measured,Second most verbose measured
+minimax/minimax-m2.5,MiniMax M3,minimax,2,prose,235,404,1.72,2.29,measured,Second most verbose measured
+deepseek/deepseek-r1,DeepSeek R1,deepseek,2,code,306,~606,~1.98,1.80,measured,Same DSL tokenizer as V4 Flash; blend differs
+deepseek/deepseek-r1,DeepSeek R1,deepseek,2,prose,235,~273,~1.16,1.80,measured,Same DSL tokenizer as V4 Flash; blend differs
+deepseek/deepseek-chat-v3.2,DeepSeek V3.2,deepseek,2,code,306,~606,~1.98,1.84,measured,Same DSL tokenizer as V4 Flash; blend differs
+deepseek/deepseek-chat-v3.2,DeepSeek V3.2,deepseek,2,prose,235,~273,~1.16,1.84,measured,Same DSL tokenizer as V4 Flash; blend differs
+deepseek/deepseek-chat-v3,DeepSeek Chat V3,deepseek,2,code,306,~606,~1.98,1.78,measured,Same DSL tokenizer as V4 Flash; blend differs
+deepseek/deepseek-chat-v3,DeepSeek Chat V3,deepseek,2,prose,235,~273,~1.16,1.78,measured,Same DSL tokenizer as V4 Flash; blend differs
+google/gemini-2.5-pro-preview-05-06,Gemini 2.5 Pro,gemini,2,code,,,1.83,measured,Blend only; usage reported by OpenRouter
+google/gemini-2.5-pro-preview-05-06,Gemini 2.5 Pro,gemini,2,prose,,,1.83,measured,Blend only; usage reported by OpenRouter
+meta-llama/llama-3.3-70b-instruct,Llama 3.3 70B,meta,2,code,,,1.72,measured,Blend only
+meta-llama/llama-3.3-70b-instruct,Llama 3.3 70B,meta,2,prose,,,1.72,measured,Blend only
+meta-llama/llama-4-maverick-17b-128e,Llama 4 Maverick,meta,2,code,,,1.75,measured,Blend only
+meta-llama/llama-4-maverick-17b-128e,Llama 4 Maverick,meta,2,prose,,,1.75,measured,Blend only
+microsoft/phi-4,Phi-4,microsoft,2,code,,,1.69,measured,Blend only
+microsoft/phi-4,Phi-4,microsoft,2,prose,,,1.69,measured,Blend only
+amazon/nova-pro-v1,Amazon Nova Pro,amazon,2,code,,,1.87,measured,Blend only
+amazon/nova-pro-v1,Amazon Nova Pro,amazon,2,prose,,,1.87,measured,Blend only
+perplexity/sonar-pro,Perplexity Sonar Pro,perplexity,3,code,306,679,2.22,1.79,measured,Sonar tokenizer (Pro and Pro Search identical)
+perplexity/sonar-pro,Perplexity Sonar Pro,perplexity,3,prose,235,270,1.15,1.79,measured,Sonar tokenizer (Pro and Pro Search identical)
+perplexity/sonar-pro-search,Perplexity Sonar Pro Search,perplexity,3,code,306,679,2.22,1.79,measured,Same tokenizer as Sonar Pro
+perplexity/sonar-pro-search,Perplexity Sonar Pro Search,perplexity,3,prose,235,270,1.15,1.79,measured,Same tokenizer as Sonar Pro
+amazon/nova-premier-v1,Amazon Nova Premier,amazon,3,code,306,881,2.88,2.24,measured,Very verbose; third most verbose measured
+amazon/nova-premier-v1,Amazon Nova Premier,amazon,3,prose,235,303,1.29,2.24,measured,Very verbose; third most verbose measured
+mistralai/mistral-large-2512,Mistral Large 3,mistral,4,code,152,310,2.04,1.68,measured,SentencePiece; same tokenizer as Codestral
+mistralai/mistral-large-2512,Mistral Large 3,mistral,4,prose,125,144,1.15,1.68,measured,SentencePiece; same tokenizer as Codestral
+mistralai/codestral-2508,Codestral,mistral,4,code,152,310,2.04,1.68,measured,SentencePiece; identical to Mistral Large 3
+mistralai/codestral-2508,Codestral,mistral,4,prose,125,144,1.15,1.68,measured,SentencePiece; identical to Mistral Large 3
+cohere/command-a,Command A,cohere,4,code,152,324,2.13,1.72,measured,C4 tokenizer
+cohere/command-a,Command A,cohere,4,prose,125,137,1.10,1.72,measured,C4 tokenizer
+ai21/jamba-large-1.7,Jamba Large 1.7,ai21,4,code,152,377,2.48,1.97,measured,Dense tokenizer; 3rd most verbose
+ai21/jamba-large-1.7,Jamba Large 1.7,ai21,4,prose,125,151,1.21,1.97,measured,Dense tokenizer; 3rd most verbose
+openai/o3-mini,o3-mini,openai,4,code,152,300,1.97,1.64,measured,o200k; slightly lower than GPT-5.x (2.07)
+openai/o3-mini,o3-mini,openai,4,prose,125,144,1.15,1.64,measured,o200k; similar prose efficiency
+openai/o4-mini,o4-mini,openai,2,code,,,,1.72,blocked,Encrypted reasoning; no usage field returned
+openai/o4-mini,o4-mini,openai,2,prose,,,,1.72,blocked,Encrypted reasoning; no usage field returned
+openai/o4-mini,o4-mini,openai,4,code,,,,1.72,failed,OpenAI Responses API; no prompt_tokens field
+openai/o4-mini,o4-mini,openai,4,prose,,,,1.72,failed,OpenAI Responses API; no prompt_tokens field
+sakana/fugu-ultra,Fugu Ultra,sakana,3,code,,,,,blocked,Guardrail blocked
+sakana/fugu-ultra,Fugu Ultra,sakana,4,code,152,14529,95.59,,failed,Non-standard token counting; $0.39/test
+inflection/inflection-3-pi,Inflection 3 Pi,inflection,3,code,,,,,blocked,Guardrail blocked
+inflection/inflection-3-pi,Inflection 3 Pi,inflection,4,code,,,,,failed,Provider returns empty response (502)
+inflection/inflection-3-productivity,Inflection 3 Productivity,inflection,3,code,,,,,blocked,Guardrail blocked
+inflection/inflection-3-productivity,Inflection 3 Productivity,inflection,4,code,,,,,failed,Provider returns empty response (502)
+qwen/qwen3.7-plus,Qwen3.7 Plus,qwen,1,code,,,,1.60,blocked,Content guardrail blocks API access
+qwen/qwen3.7-max,Qwen3.7 Max,qwen,1,code,,,,1.60,blocked,Content guardrail blocks API access
+perplexity/sonar-reasoning-pro,Perplexity Sonar Reasoning Pro,perplexity,3,code,,,,,failed,Timed out (search/reasoning model)
+perplexity/sonar-deep-research,Perplexity Sonar Deep Research,perplexity,3,code,,,,,failed,Timed out (search/reasoning model)

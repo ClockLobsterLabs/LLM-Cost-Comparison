@@ -176,7 +176,9 @@ When asked to appraise:
 |------|---------|
 | `models.json` | Canonical model database with pricing, benchmarks, features |
 | `SKILL.md` | This file — skill instructions |
-| `docs/tokenizer-efficiency-methodology.md` | Methodology, cost breakdown, and measurement protocol |
+| `docs/tokenizer-efficiency-methodology.md` | Measurement protocol reference |
+| `docs/tokenizer-efficiency-experiment.md` | Full experiment write-up: hypothesis, method, results, discussion |
+| `data/tokenizer-efficiency-raw.csv` | Raw measurement data: per-call prompt_tokens, E values, status for all 51 models |
 
 ## Pricing Methodology
 
