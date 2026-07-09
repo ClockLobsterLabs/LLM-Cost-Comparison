@@ -1,6 +1,6 @@
 {
   "$schema": "./models.schema.json",
-  "last_updated": "2026-07-09 (Session 6: Output verbosity experiment across 24 models. Session 6b: Compression experiments for DS V4 Flash/Pro with 5 methods.)",
+  "last_updated": "2026-07-09 (Session 5: Tokenizer efficiency across 48 models — merged original S5 + expansion across 25 new models. Session 6: Output verbosity across 24 models. Session 6b: Compression experiments for DS V4 Flash/Pro with 5 methods.)",
   "pricing_sources": {
     "primary": {
       "name": "OpenCode Zen",
@@ -122,7 +122,7 @@
       "new_features": "Multi-Token Prediction, MoE 284B/13B, Deep EP optimization, 1M context",
       "specialty": "Cost-sensitive daily coding, general-purpose agent work",
       "strategy_note": "Your daily driver on Zen. Best value in the market. No reason to switch within tier.",
-      "tokenizer_efficiency": 1.65,
+      "tokenizer_efficiency": 1.85,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -311,7 +311,7 @@
       "new_features": "1.6T MoE, 1M context, strong reasoning at low cost",
       "specialty": "Stronger reasoning than Flash, good for complex coding tasks",
       "strategy_note": "Strong Taskrunner. Cheaper than GLM 5.2 ($3.48 vs $4.40 out) but lower AAII (44 vs 51). Good when GLM is overkill. Warning: 4× thinking tax inflates effective output cost to $17.40/M (5× $3.48), jumping from Taskrunner to Daily tier.",
-      "tokenizer_efficiency": 1.65,
+      "tokenizer_efficiency": 1.85,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -542,7 +542,7 @@
       "new_features": "Anthropic's newest frontier. #1 Arena ELO (1509). #1 Arena Agent (14.06% win rate).",
       "specialty": "Absolute frontier — planning, architecture, hardest problems",
       "strategy_note": "Overkill for daily use vs your stack. Consider for critical planning/audit work if GLM 5.2 isn't enough.",
-      "tokenizer_efficiency": 1.85
+      "tokenizer_efficiency": 3.03
     },
     "claude-opus-4-8": {
       "name": "Claude Opus 4.8",
@@ -648,7 +648,7 @@
       "new_features": "Thinking mode available. Strong agentic coding. 1M context.",
       "specialty": "Premium agentic coding, complex reasoning",
       "strategy_note": "Strongest Claude before Fable 5. Half the price of Fable on output. Consider if GLM 5.2 underperforms on a specific task.",
-      "tokenizer_efficiency": 1.85
+      "tokenizer_efficiency": 3.03
     },
     "claude-opus-4-7": {
       "name": "Claude Opus 4.7",
@@ -740,7 +740,7 @@
       "new_features": "Previous Opus gen. Still strong. Same pricing as 4.8.",
       "specialty": "Premium general reasoning, coding",
       "strategy_note": "Same price as 4.8 but slightly lower capability. Prefer 4.8 if both available on Zen.",
-      "tokenizer_efficiency": 1.85
+      "tokenizer_efficiency": 3.05
     },
     "claude-opus-4-6": {
       "name": "Claude Opus 4.6",
@@ -786,7 +786,7 @@
       "new_features": "Previous Opus gen. Still on Zen. Replaced by Opus 4.7 and 4.8.",
       "specialty": "Premium general reasoning, coding",
       "strategy_note": "Weaker than 4.7 and 4.8 at the same price ($25/M out). No reason to choose over newer Opus models.",
-      "tokenizer_efficiency": 1.85
+      "tokenizer_efficiency": 2.21
     },
     "claude-sonnet-5": {
       "name": "Claude Sonnet 5",
@@ -832,7 +832,7 @@
       "new_features": "Adaptive Reasoning (Low/Medium/High/XHigh/Max). Very verbose — 300M output tokens. Strong Arena presence.",
       "specialty": "Best daily driver at this price. Matches Opus 4.7 on AAII at 60% less cost.",
       "strategy_note": "AAII 53 at $10/M out is exceptional. If you ever need a stronger daily than Flash, this is the upgrade path. Consider for complex one-off tasks where GLM is unavailable.",
-      "tokenizer_efficiency": 1.85
+      "tokenizer_efficiency": 3.03
     },
     "claude-sonnet-4-6": {
       "name": "Claude Sonnet 4.6",
@@ -866,7 +866,7 @@
       "new_features": "1M context. Previous Sonnet gen.",
       "specialty": "Strong daily driver, one gen behind Sonnet 5",
       "strategy_note": "Sonnet 5 is cheaper ($10 vs $15 out) and stronger. No reason to use 4.6 if 5 is available.",
-      "tokenizer_efficiency": 1.85
+      "tokenizer_efficiency": 2.21
     },
     "claude-haiku-4-5": {
       "name": "Claude Haiku 4.5",
@@ -908,7 +908,7 @@
       "new_features": "Fast, cheap Claude. 1M context.",
       "specialty": "Quick tasks, classification, structured output",
       "strategy_note": "Good but DeepSeek V4 Pro ($3.48 out at AAII 44) beats it on value-to-capability ratio.",
-      "tokenizer_efficiency": 1.85,
+      "tokenizer_efficiency": 2.21,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -1124,7 +1124,7 @@
       "new_features": "Multimodal (text+image), 922K context, xhigh reasoning mode. Codex CLI agent scores #1 on Terminal-Bench.",
       "specialty": "Top-tier agentic coding. Best Terminal-Bench score.",
       "strategy_note": "Best raw coding benchmark scores. Very expensive at $30/M out. Worth it if Terminal-Bench tasks match your workload. Otherwise, overpriced for your stack.",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.78
     },
     "gpt-5-5-pro": {
       "name": "GPT-5.5 Pro",
@@ -1157,7 +1157,7 @@
       "new_features": "Highest-tier OpenAI. Extreme pricing. Use only when nothing else works.",
       "specialty": "Maximum capability, no expense spared",
       "strategy_note": "$180/M out. Strictly for problems no other model can solve. Unlikely to be worth it for your workflow.",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.78
     },
     "gpt-5-4": {
       "name": "GPT-5.4",
@@ -1259,7 +1259,7 @@
       "new_features": "Strong all-rounder. Replaced by GPT-5.5 for frontier work.",
       "specialty": "Reliable general-purpose coding, reasoning",
       "strategy_note": "Solid daily ($15 out, AAII 51) but Sonnet 5 beats it on price ($10 out) and capability (AAII 53).",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.78
     },
     "gpt-5-4-mini": {
       "name": "GPT-5.4 Mini",
@@ -1296,7 +1296,7 @@
       "new_features": "Smaller, faster GPT-5.4 variant",
       "specialty": "Fast coding, classification, structured extraction",
       "strategy_note": "GLM 5.2 ($4.40 out, AAII 51) is cheaper and vastly more capable. No reason to use Mini.",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.78
     },
     "gpt-5-4-nano": {
       "name": "GPT-5.4 Nano",
@@ -1333,7 +1333,7 @@
       "new_features": "Smallest GPT-5.4. Cheap but limited capability.",
       "specialty": "Ultra-cheap structured tasks, classification, formatting",
       "strategy_note": "DeepSeek V4 Flash ($0.28 out, AAII 40) is cheaper AND stronger. Nano is only useful if you specifically need an OpenAI model.",
-      "tokenizer_efficiency": 1.72,
+      "tokenizer_efficiency": 1.78,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -1476,7 +1476,7 @@
       "new_features": "Oldest GPT variant. Very cheap, very limited.",
       "specialty": "Classification, simple extraction, formatting",
       "strategy_note": "Worse than DeepSeek V4 Flash in every way except cost ($0.40 vs $0.28 out — wait, Flash is cheaper). No reason to use.",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.78
     },
     "gpt-5-2": {
       "name": "GPT-5.2",
@@ -1531,7 +1531,7 @@
       "new_features": "Older GPT. Replaced by GPT-5.3 Codex and GPT-5.4. Still on Zen.",
       "specialty": "General reasoning, predecessor to GPT-5.3/5.4",
       "strategy_note": "GPT-5.4 (AAII 51, $15 out) and GPT-5.3 Codex Spark ($14 out) both beat it. Only relevant as a pricing baseline.",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.78
     },
     "gpt-5-3-codex-spark": {
       "name": "GPT-5.3 Codex Spark",
@@ -1582,7 +1582,7 @@
       "new_features": "Code-specialized GPT. Codex lineage.",
       "specialty": "Code generation, agentic coding",
       "strategy_note": "GPT-5.4 ($15 out) or Sonnet 5 ($10 out) are likely better at similar or lower cost.",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.78
     },
     "gemini-3-1-pro": {
       "name": "Gemini 3.1 Pro",
@@ -1674,7 +1674,7 @@
       "new_features": "Multimodal (text+image+speech+video). 1M context. Gemini CLI tooling.",
       "specialty": "Google ecosystem, multimodal tasks, long context",
       "strategy_note": "Good daily driver. Terminal-Bench 70.7% is respectable. If you work with video/audio, worth considering. Otherwise, GLM 5.2 or Sonnet 5 are better values.",
-      "tokenizer_efficiency": 1.65
+      "tokenizer_efficiency": 2.06
     },
     "gemini-3-5-flash": {
       "name": "Gemini 3.5 Flash",
@@ -1715,7 +1715,7 @@
       "new_features": "Latest Gemini Flash. Fast, cheap, 1M context, multimodal.",
       "specialty": "Fast multimodal, vision, audio tasks",
       "strategy_note": "DeepSeek V4 Flash ($0.28 out, AAII 40) is cheaper. GLM 5.2 ($4.40 out, AAII 51) is stronger. Gemini Flash fills a niche if you need Google's multimodal capabilities.",
-      "tokenizer_efficiency": 1.65
+      "tokenizer_efficiency": 2.06
     },
     "gemini-3-flash": {
       "name": "Gemini 3 Flash",
@@ -1748,7 +1748,7 @@
       "new_features": "Older Gemini Flash. Still available on Zen.",
       "specialty": "Budget multimodal, simple coding",
       "strategy_note": "Superceded by 3.5 Flash. DeepSeek V4 Flash is cheaper and stronger.",
-      "tokenizer_efficiency": 1.65
+      "tokenizer_efficiency": 2.06
     },
     "glm-5-2": {
       "name": "GLM 5.2",
@@ -1789,7 +1789,7 @@
       "new_features": "753B/40B MoE, MIT license, #1 open-weights model, fastest at 208.6 tok/s. #9 Arena Agent (6.62% win rate). #2 Arena WebDev (1584 ELO).",
       "specialty": "Your complex planning/audit model. Open frontier intelligence at a fraction of proprietary cost.",
       "strategy_note": "Your go-to for complex work. AAII 51 at $4.40/M out is unmatched value in its tier. Check for GLM 5.3 in every appraisal.",
-      "tokenizer_efficiency": 1.59,
+      "tokenizer_efficiency": 1.81,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -1933,7 +1933,7 @@
       "new_features": "Code-specialized Kimi. 1T/32B MoE. Slow but capable. Optimized for direct response — negligible thinking tokens.",
       "specialty": "Code generation, Chinese-language tasks, open-weight coding",
       "strategy_note": "At $4/M out with AAII 42 and 46 tok/s, it's slower and less capable than GLM 5.2 ($4.40 out, AAII 51, 208 tok/s). Pass.",
-      "tokenizer_efficiency": 1.6,
+      "tokenizer_efficiency": 1.79,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -2088,7 +2088,7 @@
       "new_features": "Previous Kimi gen. Same price as K2.7 Code but weaker.",
       "specialty": "General reasoning (weaker than K2.7 Code)",
       "strategy_note": "K2.7 Code is better at the same price. No reason to use K2.6.",
-      "tokenizer_efficiency": 1.6
+      "tokenizer_efficiency": 1.79
     },
     "grok-4-5": {
       "name": "Grok 4.5",
@@ -2130,7 +2130,7 @@
       "new_features": "BRAND NEW (released today!). AAII 54 — #4 overall. Most concise frontier (60M output tokens).",
       "specialty": "Concise frontier intelligence. Complex reasoning at taskrunner pricing.",
       "strategy_note": "**ALERT**: AAII 54 at $6/M out is the best value in this appraisal. Complex-level intelligence (beats Opus 4.8) at Taskrunner pricing. Only 500K context. Worth evaluating as a GLM 5.2 alternative for complex work.",
-      "tokenizer_efficiency": 2.46,
+      "tokenizer_efficiency": 2.66,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -2273,7 +2273,7 @@
       "new_features": "New xAI build model. Cheap. Unknown benchmarks.",
       "specialty": "Experimental — watch for benchmark results",
       "strategy_note": "Too new to evaluate. Re-check in next appraisal cycle.",
-      "tokenizer_efficiency": 2.46
+      "tokenizer_efficiency": 2.43
     },
     "qwen3-7-max": {
       "name": "Qwen3.7 Max",
@@ -2315,7 +2315,7 @@
       "new_features": "Alibaba's largest Qwen. Competitive with mid-tier models.",
       "specialty": "Chinese-language tasks, general reasoning",
       "strategy_note": "SWE-bench Pro 60.6% at $7.50/M out is competitive. Still, GLM 5.2 (62.1% at $4.40) is better value.",
-      "tokenizer_efficiency": 1.6
+      "tokenizer_efficiency": 1.97
     },
     "qwen3-7-plus": {
       "name": "Qwen3.7 Plus",
@@ -2357,7 +2357,7 @@
       "new_features": "Cheaper Qwen variant. Decent for budget work.",
       "specialty": "Budget coding, Chinese tasks",
       "strategy_note": "SWE-bench Pro 57.6% and TB 70.3% at $1.60/M out is strong value. Best budget coding option after DS Flash.",
-      "tokenizer_efficiency": 1.6
+      "tokenizer_efficiency": 1.97
     },
     "minimax-m3": {
       "name": "MiniMax M3",
@@ -2402,7 +2402,7 @@
       "new_features": "Latest MiniMax. Cheap but limited.",
       "specialty": "Budget tasks, simple code generation",
       "strategy_note": "SWE-bench Pro 59.0% / Verified 80.5% at $1.20/M out. Incredible budget value after DS Flash.",
-      "tokenizer_efficiency": 2.29,
+      "tokenizer_efficiency": 1.91,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -2545,7 +2545,7 @@
       "new_features": "Free MiniMax model. Limited availability (data may train model).",
       "specialty": "Free experimentation",
       "strategy_note": "DeepSeek V4 Flash Free is stronger. Only use if DS Free is unavailable.",
-      "tokenizer_efficiency": 2.29
+      "tokenizer_efficiency": 1.85
     },
     "big-pickle": {
       "name": "Big Pickle",
@@ -2611,7 +2611,7 @@
       "new_features": "Free code model. Privacy warning — data trains Cohere models.",
       "specialty": "Free code generation",
       "strategy_note": "Privacy warning: Cohere uses data for training. Skip unless you need a free model and DS Flash Free is down.",
-      "tokenizer_efficiency": 1.65
+      "tokenizer_efficiency": 1.75
     },
     "nemotron-3-ultra-free": {
       "name": "Nemotron 3 Ultra Free",
@@ -2644,7 +2644,7 @@
       "new_features": "NVIDIA free trial model. Limited availability.",
       "specialty": "Free NVIDIA-hosted experimentation",
       "strategy_note": "NVIDIA trial terms — do not submit personal data. Only for curiosity.",
-      "tokenizer_efficiency": 1.65
+      "tokenizer_efficiency": 1.88
     },
     "o4-mini": {
       "name": "o4-mini",
@@ -2695,7 +2695,7 @@
       "new_features": "Fast, cost-efficient OpenAI reasoning model. Succeeded by GPT-5 Mini.",
       "specialty": "Cheap reasoning, coding, vision",
       "strategy_note": "SWE-bench Verified 68.1% at $4.40/M out. Strong value reasoning model. Beats DeepSeek V4 Pro on pure SWE-bench (68.1% vs 55.4%) at similar cost.",
-      "tokenizer_efficiency": 1.72
+      "tokenizer_efficiency": 1.78
     },
     "o3-mini": {
       "name": "o3-mini",
@@ -2741,7 +2741,7 @@
       "new_features": "Predecessor to o4-mini. Older reasoning model.",
       "specialty": "Cheap reasoning, coding",
       "strategy_note": "o4-mini is better at the same price. No reason to use o3-mini if o4-mini is available.",
-      "tokenizer_efficiency": 1.64,
+      "tokenizer_efficiency": 1.78,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -2907,7 +2907,7 @@
       "new_features": "Original reasoning pioneer. 671B MoE. Open weights. RL-trained reasoning.",
       "specialty": "Reasoning, math, coding — the model that kicked off the reasoning era",
       "strategy_note": "Aged but historically important. DeepSeek V4 Pro ($3.48 out, AAII 44) and o4-mini ($4.40 out, SWE-bench 68.1%) both outperform R1 in their respective strengths. R1 is superseded within the family.",
-      "tokenizer_efficiency": 1.8,
+      "tokenizer_efficiency": 1.84,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -3053,7 +3053,7 @@
       "new_features": "Latest V3 generation. Strong reasoning and agent performance. Open weights.",
       "specialty": "Budget powerful coding, predecessor to V4 Flash",
       "strategy_note": "SWE-bench Verified 70.0% at $0.34/M out is incredible value. Cheaper than V4 Flash ($0.28 out + cache) with very similar capability. Worth considering as a Flash alternative if OpenRouter rates hold.",
-      "tokenizer_efficiency": 1.84,
+      "tokenizer_efficiency": 1.87,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -3195,7 +3195,7 @@
       "new_features": "Original V3 chat model. Superseded by V3.2.",
       "specialty": "Legacy budget coding",
       "strategy_note": "Superseded by DeepSeek V3.2 ($0.34 out, SWE-bench Verified 70.0%) and V4 Flash ($0.28 out). No reason to use.",
-      "tokenizer_efficiency": 1.78,
+      "tokenizer_efficiency": 1.84,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -3372,7 +3372,7 @@
       "new_features": "1M context, thinking mode, multimodal (text+image+video+audio). Very strong GPQA (86.4%).",
       "specialty": "Google flagship reasoning, long context, multimodal",
       "strategy_note": "Strong daily driver option ($10/M out). GPQA 86.4% and Aider-Polyglot 82.2% are competitive with Claude Sonnet 5 ($10 out). Consider if you need Google's multimodal capabilities or 1M context.",
-      "tokenizer_efficiency": 1.83,
+      "tokenizer_efficiency": 2.06,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -3524,7 +3524,7 @@
       "new_features": "Most popular open-weight model. 70B dense. Strong for self-hosting.",
       "specialty": "Open-weight general-purpose, self-hosting",
       "strategy_note": "Good for self-hosting but not competitive on API pricing. DeepSeek V4 Flash ($0.28 out) is cheaper and stronger. Only relevant if you need open weights for a specific deployment constraint.",
-      "tokenizer_efficiency": 1.72,
+      "tokenizer_efficiency": 1.8,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -3695,7 +3695,7 @@
       "new_features": "Natively multimodal MoE. 1M context. 128 experts. Open weights.",
       "specialty": "Open-weight multimodal, 1M context budget coding",
       "strategy_note": "SWE-bench Verified 75.0% at $0.60/M out is exceptional value for an open-weight model. AAII 14 is misleading (AA's methodology penalizes MoE). Its real-world coding ability is much higher than AAII suggests.",
-      "tokenizer_efficiency": 1.75,
+      "tokenizer_efficiency": 1.81,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -3857,7 +3857,7 @@
       "new_features": "Mistral flagship. 675B MoE. Open weights. Competitive with DeepSeek V3.2.",
       "specialty": "Open-weight European model, multilingual, enterprise",
       "strategy_note": "MMLU-Pro 85.46% is strong, but agentic coding benchmarks are missing. DeepSeek V4 Flash and V3.2 are cheaper with better coding scores. Consider if you need Mistral's European hosting.",
-      "tokenizer_efficiency": 1.68,
+      "tokenizer_efficiency": 1.83,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -4008,7 +4008,7 @@
       "new_features": "Code-specialized model. 80+ programming languages. 256K context. Superseded by Codestral 2.0.",
       "specialty": "Code generation, multi-language completion",
       "strategy_note": "Weak SWE-bench Verified (40%) vs DeepSeek V4 Flash. Only relevant if you want a dedicated code model on Mistral's platform.",
-      "tokenizer_efficiency": 1.68,
+      "tokenizer_efficiency": 1.82,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -4165,7 +4165,7 @@
       "new_features": "Enterprise-focused. 256K context. Strong tool use and RAG. Open weights (non-commercial).",
       "specialty": "Enterprise tool use, RAG, long-context",
       "strategy_note": "Expensive ($10/M out) for its capability level. Cohere's strength is enterprise RAG and tool use, not raw coding. Skip unless you need Cohere's platform.",
-      "tokenizer_efficiency": 1.72,
+      "tokenizer_efficiency": 1.95,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -4322,7 +4322,7 @@
       "new_features": "Small but mighty. 14B dense. MIT license. Uses tiktoken tokenizer.",
       "specialty": "Ultra-cheap open-weight, local deployment, low latency",
       "strategy_note": "At $0.14/M out with only 16K context, it's a niche model for local deployment or ultra-low-cost simple tasks. DeepSeek V4 Flash dominates this tier on API.",
-      "tokenizer_efficiency": 1.69,
+      "tokenizer_efficiency": 1.78,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -4479,7 +4479,7 @@
       "new_features": "AWS flagship multimodal model. 300K context. Vision, video, tool use.",
       "specialty": "AWS ecosystem, multimodal, long-context",
       "strategy_note": "Weak coding benchmarks (LiveCodeBench 23.3%) vs similarly-priced alternatives. GLM 5.2 ($4.40 out, AAII 51) is dramatically stronger. Only relevant if you're already in the AWS Bedrock ecosystem.",
-      "tokenizer_efficiency": 1.87,
+      "tokenizer_efficiency": 1.93,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -4620,7 +4620,7 @@
       "new_features": "Search-augmented model. Real-time web search + answer generation. 200K context.",
       "specialty": "Search-based Q&A, research, citations",
       "strategy_note": "Expensive ($15/M out) for a search model. Use only when you need verified citations with LLM synthesis. Not a general coding model.",
-      "tokenizer_efficiency": 1.79,
+      "tokenizer_efficiency": 1.76,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -4753,7 +4753,7 @@
       "new_features": "Search-augmented model. Predecessor to Sonar Pro Search.",
       "specialty": "Search-based Q&A",
       "strategy_note": "Superseded by Sonar Pro Search at same price. Same tokenizer.",
-      "tokenizer_efficiency": 1.79,
+      "tokenizer_efficiency": 1.76,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
@@ -4894,7 +4894,7 @@
       "new_features": "AWS highest-tier model. 1M context. Multimodal (text+image+video).",
       "specialty": "AWS ecosystem premium, long-context, multimodal",
       "strategy_note": "Very verbose tokenizer (E=2.24). Nova Pro ($3.20 out, E=1.87) is cheaper AND more efficient. Nova Premier's $12.50/M out with 20% more tokens per word makes it poor value vs alternatives.",
-      "tokenizer_efficiency": 2.24,
+      "tokenizer_efficiency": 2.28,
       "output_verbosity": {
         "session": 6,
         "date": "2026-07-09",
