@@ -1,6 +1,6 @@
 {
   "$schema": "./models.schema.json",
-  "last_updated": "2026-07-09 (Session 5: Tokenizer efficiency across 48 models tested + 3 inferred (Flash Max, Pro Max, Flash Free = same base model) = 51/51 in models.json. Big Pickle has placeholder (Zen-only, no API key). Session 6: Output verbosity across 24 models. Session 6b: Compression experiments for DS V4 Flash/Pro with 5 methods.)",
+  "last_updated": "2026-07-09 (Session 5: Tokenizer efficiency across 48 models + 2 Max variants (xhigh reasoning: Flash Max E=2.17, Pro Max E=2.14). Removed Flash Free and Big Pickle (Zen-only, unreachable). Session 6: Output verbosity across 24 models. Session 6b: Compression experiments for DS V4 Flash/Pro with 5 methods.)",
   "pricing_sources": {
     "primary": {
       "name": "OpenCode Zen",
@@ -273,7 +273,7 @@
       "new_features": "Same as Flash, Max serving config for best throughput",
       "specialty": "Your Max variant choice on OpenRouter. Same model, tuned serving.",
       "strategy_note": "Your secondary daily on OpenRouter. Comparable to Zen Flash.",
-      "tokenizer_efficiency": 1.85
+      "tokenizer_efficiency": 2.17
     },
     "deepseek-v4-pro": {
       "name": "DeepSeek V4 Pro",
@@ -462,41 +462,7 @@
       "new_features": "Same as Pro, Max serving config",
       "specialty": "Pro quality at budget pricing on OpenRouter",
       "strategy_note": "Remarkable value — $1/M out for 44 AAII on OpenRouter. Watch for price changes.",
-      "tokenizer_efficiency": 1.85
-    },
-    "deepseek-v4-flash-free": {
-      "name": "DeepSeek V4 Flash Free",
-      "family": "deepseek",
-      "version": "2026-04-24",
-      "tier": "free",
-      "open_weights": true,
-      "license": "MIT",
-      "context_window": 1000000,
-      "parameters": "284B total / 13B active MoE",
-      "zen_available": true,
-      "zen_pricing": {
-        "input": 0,
-        "output": 0,
-        "cached_read": 0
-      },
-      "openrouter_pricing": null,
-      "pricing_source": "zen",
-      "benchmarks": {
-        "aa_intelligence_index": {
-          "score": 40,
-          "source": "Same model as paid Flash",
-          "date": "2026-07"
-        },
-        "swe_bench_verified": null,
-        "swe_bench_pro": null,
-        "terminal_bench_2_1": null
-      },
-      "speed_tok_per_s": 111,
-      "thinking_token_ratio": 0,
-      "new_features": "Same as Flash, free tier (limited time, data may train model)",
-      "specialty": "Best free model. Same capability as paid Flash.",
-      "strategy_note": "Limited availability. Data may train DeepSeek. Fine for experimentation.",
-      "tokenizer_efficiency": 1.85
+      "tokenizer_efficiency": 2.14
     },
     "claude-fable-5": {
       "name": "Claude Fable 5",
@@ -2546,39 +2512,6 @@
       "specialty": "Free experimentation",
       "strategy_note": "DeepSeek V4 Flash Free is stronger. Only use if DS Free is unavailable.",
       "tokenizer_efficiency": 1.85
-    },
-    "big-pickle": {
-      "name": "Big Pickle",
-      "family": "stealth",
-      "version": "2026-07-01",
-      "tier": "free",
-      "open_weights": false,
-      "license": "Proprietary (free tier — data trains model)",
-      "context_window": 128000,
-      "parameters": "Undisclosed (stealth model)",
-      "zen_available": true,
-      "zen_pricing": {
-        "input": 0,
-        "output": 0,
-        "cached_read": 0
-      },
-      "openrouter_pricing": null,
-      "pricing_source": "zen",
-      "benchmarks": {
-        "aa_intelligence_index": {
-          "score": null,
-          "source": "Stealth — no public benchmarks",
-          "date": "2026-07"
-        },
-        "swe_bench_verified": null,
-        "swe_bench_pro": null,
-        "terminal_bench_2_1": null
-      },
-      "speed_tok_per_s": null,
-      "new_features": "Stealth model. Free on Zen. Provider uses data for training.",
-      "specialty": "Unknown — experimental",
-      "strategy_note": "Free but data trains the model. Only use for non-sensitive experiments.",
-      "tokenizer_efficiency": 1.65
     },
     "north-mini-code-free": {
       "name": "North Mini Code Free",
