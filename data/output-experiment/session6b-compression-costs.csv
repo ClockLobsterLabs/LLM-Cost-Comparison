@@ -1,0 +1,6 @@
+"method","total_cost","avg_cost"
+"diff-only","0.01693","0.0002645"
+"json-envelope","0.02487","0.0003886"
+"smc","0.01907","0.000298"
+"verb-noun","0.03882","0.0006065"
+"word-deletion","0.01766","0.000276"
