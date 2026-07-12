@@ -1,0 +1,121 @@
+model,tier,model_id,max_tokens_setting,output_tokens,prompt_tokens,elapsed_ms,tokens_per_sec,cost,status,error
+MiMo-V2.5,free,minimax/minimax-m2.5,16,16,433,2367.6,6.76,3.6e-05,success,
+MiMo-V2.5,free,minimax/minimax-m2.5,500,500,433,5206.7,96.03,0.000467,success,
+MiMo-V2.5,free,minimax/minimax-m2.5,1000,1000,433,8705.3,114.87,0.000913,success,
+MiMo-V2.5,free,minimax/minimax-m2.5,2000,2000,433,27109.1,73.78,0.001804,success,
+MiMo-V2.5,free,minimax/minimax-m2.5,5000,5000,433,53567.8,93.34,0.004477,success,
+Nemotron 3 Ultra Free,free,nvidia/nemotron-3-ultra-550b-a55b:free,16,16,422,5100.0,3.14,0.0,success,
+Nemotron 3 Ultra Free,free,nvidia/nemotron-3-ultra-550b-a55b:free,500,500,422,8425.6,59.34,0.0,success,
+Nemotron 3 Ultra Free,free,nvidia/nemotron-3-ultra-550b-a55b:free,1000,1000,422,9318.8,107.31,0.0,success,
+Nemotron 3 Ultra Free,free,nvidia/nemotron-3-ultra-550b-a55b:free,2000,2000,422,17266.0,115.83,0.0,success,
+Nemotron 3 Ultra Free,free,nvidia/nemotron-3-ultra-550b-a55b:free,5000,5000,422,55500.9,90.09,0.0,success,
+Jamba Large 1.7,free,ai21/jamba-large-1.7,16,16,451,1204.0,13.29,0.00102,success,
+Jamba Large 1.7,free,ai21/jamba-large-1.7,500,500,451,12185.6,41.03,0.004853,success,
+Jamba Large 1.7,free,ai21/jamba-large-1.7,1000,1000,451,15581.3,64.18,0.008813,success,
+Jamba Large 1.7,free,ai21/jamba-large-1.7,2000,2000,451,30127.5,66.38,0.016733,success,
+Jamba Large 1.7,free,ai21/jamba-large-1.7,5000,2972,451,44791.0,66.35,0.024431,success,
+North Mini Code Free,free,cohere/north-mini-code:free,16,16,382,886.1,18.06,0.0,success,
+North Mini Code Free,free,cohere/north-mini-code:free,500,498,382,8178.0,60.89,0.0,success,
+North Mini Code Free,free,cohere/north-mini-code:free,1000,926,382,9957.3,93.0,0.0,success,
+North Mini Code Free,free,cohere/north-mini-code:free,2000,1858,382,11219.3,165.61,0.0,success,
+North Mini Code Free,free,cohere/north-mini-code:free,5000,847,446,4789.1,176.86,0.0,success,
+DeepSeek V4 Flash,budget,deepseek/deepseek-chat-v4-flash,16,,,90.8,,,error,"{""error"":{""message"":""deepseek/deepseek-chat-v4-flash is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Flash,budget,deepseek/deepseek-chat-v4-flash,500,,,84.5,,,error,"{""error"":{""message"":""deepseek/deepseek-chat-v4-flash is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Flash,budget,deepseek/deepseek-chat-v4-flash,1000,,,85.0,,,error,"{""error"":{""message"":""deepseek/deepseek-chat-v4-flash is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Flash,budget,deepseek/deepseek-chat-v4-flash,2000,,,116.0,,,error,"{""error"":{""message"":""deepseek/deepseek-chat-v4-flash is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Flash,budget,deepseek/deepseek-chat-v4-flash,5000,,,91.1,,,error,"{""error"":{""message"":""deepseek/deepseek-chat-v4-flash is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Flash Max,budget,deepseek/deepseek-v4-flash-max,16,,,102.4,,,error,"{""error"":{""message"":""deepseek/deepseek-v4-flash-max is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Flash Max,budget,deepseek/deepseek-v4-flash-max,500,,,101.0,,,error,"{""error"":{""message"":""deepseek/deepseek-v4-flash-max is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Flash Max,budget,deepseek/deepseek-v4-flash-max,1000,,,112.0,,,error,"{""error"":{""message"":""deepseek/deepseek-v4-flash-max is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Flash Max,budget,deepseek/deepseek-v4-flash-max,2000,,,66.4,,,error,"{""error"":{""message"":""deepseek/deepseek-v4-flash-max is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Flash Max,budget,deepseek/deepseek-v4-flash-max,5000,,,95.8,,,error,"{""error"":{""message"":""deepseek/deepseek-v4-flash-max is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+GPT-5.4 Nano,budget,openai/gpt-5.4-nano,16,16,397,899.7,17.78,9.8e-05,success,
+GPT-5.4 Nano,budget,openai/gpt-5.4-nano,500,500,397,3462.4,144.41,0.000697,success,
+GPT-5.4 Nano,budget,openai/gpt-5.4-nano,1000,1000,397,7253.4,137.87,0.001316,success,
+GPT-5.4 Nano,budget,openai/gpt-5.4-nano,2000,2000,397,12019.2,166.4,0.002554,success,
+GPT-5.4 Nano,budget,openai/gpt-5.4-nano,5000,5000,397,29565.2,169.12,0.006266,success,
+GPT-5 Nano,budget,openai/gpt-5-nano,16,0,0,1330.4,,6e-06,success,
+GPT-5 Nano,budget,openai/gpt-5-nano,500,448,397,10842.0,41.32,0.000197,success,
+GPT-5 Nano,budget,openai/gpt-5-nano,1000,960,397,25837.7,37.15,0.0004,success,
+GPT-5 Nano,budget,openai/gpt-5-nano,2000,1984,397,26406.3,75.13,0.000805,success,
+GPT-5 Nano,budget,openai/gpt-5-nano,5000,4992,397,108485.1,46.02,0.001996,success,
+Phi-4,budget,microsoft/phi-4,16,16,396,5786.8,2.76,3e-05,success,
+Phi-4,budget,microsoft/phi-4,500,500,396,6735.6,74.23,9.7e-05,success,
+Phi-4,budget,microsoft/phi-4,1000,1000,396,12079.2,82.79,0.000166,success,
+Phi-4,budget,microsoft/phi-4,2000,2000,396,23187.2,86.25,0.000305,success,
+Phi-4,budget,microsoft/phi-4,5000,2580,396,31403.6,82.16,0.000385,success,
+DeepSeek Chat V3,budget,deepseek/deepseek-chat-v3,16,16,411,1828.1,8.75,9.4e-05,success,
+DeepSeek Chat V3,budget,deepseek/deepseek-chat-v3,500,500,410,14135.9,35.37,0.000477,success,
+DeepSeek Chat V3,budget,deepseek/deepseek-chat-v3,1000,1000,410,27467.1,36.41,0.000873,success,
+DeepSeek Chat V3,budget,deepseek/deepseek-chat-v3,2000,2000,410,55056.3,36.33,0.001665,success,
+DeepSeek Chat V3,budget,deepseek/deepseek-chat-v3,5000,4989,411,157669.2,31.64,0.004033,success,
+DeepSeek V3.2,budget,deepseek/deepseek-chat-v3.2,16,,,1224.8,,,error,"{""error"":{""message"":""deepseek/deepseek-chat-v3.2 is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V3.2,budget,deepseek/deepseek-chat-v3.2,500,,,71.9,,,error,"{""error"":{""message"":""deepseek/deepseek-chat-v3.2 is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V3.2,budget,deepseek/deepseek-chat-v3.2,1000,,,84.2,,,error,"{""error"":{""message"":""deepseek/deepseek-chat-v3.2 is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V3.2,budget,deepseek/deepseek-chat-v3.2,2000,,,93.1,,,error,"{""error"":{""message"":""deepseek/deepseek-chat-v3.2 is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V3.2,budget,deepseek/deepseek-chat-v3.2,5000,,,90.3,,,error,"{""error"":{""message"":""deepseek/deepseek-chat-v3.2 is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+Llama 3.3 70B,budget,meta-llama/llama-3.3-70b-instruct,16,16,399,1346.2,11.89,4.5e-05,success,
+Llama 3.3 70B,budget,meta-llama/llama-3.3-70b-instruct,500,500,399,28316.7,17.66,0.000198,success,
+Llama 3.3 70B,budget,meta-llama/llama-3.3-70b-instruct,1000,1000,399,59260.2,16.87,0.000356,success,
+Llama 3.3 70B,budget,meta-llama/llama-3.3-70b-instruct,2000,2000,399,104037.3,19.22,0.000673,success,
+Llama 3.3 70B,budget,meta-llama/llama-3.3-70b-instruct,5000,4239,399,231801.0,18.29,0.001382,success,
+Llama 4 Maverick,budget,meta-llama/llama-4-maverick-17b-128e,16,,,403.4,,,error,"{""error"":{""message"":""meta-llama/llama-4-maverick-17b-128e is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+Llama 4 Maverick,budget,meta-llama/llama-4-maverick-17b-128e,500,,,89.1,,,error,"{""error"":{""message"":""meta-llama/llama-4-maverick-17b-128e is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+Llama 4 Maverick,budget,meta-llama/llama-4-maverick-17b-128e,1000,,,95.2,,,error,"{""error"":{""message"":""meta-llama/llama-4-maverick-17b-128e is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+Llama 4 Maverick,budget,meta-llama/llama-4-maverick-17b-128e,2000,,,68.9,,,error,"{""error"":{""message"":""meta-llama/llama-4-maverick-17b-128e is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+Llama 4 Maverick,budget,meta-llama/llama-4-maverick-17b-128e,5000,,,102.1,,,error,"{""error"":{""message"":""meta-llama/llama-4-maverick-17b-128e is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+Codestral,budget,mistralai/codestral-2508,16,16,409,3206.7,4.99,0.000136,success,
+Codestral,budget,mistralai/codestral-2508,500,500,409,9598.3,52.09,0.000464,success,
+Codestral,budget,mistralai/codestral-2508,1000,1000,409,10728.1,93.21,0.00091,success,
+Codestral,budget,mistralai/codestral-2508,2000,2000,409,23226.4,86.11,0.001801,success,
+Codestral,budget,mistralai/codestral-2508,5000,5000,409,49625.7,100.75,0.004474,success,
+MiniMax M3,budget,minimax/minimax-m3,16,16,571,1333.3,12.0,0.000162,success,
+MiniMax M3,budget,minimax/minimax-m3,500,500,571,5548.3,90.12,0.000631,success,
+MiniMax M3,budget,minimax/minimax-m3,1000,1000,571,12211.6,81.89,0.001225,success,
+MiniMax M3,budget,minimax/minimax-m3,2000,2000,571,20741.5,96.42,0.002413,success,
+MiniMax M3,budget,minimax/minimax-m3,5000,5000,571,41949.4,119.19,0.005977,success,
+o4-mini,taskrunner,openai/o4-mini,16,0,0,2065.8,,7.2e-05,success,
+o4-mini,taskrunner,openai/o4-mini,500,448,397,8436.4,53.1,0.002384,success,
+o4-mini,taskrunner,openai/o4-mini,1000,960,397,11450.5,83.84,0.004614,success,
+o4-mini,taskrunner,openai/o4-mini,2000,2000,397,11451.9,174.64,0.009144,success,
+o4-mini,taskrunner,openai/o4-mini,5000,5000,397,29820.7,167.67,0.022212,success,
+o3-mini,taskrunner,openai/o3-mini,16,16,397,1048.2,15.26,0.000502,success,
+o3-mini,taskrunner,openai/o3-mini,500,948,397,9069.9,104.52,0.004562,success,
+o3-mini,taskrunner,openai/o3-mini,1000,1960,397,6904.6,283.87,0.00897,success,
+o3-mini,taskrunner,openai/o3-mini,2000,2960,397,8646.8,342.32,0.013326,success,
+o3-mini,taskrunner,openai/o3-mini,5000,6216,397,23195.7,267.98,0.027509,success,
+GPT-5.4 Mini,taskrunner,openai/gpt-5.4-mini,16,16,397,977.3,16.37,0.000366,success,
+GPT-5.4 Mini,taskrunner,openai/gpt-5.4-mini,500,500,397,5631.4,88.79,0.002522,success,
+GPT-5.4 Mini,taskrunner,openai/gpt-5.4-mini,1000,1000,397,6170.7,162.06,0.00475,success,
+GPT-5.4 Mini,taskrunner,openai/gpt-5.4-mini,2000,2000,397,11267.6,177.5,0.009205,success,
+GPT-5.4 Mini,taskrunner,openai/gpt-5.4-mini,5000,5000,397,26758.3,186.86,0.02257,success,
+Kimi K2.6,taskrunner,moonshotai/kimi-k2.6,16,16,395,4291.0,3.73,0.000312,success,
+Kimi K2.6,taskrunner,moonshotai/kimi-k2.6,500,500,395,11133.0,44.91,0.001946,success,
+Kimi K2.6,taskrunner,moonshotai/kimi-k2.6,1000,1000,395,21557.1,46.39,0.00344,success,
+Kimi K2.6,taskrunner,moonshotai/kimi-k2.6,2000,2000,395,73756.2,27.12,0.00701,success,
+Kimi K2.6,taskrunner,moonshotai/kimi-k2.6,5000,5000,395,162739.9,30.72,0.017138,success,
+Kimi K2.7 Code,taskrunner,moonshotai/kimi-k2.7-code,16,16,395,3185.6,5.02,0.000307,success,
+Kimi K2.7 Code,taskrunner,moonshotai/kimi-k2.7-code,500,500,395,11506.5,43.45,0.001798,success,
+Kimi K2.7 Code,taskrunner,moonshotai/kimi-k2.7-code,1000,1000,395,18790.5,53.22,0.00353,success,
+Kimi K2.7 Code,taskrunner,moonshotai/kimi-k2.7-code,2000,2000,395,46929.5,42.62,0.006995,success,
+Kimi K2.7 Code,taskrunner,moonshotai/kimi-k2.7-code,5000,5000,395,103489.9,48.31,0.01739,success,
+GLM 5.2,taskrunner,z-ai/glm-5.2,16,16,401,7710.4,2.08,0.000188,success,
+GLM 5.2,taskrunner,z-ai/glm-5.2,500,500,401,25483.5,19.62,0.00069,success,
+GLM 5.2,taskrunner,z-ai/glm-5.2,1000,1000,401,35154.4,28.45,0.001344,success,
+GLM 5.2,taskrunner,z-ai/glm-5.2,2000,2000,401,67937.3,29.44,0.00265,success,
+GLM 5.2,taskrunner,z-ai/glm-5.2,5000,5000,401,63468.3,78.78,0.006603,success,
+DeepSeek V4 Pro,taskrunner,deepseek/deepseek-v4-pro,16,16,411,1788.7,8.95,0.000191,success,
+DeepSeek V4 Pro,taskrunner,deepseek/deepseek-v4-pro,500,500,411,11571.8,43.21,0.000444,success,
+DeepSeek V4 Pro,taskrunner,deepseek/deepseek-v4-pro,1000,1000,411,18633.6,53.67,0.000874,success,
+DeepSeek V4 Pro,taskrunner,deepseek/deepseek-v4-pro,2000,2000,411,35597.8,56.18,0.001736,success,
+DeepSeek V4 Pro,taskrunner,deepseek/deepseek-v4-pro,5000,5000,411,91294.4,54.77,0.00432,success,
+DeepSeek V4 Pro Max,taskrunner,deepseek/deepseek-v4-pro-max,16,,,207.9,,,error,"{""error"":{""message"":""deepseek/deepseek-v4-pro-max is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Pro Max,taskrunner,deepseek/deepseek-v4-pro-max,500,,,92.6,,,error,"{""error"":{""message"":""deepseek/deepseek-v4-pro-max is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Pro Max,taskrunner,deepseek/deepseek-v4-pro-max,1000,,,86.8,,,error,"{""error"":{""message"":""deepseek/deepseek-v4-pro-max is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Pro Max,taskrunner,deepseek/deepseek-v4-pro-max,2000,,,119.8,,,error,"{""error"":{""message"":""deepseek/deepseek-v4-pro-max is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+DeepSeek V4 Pro Max,taskrunner,deepseek/deepseek-v4-pro-max,5000,,,88.2,,,error,"{""error"":{""message"":""deepseek/deepseek-v4-pro-max is not a valid model ID"",""code"":400},""user_id"":""user_3CSfMp3Jd7ZH8tn7jrO7VE4zBQR""}"
+Claude Haiku 4.5,taskrunner,anthropic/claude-haiku-4.5,16,16,440,1278.1,12.52,0.000515,success,
+Claude Haiku 4.5,taskrunner,anthropic/claude-haiku-4.5,500,500,440,3242.4,154.21,0.002911,success,
+Claude Haiku 4.5,taskrunner,anthropic/claude-haiku-4.5,1000,1000,440,5012.8,199.49,0.005386,success,
+Claude Haiku 4.5,taskrunner,anthropic/claude-haiku-4.5,2000,2000,440,9344.3,214.03,0.010336,success,
+Claude Haiku 4.5,taskrunner,anthropic/claude-haiku-4.5,5000,5000,440,22841.4,218.9,0.025186,success,

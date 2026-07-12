@@ -1,0 +1,8 @@
+name,tier,model_id,nitro,max_tokens,output_tokens,prompt_tokens,elapsed_ms,tokens_per_sec,cost,status,error
+DeepSeek V4 Flash,budget,deepseek/deepseek-v4-flash,yes,3350,3350,34,27222.1,123.06,0.000655,success,
+DeepSeek V4 Flash Max,budget,deepseek/deepseek-v4-flash,yes,3350,3350,113,20280.6,165.18,0.000944,success,
+DeepSeek V3.2,budget,deepseek/deepseek-v3.2,yes,3350,3350,34,23940.5,139.93,0.004992,success,
+Llama 4 Maverick,budget,meta-llama/llama-4-maverick,yes,3350,1256,39,9703.2,129.44,0.001257,success,
+DeepSeek V4 Pro Max,taskrunner,deepseek/deepseek-v4-pro,yes,3350,3350,114,28466.9,117.68,0.011738,success,
+GPT-5.3 Codex Spark,daily,openai/gpt-5.2-codex,yes,3350,3350,35,26257.0,127.59,0.046492,success,
+Perplexity Sonar,daily,perplexity/sonar,yes,3350,3189,29,15996.5,199.36,0.008138,success,

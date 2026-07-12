@@ -1,0 +1,51 @@
+name,tier,openrouter_id,is_max_variant
+MiMo-V2.5,free,xiaomi/mimo-v2.5,False
+Nemotron 3 Ultra Free,free,nvidia/nemotron-3-ultra-550b-a55b:free,False
+Jamba Large 1.7,free,ai21/jamba-large-1.7,False
+North Mini Code Free,free,cohere/north-mini-code:free,False
+DeepSeek V4 Flash,budget,deepseek/deepseek-v4-flash,False
+DeepSeek V4 Flash Max,budget,deepseek/deepseek-v4-flash,True
+GPT-5.4 Nano,budget,openai/gpt-5.4-nano,False
+GPT-5 Nano,budget,openai/gpt-5-nano,False
+Phi-4,budget,microsoft/phi-4,False
+DeepSeek Chat V3,budget,deepseek/deepseek-chat,False
+DeepSeek V3.2,budget,deepseek/deepseek-v3.2,False
+Llama 3.3 70B,budget,meta-llama/llama-3.3-70b-instruct,False
+Llama 4 Maverick,budget,meta-llama/llama-4-maverick,False
+Codestral,budget,mistralai/codestral-2508,False
+MiniMax M3,budget,minimax/minimax-m3,False
+Qwen3.7 Plus,budget,qwen/qwen3.7-plus,False
+o4-mini,taskrunner,openai/o4-mini,False
+o3-mini,taskrunner,openai/o3-mini,False
+GPT-5.4 Mini,taskrunner,openai/gpt-5.4-mini,False
+Kimi K2.6,taskrunner,moonshotai/kimi-k2.6,False
+Kimi K2.7 Code,taskrunner,moonshotai/kimi-k2.7-code,False
+GLM 5.2,taskrunner,z-ai/glm-5.2,False
+DeepSeek V4 Pro,taskrunner,deepseek/deepseek-v4-pro,False
+DeepSeek V4 Pro Max,taskrunner,deepseek/deepseek-v4-pro,True
+Claude Haiku 4.5,taskrunner,anthropic/claude-haiku-4.5,False
+Grok 4.5,taskrunner,x-ai/grok-4.5,False
+Grok Build 0.1,taskrunner,x-ai/grok-build-0.1,False
+Qwen3.7 Max,taskrunner,qwen/qwen3.7-max,False
+Perplexity Sonar Pro,taskrunner,perplexity/sonar-pro,False
+Perplexity Sonar Pro Search,taskrunner,perplexity/sonar-pro-search,False
+Amazon Nova Pro,taskrunner,amazon/nova-pro-v1,False
+Mistral Large 3,taskrunner,mistralai/mistral-large-2512,False
+Gemini 3 Flash,taskrunner,google/gemini-3-flash-preview,False
+Claude Sonnet 4.6,daily,anthropic/claude-sonnet-4.6,False
+Claude Sonnet 5,daily,anthropic/claude-sonnet-5,False
+GPT-5.4,daily,openai/gpt-5.4,False
+GPT-5.2,daily,openai/gpt-5.2,False
+GPT-5.3 Codex Spark,daily,openai/gpt-5.2-codex,False
+Gemini 3.5 Flash,daily,google/gemini-3.5-flash,False
+Gemini 3.1 Pro,daily,google/gemini-3.1-pro-preview-customtools,False
+Gemini 2.5 Pro,daily,google/gemini-2.5-pro,False
+Amazon Nova Premier,daily,amazon/nova-premier-v1,False
+Command A,daily,cohere/command-a,False
+Perplexity Sonar,daily,perplexity/sonar,False
+Claude Opus 4.6,complex,anthropic/claude-opus-4.6,False
+Claude Opus 4.7,complex,anthropic/claude-opus-4.7-fast,False
+Claude Opus 4.8,complex,anthropic/claude-opus-4.8-fast,False
+Claude Fable 5,complex,anthropic/claude-fable-5,False
+GPT-5.5,complex,openai/gpt-5.5,False
+GPT-5.5 Pro,complex,openai/gpt-5.5-pro,False
