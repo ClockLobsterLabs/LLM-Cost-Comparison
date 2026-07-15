@@ -81,6 +81,20 @@
     "latest_deepseek_flash_max": "deepseek-v4-flash-max",
     "top_3_per_tier": true
   },
+  "appraise_slots": {
+    "_doc": "Watch list for the Appraise-Model skill. active_stack = the models a newly-released model is always compared against (the user's daily drivers). watching = flagship-per-family models the user tracks but does not use; updated to point at the current slug when a new flagship drops. null = no model currently tracked in that slot. Edit here to change the comparison set — no skill-code change needed.",
+    "active_stack": [
+      "deepseek-v4-flash",
+      "deepseek-v4-flash-max",
+      "glm-5-2"
+    ],
+    "watching": {
+      "latest_opus": null,
+      "latest_sonnet": "claude-sonnet-5",
+      "latest_kimi_code": "kimi-k2-7-code",
+      "latest_m3": "minimax-m3"
+    }
+  },
   "models": {
     "deepseek-v4-flash": {
       "name": "DeepSeek V4 Flash",

@@ -1,6 +1,6 @@
 ---
 name: research/appraise-llm
-description: Appraise new and existing LLMs — research benchmarks, pricing, features, and produce comparison tables. Use when asked to appraise, evaluate, compare, review, or audit LLMs.
+description: Appraise new and existing LLMs — research benchmarks, pricing, features, produce comparison tables, benchmark a model's tokenizer/thinking-tokens/speed live, publish a News blog post, and commit/push the data. Use when asked to appraise, evaluate, compare, review, benchmark, or audit LLMs, or when a new model is released.
 type: skill
 container: opencode
 ---
@@ -177,20 +177,63 @@ When asked to appraise:
  8. **Strategy assessment** — for each tier, say whether any model beats the user's current pick. Use thinking-adjusted blend for reasoning models.
  9. **Update models.json** with verified findings
 
+## Per-Model Appraisal Pipeline
+
+**Trigger:** "Appraise model X" / "A new model just dropped" / "Benchmark <ModelName>." This is the **event-driven, single-model** flow — distinct from the market-wide Research Protocol above. One model in → one News post + one data commit + push out.
+
+The comparison set (the models the new model is measured *against*) is **not** re-measured. Their values are read from `models.json`. Only the new model is benchmarked live. This keeps each appraisal to ~$0.02–0.10 and a few minutes.
+
+### Steps
+
+1. **Identify** the model. Confirm the OpenRouter id (`GET https://openrouter.ai/api/v1/models`), family, canonical kebab-case slug, whether it supports `reasoning_effort` (xhigh), and current pricing. Derive the slug by lowercasing the display name and replacing non-alphanumerics with hyphens (e.g. "GLM 5.3" → `glm-5-3`, "DeepSeek V5 Flash" → `deepseek-v5-flash`). "Max" variants append `-max` and reuse the base model id with `reasoning_effort=xhigh`.
+
+2. **Measure live** → run the harness once:
+   ```
+   pwsh scripts/appraise-model.ps1 -ModelId "<or-id>" -ModelName "<Display>" -Family "<family>" -Slug "<slug>" [-Reasoning]
+   ```
+   This writes `data/appraise/<slug>-<YYYY-MM-DD>.csv` and prints three headline metrics: `tokenizer_efficiency` (the 60:40 code:prose blend), `thinking_token_ratio` (0 if non-reasoning), and `speed_tok_per_s` (the 1000-token setting). Pass `-Reasoning` only if the model exposes a reasoning effort control (DeepSeek Pro/Flash Max, o-series, R1, etc.).
+
+3. **Research SWE** — SWE-bench Verified + SWE-bench Pro from published leaderboards ([swebench.com](https://swebench.com), [artificialanalysis.ai](https://artificialanalysis.ai)). Each score is stored as `{ score, source, date }`. Use `null` if the model is untested — matches the existing `models.json` convention. There is no local SWE harness; these are externally-published, attributed, dated scores.
+
+4. **Update `models.json`** — add (or refresh) the model's entry under `models[<slug>]` with: identity fields (`name`, `family`, `version`, `tier`, `context_window`, `parameters`, `open_weights`, `license`), `zen_pricing` / `openrouter_pricing`, the three measured values, and the `benchmarks` block. Also bump the top-level `last_updated` changelog string. If this model is a new flagship for a watched family, update the corresponding `appraise_slots.watching` pointer (e.g. `latest_sonnet`, `latest_m3`).
+
+5. **Build the comparison table** — one row for the new model plus one row per model in `appraise_slots.active_stack` (your daily drivers) and `appraise_slots.watching` (flagships you track). Every value except the new model's measured ones is read from `models.json`. Columns match the **Appraisal Table Template** above: SWE-bench Pro, TB 2.1, Input/Output $/M, Blend 7:2:1, Blend w/ Think, AAII, Thinking Tax, "Beats your stack?". For the new model, compute both blend columns using its freshly-measured `thinking_token_ratio` and `tokenizer_efficiency`.
+
+6. **Write the News post** — create `clocklobster-site/blog/news/<YYYY-MM-DD>-<slug>/` containing `index.md` (source) and `index.html` (rendered standalone page). See `blog/news/_template/` for the exact chrome to clone (depth-3 page → assets at `../../../`). Header block convention (no YAML): `**Series:** News — Model Appraisal`, `**Published:** YYYY-MM-DD`, `**Dataset:** github.com/ClockLobsterLabs/LLM-Cost-Comparison`, `**Author:** <byline>`. Body: verdict up front, the comparison table (as `class="sortable"`), the measured numbers, cost analysis, and a clear recommendation. Then **append a card** to `clocklobster-site/blog/news/index.html` linking the new post.
+
+7. **Commit + push data repo** — `git add data/appraise/<slug>-<date>.csv models.json` (plus any SKILL.md/AGENTS.md changes) → `git commit -m "feat(data): appraise <ModelName> — tokenizer, thinking, speed, SWE"` → `git push origin main`.
+
+8. **Commit + push site repo** — in `clocklobster-site/`: `git add blog/news/` (new post + landing update) → `git commit -m "feat: add News post — <ModelName> appraisal"` → `git push origin main`. The site deploys via GitHub Pages on push to `main`.
+
+### Cross-repo layout
+
+Both repos live under `C:\Users\RDP\`, siblings:
+- This repo: `C:\Users\RDP\ClockLobsterLabs\LLM-Cost-Comparison` → `github.com/ClockLobsterLabs/LLM-Cost-Comparison`
+- The site: `C:\Users\RDP\clocklobster-site` → `github.com/victorsalmon/clocklobster-site`
+
+From this repo root the site is at `../../clocklobster-site` (one level up, across). The site's `AGENTS.md` documents the reverse path and mandates auto-commit/push to `main`; this repo's `AGENTS.md` does the same.
+
+### When to update the watch list
+
+`appraise_slots.watching` is data, not code. Update a slot whenever a new flagship drops in that family — e.g. when M4 supersedes M3, set `latest_m3` (rename the slot if the family name changes) to the new slug. `active_stack` changes only when the user's daily-driver stack changes. null means "no model currently tracked."
+
 ## Data Files
 
 | File | Purpose |
 |------|---------|
-| `models.json` | Canonical model database with pricing, benchmarks, features |
-| `SKILL.md` | This file — skill instructions |
+| `models.json` | Canonical model database with pricing, benchmarks, features, `appraise_slots` watch list |
+| `SKILL.md` | This file — skill instructions (market-wide research + per-model appraisal pipeline) |
+| `AGENTS.md` | Repo context + completion protocol (commit/push to main) for AI assistants |
 | `docs/tokenizer-efficiency-experiment.md` | Full experiment write-up: hypothesis, standardized conditions, method, results, discussion, proposed output/reasoning extension |
 | `data/experiment-session5-raw.csv` | Raw measurement data: 69 calls, per-call prompt_tokens, E values, status |
 | `data/experiment-session5-consolidated.csv` | Cleaned & corrected results for all 21 measurable models |
 | `data/experiment-session5-summary.csv` | Ranked E values with 60:40 and 33:33:33 blend scores |
+| `data/appraise/` | Per-model appraisal raw CSVs (one per model: `<slug>-<date>.csv`) — written by `scripts/appraise-model.ps1` |
 | `data/samples/code-sample.txt` | Canonical TypeScript code sample (306 words) |
 | `data/samples/prose-sample.txt` | Canonical prose sample (235 words) |
 | `data/samples/blended-sample.txt` | Canonical blended documentation sample (250 words) |
 | `experiment-runner.ps1` | Reusable measurement script — dot-sources `experiment-config.ps1` |
+| `scripts/appraise-model.ps1` | Per-model 3-in-1 appraisal harness (tokenizer E + thinking tokens + speed) |
 | `experiment-config.ps1` | Gitignored user config file (API key, optional overrides) |
 | `example-config.env` | Template file — copy to `experiment-config.ps1` and fill in |
 
