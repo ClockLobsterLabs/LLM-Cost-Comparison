@@ -190,22 +190,23 @@ Write-Host "  Models: $($Models.Count)  |  Rounds: $Rounds  |  Max tokens: $MaxT
 Write-Host "  Prompt: `"$Prompt`""
 Write-Host "  Output: $csvPath"
 if ($DryRun) { Write-Host "  MODE: DRY RUN — no API calls will be made" -ForegroundColor Cyan }
-if ($SingleRound) { Write-Host "  MODE: SINGLE ROUND — one measurement pass then exit" -ForegroundColor Cyan }
+if ($SingleRound) { Write-Host "  MODE: SINGLE ROUND — measure current hour (if needed) then exit" -ForegroundColor Cyan }
 Write-Host "================================================================"
 Write-Host ""
 
-# SingleRound overrides to 1 round + StartNow.
+# SingleRound: 1 round, StartNow, no inter-round sleep. External scheduler
+# handles the hourly cadence. If the current hour is already complete, exit.
 if ($SingleRound) { $Rounds = 1; $StartNow = $true }
 
 try {
     for ($round = 0; $round -lt $Rounds; $round++) {
 
-        # --- Calculate sleep until next hour boundary on first round only. ---
+        # --- Calculate sleep until next hour boundary (multi-round mode only). ---
         if ($round -eq 0 -and -not $DryRun -and -not $StartNow) {
             $now = Get-Date
             $nextHour = $now.AddHours(1).Date.AddHours($now.Hour + 1)
             $waitMs = ($nextHour - $now).TotalMilliseconds
-            if ($waitMs -gt 5000) {  # only sleep if >5s until the top of the hour
+            if ($waitMs -gt 5000) {
                 Write-Host "Waiting $([math]::Round($waitMs / 1000))s until next hour boundary ($($nextHour.ToString('HH:mm:ss'))) ..."
                 Start-Sleep -Milliseconds $waitMs
             }
