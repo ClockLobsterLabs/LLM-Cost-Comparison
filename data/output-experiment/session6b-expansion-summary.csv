@@ -1,0 +1,6 @@
+method,desc,count,avg_tokens,max_tokens,min_tokens,avg_words,total_cost,avg_cost
+smc,Structured Markdown Compression,272,253.2,4478,0,42.6,0.15891,0.0005842
+json-envelope,JSON Envelope,272,303.4,6623,0,47.2,0.16973,0.000624
+diff-only,Diff-Only Delta,272,191.9,3436,0,28.9,0.14464,0.0005318
+verb-noun,Verb-Noun Grammar,272,711.7,7812,0,34.7,0.2517,0.0009254
+word-deletion,Word Deletion / Extreme Concision,272,264.6,4096,3,26.4,0.18422,0.0006773
