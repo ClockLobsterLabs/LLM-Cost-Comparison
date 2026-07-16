@@ -29,7 +29,8 @@ param(
     [string]$Prompt = "Write the numbers from 1 to 200, comma-separated.",
     [string]$OutputDir = "$PSScriptRoot/../data/speed-timeseries",
     [switch]$DryRun,                                       # print plan without calling API
-    [switch]$StartNow                                       # skip initial wait; start measuring immediately
+    [switch]$StartNow,                                      # skip initial wait; start measuring immediately
+    [switch]$SingleRound                                    # run exactly 1 round and exit (for external scheduling)
 )
 
 # ---------------------------------------------------------------------------
@@ -189,8 +190,12 @@ Write-Host "  Models: $($Models.Count)  |  Rounds: $Rounds  |  Max tokens: $MaxT
 Write-Host "  Prompt: `"$Prompt`""
 Write-Host "  Output: $csvPath"
 if ($DryRun) { Write-Host "  MODE: DRY RUN — no API calls will be made" -ForegroundColor Cyan }
+if ($SingleRound) { Write-Host "  MODE: SINGLE ROUND — one measurement pass then exit" -ForegroundColor Cyan }
 Write-Host "================================================================"
 Write-Host ""
+
+# SingleRound overrides to 1 round + StartNow.
+if ($SingleRound) { $Rounds = 1; $StartNow = $true }
 
 try {
     for ($round = 0; $round -lt $Rounds; $round++) {
