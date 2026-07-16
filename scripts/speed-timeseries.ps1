@@ -125,6 +125,8 @@ if ($CheckDone) {
         exit 1
     }
 }
+
+if (-not (Test-Path $csvPath)) {
     # Write header to new file.
     $csvHeader | Set-Content -Path $csvPath -Encoding UTF8
 }
