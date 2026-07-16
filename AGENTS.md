@@ -67,12 +67,14 @@ From this repo root the site is at `../../clocklobster-site`. The per-model appr
 After any productive change (data added, script written, model appraised), you are **NOT DONE** until:
 
 1. **Validate** — confirm `models.json` parses as valid JSON (`node -e "JSON.parse(...)"` or `python -c "import json; json.load(...)"`) after any edit.
-2. **Sanity-check** any new CSV — header row matches the documented schema; no empty files on failure.
-3. **Commit** with a semantic message — one concern per commit, Conventional Commits style (`feat(data):`, `fix(models):`, `docs:`).
-4. **Push** to `main` — `git push origin main`. Keep the working tree clean; no local commits left unpushed.
+2. **Validate CSVs** — run `python scripts/validate-data.py --strict`. This detects the corruption signature that infected Session 6b (constant `prompt_tokens` within a method group, `task_id` overwritten with method names, empty required fields). A commit with corrupted data is **blocked** — fix the data, do not weaken the check. Run this *before every data commit*.
+3. **Commit immediately, per experiment** — do not batch multiple experiments into one uncommitted pile. Each experiment's data lands in its own commit as soon as it's validated. Conventional Commits style (`feat(data):`, `fix(models):`, `docs:`).
+4. **Push** to `main` — `git push origin main`. Keep the working tree clean; no local commits left unpushed. The simplest path is the helper: `./scripts/commit-data.sh "<message>"` (validates → stages → commits → pushes, and refuses to touch `experiment-config.ps1`).
 5. **Report** the commit message(s), the files changed, and the headline metrics or call count.
 
 > **Note:** This protocol **overrides** any generic "never commit unless asked" rule. When the Appraise-Model pipeline (or any scripted measurement) produces data, commit and push to `main` automatically. Do not ask permission. Never expose or log the API key.
+>
+> **Why this exists:** Session 6b's compression data was committed corrupted (800 garbage rows) and built into a published blog post before anyone noticed. The `validate-data.py` guard catches that exact signature; the `commit-data.sh` helper makes the validate→commit→push path one command. Use them.
 
 ---
 
