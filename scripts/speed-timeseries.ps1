@@ -30,7 +30,8 @@ param(
     [string]$OutputDir = "$PSScriptRoot/../data/speed-timeseries",
     [switch]$DryRun,                                       # print plan without calling API
     [switch]$StartNow,                                      # skip initial wait; start measuring immediately
-    [switch]$SingleRound                                    # run exactly 1 round and exit (for external scheduling)
+    [switch]$SingleRound,                                   # run exactly 1 round and exit (for external scheduling)
+    [switch]$CheckDone                                      # exit 0 if 24 distinct hours collected, exit 1 otherwise
 )
 
 # ---------------------------------------------------------------------------
@@ -106,6 +107,24 @@ if (Test-Path $csvPath) {
     $skipCount = $existing.Count
     Write-Host "  Found $skipCount existing rows — will skip completed pairs"
 } else {
+    # Write header to new file.
+    $csvHeader | Set-Content -Path $csvPath -Encoding UTF8
+}
+
+# ---------------------------------------------------------------------------
+# CheckDone mode — exit 0 if we have 24 distinct hours, exit 1 otherwise.
+# ---------------------------------------------------------------------------
+if ($CheckDone) {
+    $hours = $completed.Keys | ForEach-Object { $_.Split('|')[0] } | Sort-Object -Unique
+    $hourCount = $hours.Count
+    if ($hourCount -ge 24) {
+        Write-Host "COMPLETE: $hourCount distinct hours collected"
+        exit 0
+    } else {
+        Write-Host "INCOMPLETE: $hourCount / 24 hours collected"
+        exit 1
+    }
+}
     # Write header to new file.
     $csvHeader | Set-Content -Path $csvPath -Encoding UTF8
 }
@@ -221,10 +240,17 @@ try {
         }
 
         $roundStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
-        $measureTime = Get-Date
-        $hourPst = $measureTime.ToString("HH")
-        $hourUtc = $measureTime.ToUniversalTime().ToString("HH")
-        $measuredAt = $measureTime.ToString("yyyy-MM-dd HH:mm:ss")
+        $measureTimeUtc = [DateTime]::UtcNow
+        try {
+            $pstZone = [System.TimeZoneInfo]::FindSystemTimeZoneById("America/Los_Angeles")
+            $measureTimePst = [System.TimeZoneInfo]::ConvertTimeFromUtc($measureTimeUtc, $pstZone)
+        } catch {
+            # Fallback if tzdata is missing: PDT = UTC-7, PST = UTC-8
+            $measureTimePst = $measureTimeUtc.AddHours(-7)
+        }
+        $hourPst = $measureTimePst.ToString("HH")
+        $hourUtc = $measureTimeUtc.ToString("HH")
+        $measuredAt = $measureTimeUtc.ToString("yyyy-MM-dd HH:mm:ss")
 
         Write-Host ""
         Write-Host "--- Round $($round + 1)/$Rounds  |  PST=$hourPst  UTC=$hourUtc  |  $measuredAt ---" -ForegroundColor Cyan
