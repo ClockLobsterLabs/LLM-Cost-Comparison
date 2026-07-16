@@ -28,7 +28,8 @@ param(
     [int]$MaxTokens = 3300,                               # max_tokens per API call
     [string]$Prompt = "Write the numbers from 1 to 200, comma-separated.",
     [string]$OutputDir = "$PSScriptRoot/../data/speed-timeseries",
-    [switch]$DryRun                                        # print plan without calling API
+    [switch]$DryRun,                                       # print plan without calling API
+    [switch]$StartNow                                       # skip initial wait; start measuring immediately
 )
 
 # ---------------------------------------------------------------------------
@@ -118,11 +119,11 @@ $headers = @{
 }
 
 function Invoke-SpeedCall {
-    param([string]$ModelId, [string]$MessagesJson)
+    param([string]$ModelId)
 
     $body = @{
         model       = $ModelId
-        messages    = (@{ role = "user"; content = $Prompt } | ConvertTo-Json -Compress)
+        messages    = @(@{ role = "user"; content = $Prompt })
         max_tokens  = $MaxTokens
         temperature = 0
     } | ConvertTo-Json -Compress -Depth 5
@@ -195,7 +196,7 @@ try {
     for ($round = 0; $round -lt $Rounds; $round++) {
 
         # --- Calculate sleep until next hour boundary on first round only. ---
-        if ($round -eq 0 -and -not $DryRun) {
+        if ($round -eq 0 -and -not $DryRun -and -not $StartNow) {
             $now = Get-Date
             $nextHour = $now.AddHours(1).Date.AddHours($now.Hour + 1)
             $waitMs = ($nextHour - $now).TotalMilliseconds
