@@ -1,6 +1,6 @@
 # LLM Cost Comparison
 
-A reproducible, testable benchmark pipeline for measuring LLM tokenizer efficiency, output verbosity, compression, speed, and cost.
+A reproducible, testable benchmark pipeline for measuring LLM tokenizer efficiency, output verbosity, compression, speed, cost, and reasoning-token behavior.
 
 ## Quick start
 
@@ -15,14 +15,26 @@ cp .env.example .env
 # See available commands
 uv run llmcc --help
 
-# Validate existing data
-uv run llmcc validate
+# Run the test suite
+uv run pytest
 
-# Run an experiment
+# Validate an existing CSV for the Session 6b corruption signature
+uv run llmcc validate data/experiment-session5-consolidated.csv
+
+# Run an experiment (omit --dry-run to call OpenRouter)
 uv run llmcc run tokenizer-efficiency --dry-run
 
-# Export the site-facing benchmark artifact
-uv run llmcc export
+# Appraise a single model
+uv run llmcc appraise deepseek-v4-flash
+
+# Export measurements to CSV
+uv run llmcc export out.csv --experiment-id tokenizer-efficiency
+
+# Export site-facing benchmark artifact
+uv run llmcc export benchmarks.json --experiment-id tokenizer-efficiency --format json
+
+# Migrate a legacy Session 5 CSV into the database
+uv run llmcc migrate-legacy data/experiment-session5-consolidated.csv session-5
 ```
 
 ## Development
@@ -34,15 +46,17 @@ uv run pytest
 # Lint and typecheck
 uv run ruff check .
 uv run mypy src
+
+# Run the CLI in dry-run mode
+uv run llmcc run tokenizer-efficiency --dry-run
 ```
 
 ## Project layout
 
-- `catalogs/` — YAML source of truth for models, tasks, samples, compression methods, and experiments.
-- `src/llm_cost_comparison/` — Python package: CLI, experiments, storage, validation.
-- `tests/` — pytest suite with mocked API clients.
-- `data/raw/` — generated SQLite database and raw exports (gitignored).
-- `data/processed/` — generated CSV/Parquet summaries.
-- `data/site/` — generated `benchmarks.json` consumed by the website.
+- `catalogs/` - YAML source of truth for models, tasks, samples, compression methods, experiments, tiers, and pricing sources.
+- `src/llm_cost_comparison/` - Python package: CLI (`cli`), domain models (`core`), experiment harness (`experiments`), OpenRouter client (`clients`), calculations (`calculations`), storage (`storage`), validation (`validation`), and exporters (`exporters`).
+- `tests/` - pytest suite with mocked API clients and in-memory SQLite databases.
+- `data/llm_cost_comparison.db` - generated SQLite database (gitignored).
+- `data/` - legacy CSVs and new exports.
 
-See `ARCHITECTURE.md` (after Phase 7) for the full design.
+See `ARCHITECTURE.md` for the design overview and migration notes.

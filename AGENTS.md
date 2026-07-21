@@ -84,4 +84,17 @@ After any productive change (data added, script written, model appraised), you a
 
 ---
 
+## New Python CLI (v2.0.0)
+
+The repo is being refactored into a `uv`-managed Python package:
+
+- Install / sync: `uv sync --all-extras`
+- Test: `uv run pytest`
+- Lint / typecheck: `uv run ruff check .` and `uv run mypy src`
+- CLI entry point: `uv run llmcc --help`
+- Experiment definitions live in `catalogs/`.
+- Results are persisted to the SQLite database configured by `LLMCC_DATABASE_URL`.
+
+These commands take precedence for code changes. The legacy `scripts/` PowerShell workflow is still used for the live measurement pipeline until the migration is complete.
+
 *Updated whenever project structure, conventions, or context change significantly.*

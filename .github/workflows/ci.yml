@@ -35,6 +35,11 @@ jobs:
       - name: Test
         run: uv run pytest
 
+      - name: CLI sanity
+        run: |
+          uv run llmcc --help
+          uv run llmcc run tokenizer-efficiency --dry-run
+
       - name: Upload coverage
         uses: actions/upload-artifact@v4
         with:
