@@ -285,3 +285,51 @@ class Catalog(BaseModel):
         if refs == ["all"]:
             return self.methods
         return [self.get_method(ref) for ref in refs]
+
+
+class Message(BaseModel):
+    """A chat message sent to an LLM API."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    role: str
+    content: str
+
+
+class ChatRequest(BaseModel):
+    """Request payload for a single chat completion."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    model_id: str
+    messages: list[Message]
+    max_tokens: int
+    temperature: float = 0.0
+    reasoning_effort: str | None = None
+
+    def to_api_body(self) -> dict[str, object]:
+        """Build the JSON body expected by OpenAI-compatible endpoints."""
+        body: dict[str, object] = {
+            "model": self.model_id,
+            "messages": [m.model_dump() for m in self.messages],
+            "max_tokens": self.max_tokens,
+            "temperature": self.temperature,
+        }
+        if self.reasoning_effort is not None:
+            body["reasoning_effort"] = self.reasoning_effort
+        return body
+
+
+class ChatResponse(BaseModel):
+    """Response data returned from a chat completion."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    model_id: str
+    content: str
+    prompt_tokens: int
+    completion_tokens: int
+    reasoning_tokens: int | None = None
+    total_tokens: int | None = None
+    elapsed_ms: int
+    cost: Decimal | None = None
