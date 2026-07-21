@@ -48,3 +48,7 @@ class TimeoutError(APIError):
 
 class ValidationError(LLMCCError):
     """Raised when data fails a validation check."""
+
+
+class StorageError(LLMCCError):
+    """Raised when a database operation fails."""

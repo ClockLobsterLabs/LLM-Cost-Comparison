@@ -9,6 +9,7 @@ from llm_cost_comparison.core.exceptions import (
     LLMCCError,
     ModelNotFoundError,
     RateLimitError,
+    StorageError,
     TimeoutError,
     ValidationError,
 )
@@ -45,6 +46,7 @@ __all__ = [
     "RateLimitError",
     "Sample",
     "Settings",
+    "StorageError",
     "Task",
     "Tier",
     "TimeoutError",
