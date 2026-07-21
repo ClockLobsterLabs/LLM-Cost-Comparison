@@ -14,6 +14,7 @@ from llm_cost_comparison.core.config import Settings
 from llm_cost_comparison.core.models import ExperimentConfig, ExperimentParams
 from llm_cost_comparison.experiments import create_runner
 from llm_cost_comparison.exporters.csv import CSVExporter
+from llm_cost_comparison.exporters.json import BenchmarkExporter
 from llm_cost_comparison.storage.models import ExperimentRun, Measurement
 from llm_cost_comparison.storage.repository import MeasurementRepository
 from llm_cost_comparison.storage.session import get_engine, init_db
@@ -142,10 +143,13 @@ def export(
     database_url: str | None = typer.Option(None, "--db"),
     run_id: int | None = typer.Option(None, "--run-id"),
     experiment_id: str | None = typer.Option(None, "--experiment-id"),
+    fmt: str = typer.Option("csv", "--format"),
 ) -> None:
-    """Export measurements for a run or experiment to CSV."""
+    """Export measurements for a run or experiment to CSV or JSON."""
     if run_id is None and experiment_id is None:
         raise typer.BadParameter("Provide either --run-id or --experiment-id.")
+    if fmt not in {"csv", "json"}:
+        raise typer.BadParameter("--format must be 'csv' or 'json'.")
 
     settings = _settings(database_url)
     repository = MeasurementRepository(get_engine(settings=settings))
@@ -153,7 +157,10 @@ def export(
         run_id=run_id,
         experiment_id=experiment_id,
     )
-    CSVExporter(measurements).to_path(output)
+    if fmt == "json":
+        BenchmarkExporter(measurements).to_path(output)
+    else:
+        CSVExporter(measurements).to_path(output)
     typer.echo(f"Exported {len(measurements)} rows to {output}.")
 
 
