@@ -189,9 +189,9 @@ The comparison set (the models the new model is measured *against*) is **not** r
 
 2. **Measure live** → run the harness once:
    ```
-   pwsh scripts/appraise-model.ps1 -ModelId "<or-id>" -ModelName "<Display>" -Family "<family>" -Slug "<slug>" [-Reasoning]
+   uv run llmcc appraise <slug>
    ```
-   This writes `data/appraise/<slug>-<YYYY-MM-DD>.csv` and prints three headline metrics: `tokenizer_efficiency` (the 60:40 code:prose blend), `thinking_token_ratio` (0 if non-reasoning), and `speed_tok_per_s` (the 1000-token setting). Pass `-Reasoning` only if the model exposes a reasoning effort control (DeepSeek Pro/Flash Max, o-series, R1, etc.).
+   This writes `data/appraise/<slug>-<YYYY-MM-DD>.csv` and prints three headline metrics: `tokenizer_efficiency` (the 60:40 code:prose blend), `thinking_token_ratio` (0 if non-reasoning), and `speed_tok_per_s` (the 1000-token setting). The `appraisal` experiment runs tokenizer samples, a speed check, and a reasoning check for the requested model slug; reasoning-token output is captured when the model exposes a reasoning effort control (DeepSeek Pro/Flash Max, o-series, R1, etc.).
 
 3. **Research SWE** — SWE-bench Verified + SWE-bench Pro from published leaderboards ([swebench.com](https://swebench.com), [artificialanalysis.ai](https://artificialanalysis.ai)). Each score is stored as `{ score, source, date }`. Use `null` if the model is untested — matches the existing `models.json` convention. There is no local SWE harness; these are externally-published, attributed, dated scores.
 
@@ -228,14 +228,12 @@ From this repo root the site is at `../../clocklobster-site` (one level up, acro
 | `data/experiment-session5-raw.csv` | Raw measurement data: 69 calls, per-call prompt_tokens, E values, status |
 | `data/experiment-session5-consolidated.csv` | Cleaned & corrected results for all 21 measurable models |
 | `data/experiment-session5-summary.csv` | Ranked E values with 60:40 and 33:33:33 blend scores |
-| `data/appraise/` | Per-model appraisal raw CSVs (one per model: `<slug>-<date>.csv`) — written by `scripts/appraise-model.ps1` |
+| `data/appraise/` | Per-model appraisal raw CSVs (one per model: `<slug>-<date>.csv`) — written by `uv run llmcc appraise <slug>` |
 | `data/samples/code-sample.txt` | Canonical TypeScript code sample (306 words) |
 | `data/samples/prose-sample.txt` | Canonical prose sample (235 words) |
 | `data/samples/blended-sample.txt` | Canonical blended documentation sample (250 words) |
-| `experiment-runner.ps1` | Reusable measurement script — dot-sources `experiment-config.ps1` |
-| `scripts/appraise-model.ps1` | Per-model 3-in-1 appraisal harness (tokenizer E + thinking tokens + speed) |
-| `experiment-config.ps1` | Gitignored user config file (API key, optional overrides) |
-| `example-config.env` | Template file — copy to `experiment-config.ps1` and fill in |
+| `llmcc` | Python CLI entry point (`uv run llmcc --help`) |
+| `.env` | Gitignored user config file (OpenRouter API key) — copy from `.env.example` |
 
 ## Pricing Methodology
 

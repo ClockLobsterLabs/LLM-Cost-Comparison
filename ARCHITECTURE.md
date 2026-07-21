@@ -51,6 +51,6 @@ Three SQLModel tables:
 - `llmcc export <path> --run-id/--experiment-id [--format csv|json]` - export measurements.
 - `llmcc migrate-legacy <csv> <experiment-id>` - import legacy Session 5/6 CSV rows.
 
-## Legacy scripts
+## Legacy migration
 
-The `scripts/` directory still contains the original PowerShell measurement and enrichment scripts. They are preserved while the new Python CLI is validated against them, and will be removed once all workflows are fully migrated.
+The original PowerShell measurement and enrichment scripts have been removed. The Python CLI (`llmcc`) now covers tokenizer efficiency, output verbosity, compression, speed, and per-model appraisal. The remaining `scripts/` helpers are `validate-data.py` (used by `commit-data.sh`) and `commit-data.sh` itself for the data-commit protocol.

@@ -2,6 +2,7 @@
 
 
 import pytest
+import respx
 from typer.testing import CliRunner
 
 from llm_cost_comparison.cli.main import app
@@ -90,3 +91,40 @@ def test_migrate_legacy(tmp_path: pytest.TempPathFactory, monkeypatch: pytest.Mo
     assert len(rows) == 1
     assert rows[0].model_slug == "ai21/jamba-large-1.7"
     assert rows[0].prompt_tokens == 287
+
+
+def test_appraise_writes_csv(
+    tmp_path: pytest.TempPathFactory,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """appraise runs the full pipeline and writes a CSV file."""
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test-key")
+    db = tmp_path / "db.sqlite"
+    output = tmp_path / "deepseek-v4-flash-2026-07-21.csv"
+    payload = {
+        "model": "deepseek/deepseek-v4-flash",
+        "choices": [{"message": {"role": "assistant", "content": "hello"}}],
+        "usage": {
+            "prompt_tokens": 100,
+            "completion_tokens": 5,
+            "total_tokens": 105,
+        },
+    }
+
+    with respx.mock:
+        respx.post("https://openrouter.ai/api/v1/chat/completions").respond(
+            200, json=payload
+        )
+        result = runner.invoke(
+            app,
+            [
+                "appraise",
+                "deepseek-v4-flash",
+                f"--db=sqlite:///{db}",
+                f"--output={output}",
+            ],
+        )
+
+    assert result.exit_code == 0, result.stdout
+    assert output.exists()
+    assert output.read_text(encoding="utf-8").startswith("experiment_id,")

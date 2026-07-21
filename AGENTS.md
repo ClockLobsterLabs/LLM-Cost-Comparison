@@ -18,11 +18,12 @@ The benchmark **data + scripts backend** for Clock Lobster Labs. Tokenizer effic
 
 ## Tech stack
 
-- **PowerShell** scripts (`.ps1`) that call the **OpenRouter** OpenAI-compatible endpoint (`https://openrouter.ai/api/v1/chat/completions`). Every script dot-sources `experiment-config.ps1` for `$script:OPENROUTER_API_KEY`.
-- **CSV** data (raw measurements + derived summaries).
-- **JSON** (`models.json`) as the canonical, hand-edited model database.
+- **Python 3.12+** package managed by `uv` (`pyproject.toml`).
+- **Typer CLI** (`llmcc`) that calls the **OpenRouter** OpenAI-compatible endpoint (`https://openrouter.ai/api/v1/chat/completions`).
+- **SQLModel/SQLite** for measurement storage.
+- **CSV** data (raw measurements + derived summaries) and **JSON** (`models.json`) as the canonical, hand-edited model database.
 
-No build step, no package manager, no test runner. Validation = running the measurement scripts and checking the output CSVs.
+Install / sync: `uv sync --all-extras`.
 
 ---
 
@@ -32,18 +33,18 @@ No build step, no package manager, no test runner. Validation = running the meas
 |------|---------|
 | `models.json` | Canonical model DB keyed by kebab slug. Never commit with invalid JSON. |
 | `SKILL.md` | The `research/appraise-llm` skill instructions. |
-| `experiment-runner.ps1` | Reusable measurement harness (Session 5 tokenizer / Session 6 verbosity). |
-| `experiment-config.ps1` | **Gitignored.** Holds `$script:OPENROUTER_API_KEY`. Template: `example-config.env`. |
-| `scripts/` | All measurement, enrichment, and update scripts. |
-| `scripts/appraise-model.ps1` | Per-model appraisal harness (tokenizer E + thinking tokens + speed). |
+| `.env` | **Gitignored.** Holds `OPENROUTER_API_KEY`. Copy from `.env.example`. |
+| `llmcc` | CLI entry point (`uv run llmcc --help`). |
+| `catalogs/` | YAML source of truth for models, tasks, samples, methods, experiments, tiers. |
+| `scripts/` | Python validation + commit helpers (`validate-data.py`, `commit-data.sh`). |
 | `data/appraise/` | Per-model appraisal raw CSVs (`<slug>-<date>.csv`). |
 | `data/`, `data/output-experiment/` | Batch session CSVs (Session 5 / 6 / 6b). |
 
 ### Data append convention
 
-- **Raw measurements** → `Export-Csv -Append` into a single raw file per session, OR (for gap-fills) a separate new file so originals stay untouched until merge.
-- **Cost enrichment** → in-place rewrite adding a `cost` column (`scripts/enrich-costs.ps1` formula: `prompt_tokens×prompt_price + completion_tokens×completion_price`).
-- **`models.json`** → updated by dedicated `update-models-*.ps1` scripts; the canonical landing zone for benchmark data.
+- **Raw measurements** → append to SQLite via `llmcc run <experiment>` then export CSV, OR write to a new file so originals stay untouched until merge.
+- **Cost enrichment** → computed automatically during experiments using catalog pricing (`prompt_tokens×input_price + completion_tokens×output_price`).
+- **`models.json`** → updated manually after experiments; the canonical landing zone for benchmark data.
 
 ### Git commit style
 
@@ -67,7 +68,7 @@ From this repo root the site is at `../../clocklobster-site`. The per-model appr
 After any productive change (data added, script written, model appraised), you are **NOT DONE** until:
 
 1. **Validate** — confirm `models.json` parses as valid JSON (`node -e "JSON.parse(...)"` or `python -c "import json; json.load(...)"`) after any edit.
-2. **Validate CSVs** — run `python scripts/validate-data.py --strict`. This detects the corruption signature that infected Session 6b (constant `prompt_tokens` within a method group, `task_id` overwritten with method names, empty required fields). A commit with corrupted data is **blocked** — fix the data, do not weaken the check. Run this *before every data commit*.
+2. **Validate CSVs** — run `uv run llmcc validate <csv>` (or `python scripts/validate-data.py --strict` for all `data/` CSVs). This detects the corruption signature that infected Session 6b (constant `prompt_tokens` within a method group, `task_id` overwritten with method names, empty required fields). A commit with corrupted data is **blocked** — fix the data, do not weaken the check. Run this *before every data commit*.
 3. **Commit immediately, per experiment** — do not batch multiple experiments into one uncommitted pile. Each experiment's data lands in its own commit as soon as it's validated. Conventional Commits style (`feat(data):`, `fix(models):`, `docs:`).
 4. **Push** to `main` — `git push origin main`. Keep the working tree clean; no local commits left unpushed. The simplest path is the helper: `./scripts/commit-data.sh "<message>"` (validates → stages → commits → pushes, and refuses to touch `experiment-config.ps1`).
 5. **Report** the commit message(s), the files changed, and the headline metrics or call count.
@@ -80,13 +81,13 @@ After any productive change (data added, script written, model appraised), you a
 
 ## Security note
 
-`experiment-config.ps1` is gitignored and must never be committed. If a real API key is ever found committed in history, rotate it immediately and purge from history. Never print the key to logs or commit messages.
+`.env` is gitignored and must never be committed. If a real API key is ever found committed in history, rotate it immediately and purge from history. Never print the key to logs or commit messages. The legacy `experiment-config.ps1` file is no longer used; migrate its value to `.env`.
 
 ---
 
-## New Python CLI (v2.0.0)
+## Python CLI (v2.0.0)
 
-The repo is being refactored into a `uv`-managed Python package:
+The repo is a `uv`-managed Python package:
 
 - Install / sync: `uv sync --all-extras`
 - Test: `uv run pytest`
@@ -95,6 +96,6 @@ The repo is being refactored into a `uv`-managed Python package:
 - Experiment definitions live in `catalogs/`.
 - Results are persisted to the SQLite database configured by `LLMCC_DATABASE_URL`.
 
-These commands take precedence for code changes. The legacy `scripts/` PowerShell workflow is still used for the live measurement pipeline until the migration is complete.
+Legacy PowerShell measurement scripts have been removed; use `llmcc` for all new measurements.
 
 *Updated whenever project structure, conventions, or context change significantly.*

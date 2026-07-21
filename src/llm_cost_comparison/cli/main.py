@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -77,6 +78,7 @@ def appraise(
     model_slug: str,
     catalog_path: Path = typer.Option("catalogs", "--catalog", "-c"),
     database_url: str | None = typer.Option(None, "--db"),
+    output: Path | None = typer.Option(None, "--output", "-o"),
 ) -> None:
     """Run the per-model appraisal pipeline for a single model."""
     settings = _settings(database_url)
@@ -96,7 +98,15 @@ def appraise(
     try:
         runner = create_runner(custom_catalog, client, repository)
         run_record = runner.run_experiment(config.id)
-        typer.echo(f"Appraisal run {run_record.id} finished with status '{run_record.status}'.")
+        measurements = repository.get_measurements(run_id=run_record.id)
+        csv_path = output or Path(
+            f"data/appraise/{model_slug}-{datetime.now(UTC).strftime('%Y-%m-%d')}.csv"
+        )
+        CSVExporter(measurements).to_path(csv_path)
+        typer.echo(
+            f"Appraisal run {run_record.id} finished with status '{run_record.status}'. "
+            f"Wrote {len(measurements)} rows to {csv_path}."
+        )
     finally:
         client.close()
 
