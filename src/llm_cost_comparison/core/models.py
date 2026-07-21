@@ -248,11 +248,15 @@ class Catalog(BaseModel):
 
     def get_experiment(self, experiment_id: str) -> ExperimentConfig:
         """Look up an experiment by ID."""
-        if experiment_id not in self._experiment_lookup:
+        experiment = next(
+            (e for e in self.experiments if e.id == experiment_id),
+            None,
+        )
+        if experiment is None:
             from llm_cost_comparison.core.exceptions import CatalogError
 
             raise CatalogError(f"Experiment '{experiment_id}' not found in catalog")
-        return self._experiment_lookup[experiment_id]
+        return experiment
 
     def get_tier(self, tier_slug: str) -> Tier:
         """Look up a tier by slug."""
