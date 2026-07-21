@@ -1,0 +1,60 @@
+experiments:
+  - id: tokenizer-efficiency
+    type: tokenizer_efficiency
+    description: Measure tokens per word for code, prose, and blended samples.
+    sample_refs:
+      - all
+    model_refs:
+      - all
+    params:
+      max_tokens: 20
+      temperature: 0.0
+      sleep_ms: 200
+
+  - id: output-verbosity
+    type: output_verbosity
+    description: Measure how many tokens each model uses for 16 fixed tasks.
+    task_refs:
+      - all
+    model_refs:
+      - all
+    params:
+      max_tokens: 1500
+      fallback_tokens: 4096
+      temperature: 0.0
+      sleep_ms: 150
+
+  - id: compression
+    type: compression
+    description: Test five output-compression methods across 16 tasks.
+    task_refs:
+      - all
+    method_refs:
+      - all
+    model_refs:
+      - all
+    params:
+      max_tokens: 4096
+      temperature: 0.0
+      sleep_ms: 150
+
+  - id: speed
+    type: speed
+    description: Measure tokens per second every hour for a fixed set of models.
+    model_refs:
+      - all
+    params:
+      prompt: "Write the numbers from 1 to 200, comma-separated."
+      max_tokens: 3300
+      temperature: 0.0
+      sleep_ms: 200
+
+  - id: appraisal
+    type: appraisal
+    description: Single-model harness for tokenizer E, speed, and reasoning tokens.
+    sample_refs:
+      - all
+    params:
+      max_tokens: 20
+      temperature: 0.0
+      sleep_ms: 200

@@ -1,0 +1,11 @@
+pricing_sources:
+  primary:
+    name: OpenCode Zen
+    docs: https://opencode.ai/zen
+    type: PAYG via $20 top-up, auto-reload at $5
+    markup: Zero — passes through provider cost + processing fee
+  secondary:
+    name: OpenRouter
+    docs: https://openrouter.ai/models
+    type: PAYG
+    markup: 5.5% platform fee

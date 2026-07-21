@@ -1,0 +1,10 @@
+appraise_slots:
+  active_stack:
+    - deepseek-v4-flash
+    - deepseek-v4-flash-max
+    - glm-5-2
+  watching:
+    latest_opus: null
+    latest_sonnet: claude-sonnet-5
+    latest_kimi_code: kimi-k2-7-code
+    latest_m3: minimax-m3

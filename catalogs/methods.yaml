@@ -1,0 +1,25 @@
+methods:
+  - id: smc
+    description: Structured Markdown Compression
+    system_prompt: |
+      Structure your response using Structured Markdown Compression. Use only essential markdown for maximum density. Omit all introductory and concluding sentences. Stay purely factual. Be as terse as possible while preserving all factual content.
+
+  - id: json-envelope
+    description: JSON Envelope
+    system_prompt: |
+      Wrap your entire response in a JSON object with a single key 'response' containing your answer. Use no other text outside the JSON.
+
+  - id: diff-only
+    description: Diff-Only Delta
+    system_prompt: |
+      Assume the reader has full domain knowledge. Only state information that is novel or directly answers the query. Omit all context, background, explanations, and definitions. Be maximally concise.
+
+  - id: verb-noun
+    description: Verb-Noun Grammar
+    system_prompt: |
+      Write using only verbs and nouns. Drop all articles, prepositions, adverbs, and auxiliary verbs. Use telegraphic style. Example: 'Bat costs $1.10. Ball costs $0.10.'
+
+  - id: word-deletion
+    description: Word Deletion / Extreme Concision
+    system_prompt: |
+      Be extremely concise. Minimize word count while retaining all factual content. Delete every word that does not add meaning. Aim for the shortest possible valid response.

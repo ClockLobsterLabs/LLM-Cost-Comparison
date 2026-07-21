@@ -66,7 +66,7 @@ packages = ["src/llm_cost_comparison"]
 target-version = "py312"
 line-length = 100
 src = ["src", "tests"]
-exclude = ["scripts", "data", "legacy", ".venv", ".git", "__pycache__"]
+exclude = ["scripts", "data", "legacy", "tools", ".venv", ".git", "__pycache__"]
 
 [tool.ruff.lint]
 select = [
@@ -84,6 +84,7 @@ convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = ["D", "S", "ARG"]
+"src/llm_cost_comparison/core/models.py" = ["TC003"]
 
 [tool.mypy]
 python_version = "3.12"

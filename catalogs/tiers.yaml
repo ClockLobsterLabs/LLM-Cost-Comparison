@@ -1,0 +1,52 @@
+tiers:
+  - slug: complex
+    label: Complex
+    output_price_min: 18
+    role: Hardest problems — architecture, audits, planning from scratch
+    top_pick: claude-fable-5
+    top_3:
+      - claude-fable-5
+      - gpt-5-5
+      - claude-opus-4-8
+
+  - slug: daily
+    label: Daily
+    output_price_min: 8
+    output_price_max: 17.99
+    role: Strong daily driver — general coding, reasoning
+    top_pick: claude-sonnet-5
+    top_3:
+      - claude-sonnet-5
+      - gpt-5-4
+      - gemini-3-1-pro
+
+  - slug: taskrunner
+    label: Taskrunner
+    output_price_min: 2
+    output_price_max: 7.99
+    role: Fast routine tasks — implementation, refactoring, reviews
+    top_pick: glm-5-2
+    top_3:
+      - grok-4-5
+      - glm-5-2
+      - deepseek-v4-pro
+
+  - slug: budget_taskrunner
+    label: Budget Taskrunner
+    output_price_min: 0.01
+    output_price_max: 1.99
+    role: High-volume, cost-sensitive work
+    top_pick: deepseek-v4-flash
+    top_3:
+      - deepseek-v4-flash
+      - gpt-5-4-nano
+      - qwen3-7-plus
+
+  - slug: free
+    label: Free
+    role: No-cost experimentation (data may train models)
+    top_pick: deepseek-v4-flash-free
+    top_3:
+      - deepseek-v4-flash-free
+      - big-pickle
+      - mimo-v2-5-free

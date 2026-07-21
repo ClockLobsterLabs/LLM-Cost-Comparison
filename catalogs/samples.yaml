@@ -1,0 +1,15 @@
+samples:
+  - id: code
+    path: data/samples/code-sample.txt
+    word_count: 306
+    description: Multi-function TypeScript module with generics, error handling, and async workers.
+
+  - id: prose
+    path: data/samples/prose-sample.txt
+    word_count: 235
+    description: Technical architecture paragraph with punctuation, dashes, and colons.
+
+  - id: blended
+    path: data/samples/blended-sample.txt
+    word_count: 250
+    description: Technical documentation prose with inline code references and identifiers.
