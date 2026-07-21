@@ -1,0 +1,119 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "llm-cost-comparison"
+version = "2.0.0"
+description = "A reproducible, testable benchmark pipeline for comparing LLM cost, speed, and tokenizer efficiency."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [
+    { name = "Clock Lobster Labs" },
+]
+keywords = ["llm", "benchmark", "cost", "tokenizer", "openrouter"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "typer>=0.12.5",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.5.0",
+    "python-dotenv>=1.0.1",
+    "httpx>=0.27.0",
+    "tenacity>=9.0.0",
+    "pyyaml>=6.0.2",
+    "sqlmodel>=0.0.21",
+    "alembic>=1.13.0",
+    "polars>=1.0.0",
+    "pyarrow>=17.0.0",
+    "rich>=13.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.6.0",
+    "mypy>=1.11.0",
+    "pre-commit>=3.8.0",
+]
+test = [
+    "pytest>=8.3.0",
+    "pytest-cov>=5.0.0",
+    "respx>=0.22.0",
+    "types-pyyaml>=6.0.2",
+    "polyfactory>=2.16.0",
+]
+
+[project.scripts]
+llmcc = "llm_cost_comparison.cli.main:main"
+
+[project.urls]
+Homepage = "https://github.com/ClockLobsterLabs/LLM-Cost-Comparison"
+Repository = "https://github.com/ClockLobsterLabs/LLM-Cost-Comparison"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/llm_cost_comparison"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+exclude = ["scripts", "data", "legacy", ".venv", ".git", "__pycache__"]
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "W", "I", "N", "D", "UP", "B", "C4", "SIM", "TCH", "TID", "Q",
+    "PT", "ARG", "SLF", "S", "TRY", "RUF",
+]
+ignore = [
+    "D100", "D104", "D203", "D213",
+    "S101", # assert allowed in tests
+    "TRY003", # long messages outside exception class
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["D", "S", "ARG"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+plugins = ["pydantic.mypy"]
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "--strict-markers --strict-config --cov=llm_cost_comparison --cov-report=term-missing --cov-report=xml"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests that hit the network",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]
