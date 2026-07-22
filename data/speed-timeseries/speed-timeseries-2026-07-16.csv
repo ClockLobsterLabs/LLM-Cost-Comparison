@@ -1,0 +1,11 @@
+run_date,hour_pst,hour_utc,model_id,model_name,slug,region,max_tokens,prompt_tokens,output_tokens,elapsed_ms,tokens_per_sec,cost,status,error,measured_at
+"2026-07-16","01","08","deepseek/deepseek-v4-flash","DeepSeek V4 Flash","deepseek-v4-flash","China","3300","19","599","8858","67.6","0.00011927","success","","2026-07-16 01:53:02"
+"2026-07-16","01","08","z-ai/glm-5.2","GLM 5.2","glm-5-2","China","3300","25","860","867052","1","0.00262365","success","","2026-07-16 01:53:02"
+"2026-07-16","01","08","minimax/minimax-m3","MiniMax M3","minimax-m3","China","3300","189","623","10761","57.9","0.0008043","success","","2026-07-16 01:53:02"
+"2026-07-16","01","08","anthropic/claude-sonnet-5","Claude Sonnet 5","claude-sonnet-5","US","3300","26","636","6627","96","0.006412","success","","2026-07-16 01:53:02"
+"2026-07-16","01","08","openai/o4-mini","o4-mini","o4-mini","US","3300","19","1644","11944","137.6","0.0072545","success","","2026-07-16 01:53:02"
+"2026-07-16","10","17","deepseek/deepseek-v4-flash","DeepSeek V4 Flash","deepseek-v4-flash","China","3300","19","599","14379","41.7","0.00011927","success","","2026-07-16 10:27:24"
+"2026-07-16","10","17","z-ai/glm-5.2","GLM 5.2","glm-5-2","China","3300","25","1529","17277","88.5","0.00444979","success","","2026-07-16 10:27:24"
+"2026-07-16","10","17","minimax/minimax-m3","MiniMax M3","minimax-m3","China","3300","189","633","4745","133.4","0.0008163","success","","2026-07-16 10:27:24"
+"2026-07-16","10","17","anthropic/claude-sonnet-5","Claude Sonnet 5","claude-sonnet-5","US","3300","26","624","6134","101.7","0.006292","success","","2026-07-16 10:27:24"
+"2026-07-16","10","17","openai/o4-mini","o4-mini","o4-mini","US","3300","19","1322","40690","32.5","0.0058377","success","","2026-07-16 10:27:24"
