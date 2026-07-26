@@ -26,6 +26,11 @@ data/processed/*.parquet
 # Editor scratch state
 .zcode/
 .vscode/
+
+# Build / deploy
+_site/
+.worktree/
+node_modules/
 .idea/
 *.swp
 
