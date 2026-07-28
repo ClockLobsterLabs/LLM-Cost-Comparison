@@ -207,11 +207,11 @@ The comparison set (the models the new model is measured *against*) is **not** r
 
 ### Cross-repo layout
 
-Both repos live under `C:\Users\RDP\`, siblings:
-- This repo: `C:\Users\RDP\ClockLobsterLabs\LLM-Cost-Comparison` → `github.com/ClockLobsterLabs/LLM-Cost-Comparison`
-- The site: `C:\Users\RDP\clocklobster-site` → `github.com/victorsalmon/clocklobster-site`
+Both repos live under `C:\Repos\`, siblings:
+- This repo: `C:\Repos\LLM-Cost-Comparison` → `github.com/ClockLobsterLabs/LLM-Cost-Comparison`
+- The site: `C:\Repos\clocklobster-site` → `github.com/victorsalmon/clocklobster-site`
 
-From this repo root the site is at `../../clocklobster-site` (one level up, across). The site's `AGENTS.md` documents the reverse path and mandates auto-commit/push to `main`; this repo's `AGENTS.md` does the same.
+From this repo root the site is at `../clocklobster-site` (one level up, across). The site's `AGENTS.md` documents the reverse path and mandates auto-commit/push to `main`; this repo's `AGENTS.md` does the same.
 
 ### When to update the watch list
 

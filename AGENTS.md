@@ -54,12 +54,12 @@ Conventional Commits. Observed scopes: `feat(data):`, `feat(appraise):`, `fix(mo
 
 ## Cross-repo layout
 
-Two repos live as siblings under `C:\Users\RDP\`:
+Two repos live as siblings under `C:\Repos\`:
 
-- **This repo** (data + scripts): `C:\Users\RDP\ClockLobsterLabs\LLM-Cost-Comparison`
-- **The website** (static, GitHub Pages): `C:\Users\RDP\clocklobster-site` → `github.com/victorsalmon/clocklobster-site`
+- **This repo** (data + scripts): `C:\Repos\LLM-Cost-Comparison`
+- **The website** (static, GitHub Pages): `C:\Repos\clocklobster-site` → `github.com/victorsalmon/clocklobster-site`
 
-From this repo root the site is at `../../clocklobster-site`. The per-model appraisal pipeline writes a **News** post into the site repo's `blog/news/` and commits/pushes both repos. The site's `AGENTS.md` documents the reverse path.
+From this repo root the site is at `../clocklobster-site`. Sibling repos are flat under `C:\Repos\`. The per-model appraisal pipeline writes a **News** post into the site repo's `blog/news/` and commits/pushes both repos. The site's `AGENTS.md` documents the reverse path.
 
 ---
 
