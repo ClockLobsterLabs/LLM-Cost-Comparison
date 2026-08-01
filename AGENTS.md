@@ -57,7 +57,7 @@ Conventional Commits. Observed scopes: `feat(data):`, `feat(appraise):`, `fix(mo
 Two repos live as siblings under `C:\Repos\`:
 
 - **This repo** (data + scripts): `C:\Repos\LLM-Cost-Comparison`
-- **The website** (static, GitHub Pages): `C:\Repos\clocklobster-site` → `github.com/victorsalmon/clocklobster-site`
+- **The website** (static, Worktree Cloud): `C:\Repos\clocklobster-site` → `github.com/victorsalmon/clocklobster-site`
 
 From this repo root the site is at `../clocklobster-site`. Sibling repos are flat under `C:\Repos\`. The per-model appraisal pipeline writes a **News** post into the site repo's `blog/news/` and commits/pushes both repos. The site's `AGENTS.md` documents the reverse path.
 
@@ -81,7 +81,7 @@ After any productive change (data added, script written, model appraised), you a
 
 ## Security note
 
-`.env` is gitignored and must never be committed. If a real API key is ever found committed in history, rotate it immediately and purge from history. Never print the key to logs or commit messages. The legacy `experiment-config.ps1` file is no longer used; migrate its value to `.env`.
+`.env` is gitignored and must never be committed. If a real API key is ever found committed in history, rotate it immediately and purge from history. Never print the key to logs or commit messages. The legacy `experiment-config.ps1` file is kept only as a legacy/example reference; the canonical config path is `.env` (copy from `.env.example`).
 
 ---
 

@@ -56,7 +56,6 @@ uv run llmcc run tokenizer-efficiency --dry-run
 - `catalogs/` - YAML source of truth for models, tasks, samples, compression methods, experiments, tiers, and pricing sources.
 - `src/llm_cost_comparison/` - Python package: CLI (`cli`), domain models (`core`), experiment harness (`experiments`), OpenRouter client (`clients`), calculations (`calculations`), storage (`storage`), validation (`validation`), and exporters (`exporters`).
 - `tests/` - pytest suite with mocked API clients and in-memory SQLite databases.
-- `data/llm_cost_comparison.db` - generated SQLite database (gitignored).
-- `data/` - legacy CSVs and new exports.
+- `data/` - legacy CSVs and new exports; also holds the generated SQLite database at the path named by `LLMCC_DATABASE_URL` (default `sqlite:///data/llm_cost_comparison.db`, gitignored).
 
 See `ARCHITECTURE.md` for the design overview and migration notes.
