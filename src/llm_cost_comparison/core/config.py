@@ -27,3 +27,7 @@ class Settings(BaseSettings):
     )
     default_timeout: int = Field(default=120, validation_alias="LLMCC_DEFAULT_TIMEOUT")
     default_retries: int = Field(default=3, validation_alias="LLMCC_DEFAULT_RETRIES")
+    db_busy_timeout_ms: int = Field(
+        default=5000,
+        validation_alias="LLMCC_DB_BUSY_TIMEOUT",
+    )

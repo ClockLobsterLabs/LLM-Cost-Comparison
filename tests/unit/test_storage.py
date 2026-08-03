@@ -1,5 +1,10 @@
 """Tests for SQLModel storage and repository."""
 
+import threading
+from pathlib import Path
+
+from sqlalchemy.exc import OperationalError
+
 from llm_cost_comparison.storage.models import Measurement, PricingSnapshot
 from llm_cost_comparison.storage.repository import MeasurementRepository
 from llm_cost_comparison.storage.session import get_engine, init_db
@@ -65,3 +70,46 @@ def test_pricing_snapshot() -> None:
     latest = repo.get_latest_pricing("deepseek/deepseek-v4-flash")
     assert latest is not None
     assert latest.model_id == snapshot.model_id
+
+
+def test_concurrent_writes_do_not_raise_lock_error(tmp_path: Path) -> None:
+    """Concurrent writers against one DB file do not hit 'database is locked'."""
+    engine = get_engine(f"sqlite:///{tmp_path / 'concurrent.db'}")
+    init_db(engine)
+    repo = MeasurementRepository(engine)
+    run = repo.create_run("concurrency-check")
+
+    errors: list[BaseException] = []
+
+    def _write(index: int) -> None:
+        try:
+            repo.add_measurement(
+                Measurement(
+                    run_id=run.id,
+                    experiment_id="concurrency-check",
+                    model_slug="deepseek-v4-flash",
+                    model_id="deepseek/deepseek-v4-flash",
+                    sample_id=f"sample-{index}",
+                    prompt_tokens=100 + index,
+                    completion_tokens=1,
+                    elapsed_ms=100,
+                )
+            )
+        except BaseException as exc:
+            errors.append(exc)
+
+    threads = [threading.Thread(target=_write, args=(i,)) for i in range(8)]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
+
+    lock_errors = [
+        error
+        for error in errors
+        if isinstance(error, OperationalError) and "database is locked" in str(error)
+    ]
+    assert not lock_errors, f"concurrent writers raised lock errors: {lock_errors}"
+    assert not errors, f"concurrent writers raised: {errors}"
+    rows = repo.get_measurements(experiment_id="concurrency-check")
+    assert len(rows) == 8

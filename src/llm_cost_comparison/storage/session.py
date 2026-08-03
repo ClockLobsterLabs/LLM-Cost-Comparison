@@ -2,7 +2,9 @@
 
 from collections.abc import Generator
 from contextlib import contextmanager
+from typing import Any
 
+from sqlalchemy import event
 from sqlalchemy.engine import Engine
 from sqlmodel import Session, SQLModel, create_engine
 
@@ -18,9 +20,23 @@ def get_engine(database_url: str | None = None, settings: Settings | None = None
         database_url = settings.database_url
 
     try:
-        return create_engine(database_url, connect_args={"check_same_thread": False})
+        engine = create_engine(database_url, connect_args={"check_same_thread": False})
     except Exception as exc:
         raise StorageError(f"Could not create database engine: {exc}") from exc
+
+    if database_url.startswith("sqlite"):
+        busy_timeout_ms = settings.db_busy_timeout_ms if settings is not None else 5000
+
+        @event.listens_for(engine, "connect")
+        def _set_sqlite_pragma(dbapi_conn: Any, _record: Any) -> None:
+            """Apply WAL and busy-timeout pragmas to every new SQLite connection."""
+            cur = dbapi_conn.cursor()
+            cur.execute("PRAGMA journal_mode=WAL")
+            cur.execute("PRAGMA synchronous=NORMAL")
+            cur.execute(f"PRAGMA busy_timeout={busy_timeout_ms}")
+            cur.close()
+
+    return engine
 
 
 def init_db(engine: Engine) -> None:
