@@ -3,6 +3,20 @@
 from collections import defaultdict
 from typing import Any
 
+# Single source of truth for the legacy CSV column contract shared by
+# `llmcc validate` and `llmcc migrate-legacy` (see cli/main.py).
+#
+# - LEGACY_CSV_REQUIRED_COLS: columns `validate` checks on success rows.
+#   Missing/empty values emit warnings (errors only under --strict).
+# - LEGACY_CSV_WORD_COUNT_COL: the column `migrate-legacy` reads into
+#   Measurement.output_words. It is OPTIONAL for validation — Session 6/6b
+#   CSVs carry `output_words` instead and speed CSVs carry no word column —
+#   but when it is absent during migration, migrate-legacy warns on stderr
+#   instead of silently writing NULL output_words (which would skew the
+#   tokenizer-efficiency and verbosity aggregates in benchmarks.json).
+LEGACY_CSV_REQUIRED_COLS: tuple[str, ...] = ("prompt_tokens", "output_tokens")
+LEGACY_CSV_WORD_COUNT_COL: str = "word_count"
+
 
 def _is_blank(value: Any) -> bool:
     """True if value is None, empty, or the string 'None'."""
@@ -70,7 +84,21 @@ def validate_csv_signature(
     known_tasks: set[str] | None = None,
     required_cols: list[str] | None = None,
 ) -> tuple[list[str], list[str]]:
-    """Run legacy corruption checks and return (errors, warnings)."""
+    """Run legacy corruption checks and return (errors, warnings).
+
+    Column contract (shared with ``llmcc migrate-legacy`` via the module
+    constants ``LEGACY_CSV_REQUIRED_COLS`` and ``LEGACY_CSV_WORD_COUNT_COL``):
+
+    - ``prompt_tokens`` and ``output_tokens`` are required: success rows with
+      empty values produce warnings (errors only under ``--strict``).
+    - ``word_count`` is optional for validation. Session 6/6b CSVs carry
+      ``output_words`` instead and speed CSVs carry no word column, so a CSV
+      lacking ``word_count`` is not a corruption signature. However,
+      ``migrate-legacy`` depends on ``word_count`` for ``output_words``: when
+      it is absent during migration, migrate-legacy warns on stderr (the
+      tokenizer-efficiency aggregate skips those rows and the verbosity
+      aggregate treats them as 0 words) rather than silently writing NULL.
+    """
     errors: list[str] = []
     warnings: list[str] = []
 

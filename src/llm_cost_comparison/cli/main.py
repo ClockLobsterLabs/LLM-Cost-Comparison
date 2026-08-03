@@ -19,7 +19,11 @@ from llm_cost_comparison.exporters.json import BenchmarkExporter
 from llm_cost_comparison.storage.models import ExperimentRun, Measurement
 from llm_cost_comparison.storage.repository import MeasurementRepository
 from llm_cost_comparison.storage.session import get_engine, init_db
-from llm_cost_comparison.validation.legacy import validate_csv_signature
+from llm_cost_comparison.validation.legacy import (
+    LEGACY_CSV_REQUIRED_COLS,
+    LEGACY_CSV_WORD_COUNT_COL,
+    validate_csv_signature,
+)
 
 app = typer.Typer(
     name="llmcc",
@@ -132,7 +136,9 @@ def validate(
         task_col=task_col,
         method_names=method_names,
         known_tasks=known_tasks,
-        required_cols=["prompt_tokens", "output_tokens"],
+        # Required-vs-optional contract lives in validation.legacy — keep in
+        # sync with migrate-legacy by referencing the shared constant.
+        required_cols=list(LEGACY_CSV_REQUIRED_COLS),
     )
 
     for error in errors:
@@ -188,6 +194,10 @@ def _row_to_measurement(row: dict[str, str], run: ExperimentRun) -> Measurement:
     """Convert a legacy Session 5 CSV row into a Measurement."""
     if run.id is None:
         raise ValueError("Run must be persisted before migrating rows")
+    # word_count is optional per the shared contract in validation.legacy
+    # (LEGACY_CSV_WORD_COUNT_COL); when absent, output_words is NULL and
+    # migrate-legacy warns so the benchmarks aggregates are not silently skewed.
+    word_count = _to_int(row.get(LEGACY_CSV_WORD_COUNT_COL))
     return Measurement(
         run_id=run.id,
         experiment_id=run.experiment_id,
@@ -195,7 +205,7 @@ def _row_to_measurement(row: dict[str, str], run: ExperimentRun) -> Measurement:
         sample_id=row.get("sample_type"),
         prompt_tokens=_to_int(row.get("prompt_tokens")),
         completion_tokens=_to_int(row.get("output_tokens")),
-        output_words=_to_int(row.get("word_count")),
+        output_words=word_count,
         status=row.get("status") or "success",
         meta={
             "model_name": row.get("model_name"),
@@ -218,6 +228,17 @@ def migrate_legacy(
 
     with csv_path.open("r", encoding="utf-8", newline="") as fh:
         rows = list(csv.DictReader(fh))
+
+    missing_word_count = sum(
+        1 for row in rows if _to_int(row.get(LEGACY_CSV_WORD_COUNT_COL)) is None
+    )
+    if missing_word_count:
+        typer.echo(
+            f"Warning: {missing_word_count} rows lacked '{LEGACY_CSV_WORD_COUNT_COL}'; "
+            "output_words set to NULL — tokenizer-efficiency aggregate will skip "
+            "these rows and verbosity aggregate will count them as 0 words.",
+            err=True,
+        )
 
     measurements = [_row_to_measurement(row, run) for row in rows]
     repository.add_measurements(measurements)

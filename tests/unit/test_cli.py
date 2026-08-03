@@ -93,6 +93,45 @@ def test_migrate_legacy(tmp_path: pytest.TempPathFactory, monkeypatch: pytest.Mo
     assert rows[0].prompt_tokens == 287
 
 
+def test_migrate_legacy_warns_when_word_count_missing(
+    tmp_path: pytest.TempPathFactory, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A CSV that passes validate but lacks word_count migrates with a warning.
+
+    word_count is optional per the shared column contract (Session 6/6b CSVs
+    carry output_words instead), so validation must not reject the CSV — but
+    migrate-legacy must surface the NULL output_words impact on the
+    benchmarks aggregates instead of importing it silently.
+    """
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-test-key")
+    db = tmp_path / "db.sqlite"
+    csv = tmp_path / "no-word-count.csv"
+    csv.write_text(
+        "model_id,sample_type,prompt_tokens,output_tokens,status\n"
+        "x,t1,100,5,success\n"
+        "x,t2,120,6,success\n"
+    )
+
+    validate_result = runner.invoke(app, ["validate", str(csv), "--strict"])
+    assert validate_result.exit_code == 0
+    assert "No corruption signatures detected." in validate_result.stdout
+
+    migrate_result = runner.invoke(
+        app,
+        ["migrate-legacy", str(csv), "session-5", f"--db=sqlite:///{db}"],
+    )
+    assert migrate_result.exit_code == 0
+    assert "Migrated 2" in migrate_result.stdout
+    assert "2 rows lacked 'word_count'" in migrate_result.stderr
+    assert "tokenizer-efficiency" in migrate_result.stderr
+
+    engine = get_engine(f"sqlite:///{db}")
+    repo = MeasurementRepository(engine)
+    rows = repo.get_measurements(experiment_id="session-5")
+    assert len(rows) == 2
+    assert all(row.output_words is None for row in rows)
+
+
 def test_appraise_writes_csv(
     tmp_path: pytest.TempPathFactory,
     monkeypatch: pytest.MonkeyPatch,
