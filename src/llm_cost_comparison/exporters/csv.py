@@ -4,6 +4,7 @@ import csv
 from pathlib import Path
 from typing import Any, ClassVar
 
+from llm_cost_comparison.exporters._io import atomic_write
 from llm_cost_comparison.storage.models import Measurement
 
 
@@ -56,8 +57,7 @@ class CSVExporter:
     def to_path(self, path: Path | str) -> None:
         """Write all measurements to *path* as CSV."""
         path = Path(path)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open("w", newline="", encoding="utf-8") as fh:
+        with atomic_write(path, "w", newline="", encoding="utf-8") as fh:
             writer = csv.DictWriter(fh, fieldnames=self.BASE_COLUMNS)
             writer.writeheader()
             for measurement in self.measurements:

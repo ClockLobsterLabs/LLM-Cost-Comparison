@@ -9,6 +9,7 @@ from typing import Any
 
 from llm_cost_comparison.calculations.compression import CompressionCalculator
 from llm_cost_comparison.calculations.efficiency import EfficiencyCalculator
+from llm_cost_comparison.exporters._io import atomic_write
 from llm_cost_comparison.storage.models import Measurement
 
 
@@ -151,6 +152,5 @@ class BenchmarkExporter:
     def to_path(self, path: Path | str) -> None:
         """Write the aggregated benchmarks artifact to *path*."""
         path = Path(path)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open("w", encoding="utf-8") as fh:
+        with atomic_write(path, "w", encoding="utf-8") as fh:
             json.dump(self._aggregate(), fh, indent=2, default=str)
