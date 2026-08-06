@@ -19,7 +19,7 @@ def atomic_write(path: Path, mode: str = "w", **kwargs: Any) -> Generator[TextIO
     tmp = path.with_name(path.name + ".tmp")
     try:
         with tmp.open(mode, **kwargs) as fh:
-            yield cast(TextIO, fh)
+            yield cast("TextIO", fh)
         os.replace(tmp, path)
     except BaseException:
         tmp.unlink(missing_ok=True)

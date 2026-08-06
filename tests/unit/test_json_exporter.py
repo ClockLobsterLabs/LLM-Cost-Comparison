@@ -6,6 +6,7 @@ from typing import Any
 
 import pytest
 
+from llm_cost_comparison.calculations.compression import CompressionCalculator
 from llm_cost_comparison.exporters.json import BenchmarkExporter
 from llm_cost_comparison.storage.models import Measurement
 
@@ -131,7 +132,7 @@ def test_aggregate_compression_ratios(tmp_path: Path) -> None:
 
 
 def test_aggregate_thinking_ratio(tmp_path: Path) -> None:
-    """Reasoning-check measurements yield a reasoning/completion ratio; non-reasoning runs yield 0.0."""
+    """Reasoning measurements yield a reasoning/completion ratio; non-reasoning yield 0.0."""
     measurements = [
         Measurement(
             run_id=1, experiment_id="appraisal", model_slug="m1",
@@ -171,5 +172,6 @@ def test_aggregate_speed_skips_missing_elapsed(tmp_path: Path) -> None:
     output = tmp_path / "benchmarks.json"
     BenchmarkExporter(measurements).to_path(output)
 
-    speed = json.loads(output.read_text(encoding="utf-8"))["models"]["m1"]["speed_tok_per_s"]
+    data = json.loads(output.read_text(encoding="utf-8"))
+    speed = data["models"]["m1"]["speed_tok_per_s"]
     assert speed == 150.0

@@ -1,6 +1,12 @@
 """Tests for validators and legacy CSV corruption checks."""
 
 
+import csv
+import subprocess
+import sys
+from decimal import Decimal
+from pathlib import Path
+
 from llm_cost_comparison.core.models import ChatResponse
 from llm_cost_comparison.storage.models import Measurement
 from llm_cost_comparison.validation.legacy import (

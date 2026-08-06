@@ -6,7 +6,7 @@ import respx
 
 from llm_cost_comparison.clients.openrouter import OpenRouterClient
 from llm_cost_comparison.core.config import Settings
-from llm_cost_comparison.core.exceptions import ModelNotFoundError, TimeoutError
+from llm_cost_comparison.core.exceptions import APIError, ModelNotFoundError, TimeoutError
 from llm_cost_comparison.core.models import ChatRequest, Message
 
 
@@ -129,4 +129,6 @@ def test_negative_elapsed_rejected(settings: Settings) -> None:
     """A parsed response with negative elapsed_ms raises the typed APIError."""
     client = OpenRouterClient(settings)
     with pytest.raises(APIError, match="Invalid OpenRouter response"):
-        client._parse_response(_success_payload(), "deepseek/deepseek-v4-flash", -1)
+        client._parse_response(  # noqa: SLF001 — unit-testing the parser directly
+            _success_payload(), "deepseek/deepseek-v4-flash", -1
+        )
