@@ -35,6 +35,17 @@ All experiments are configured in `catalogs/experiments.yaml` and resolved throu
 
 The `ExperimentRunner` creates an `ExperimentRun`, calls `Experiment.run`, persists `Measurement` rows, and marks the run complete or failed.
 
+### Model-data files: catalog vs site artifact
+
+The repo has **two model databases with different schemas** — they are not interchangeable:
+
+- `catalogs/*.yaml` (e.g. `catalogs/models.yaml`, 49 entries) — the **CLI/experiment source of truth**, loaded by `Catalog` (`core/models.py`). Fields: `slug`, `name`, `family`, `tier`, `pricing: {zen: {input/output/cached_read}}`, `pricing_source`, `openrouter_id`, `max_variants`. No benchmarks, no speed/thinking fields.
+- `models.json` — the **site-facing canonical DB** for the website's Benchmarks sub-blog; hand-edited per `SKILL.md` step 4. Keys: `zen_pricing`, `openrouter_pricing`, `benchmarks`, `speed_tok_per_s`, `thinking_token_ratio`, `tokenizer_efficiency`, `output_verbosity`.
+
+**Relationship**: the CLI never reads `models.json` (zero references in `src/`/`scripts/`). Live measurements are exported from the SQLite DB by `llmcc export --format json` (`BenchmarkExporter`) into a `benchmarks.json` artifact; `models.json` is a curated hand-edited superset maintained alongside it.
+
+**Field-name mapping**: `catalog pricing.zen` ↔ `models.json zen_pricing`; `pricing.openrouter` ↔ `openrouter_pricing`; `benchmarks`/`speed_tok_per_s`/`thinking_token_ratio`/`tokenizer_efficiency`/`output_verbosity` are **not** catalog fields — they exist only in `models.json`.
+
 ## Storage model
 
 Three SQLModel tables:
