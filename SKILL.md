@@ -102,7 +102,7 @@ Each model family tokenizes text differently. E = tokens per word. Three raw val
 | 16 | Amazon | Nova Premier | 2.92 | 1.31 | 1.92 | **2.28** |
 | 17 | Grok / xAI | Grok 4.5 | 3.09 | 2.01 | 2.54 | **2.66** |
 
-> **Session 5 (2026-07-09):** Full standardized re-test of all 23 measurable models with identical samples, same API key (OPENROUTER_CODE_KEY), same max_tokens=20. 69 calls, ~$0.20 total. Replaces all earlier Sessions 1-4 data. Unmeasurable models: Fugu Ultra (ignores max_tokens, ~95 tok/word), o4-mini (Responses API, no usage field), Inflection 3 Pi/Productivity (502 errors), Qwen 3.7 Plus/Max (guardrail), Sonar Reasoning Pro/Deep Research (timeout). See `data/experiment-session5-raw.csv` and `docs/tokenizer-efficiency-experiment.md` for full data.
+> **Session 5 (2026-07-09):** Full standardized re-test of all 23 measurable models with identical samples, same API key (OPENROUTER_API_KEY), same max_tokens=20. 69 calls, ~$0.20 total. Replaces all earlier Sessions 1-4 data. Unmeasurable models: Fugu Ultra (ignores max_tokens, ~95 tok/word), o4-mini (Responses API, no usage field), Inflection 3 Pi/Productivity (502 errors), Qwen 3.7 Plus/Max (guardrail), Sonar Reasoning Pro/Deep Research (timeout). See `data/experiment-session5-raw.csv` and `docs/tokenizer-efficiency-experiment.md` for full data.
 >
 > **Output & reasoning extension (proposed):** Section 8 of the experiment doc defines 16 task prompts across 10 usage categories (Q&A, Coding, Analysis, Reasoning, Creative, Role-play, Instruction following, Safety, Multilingual, Extraction) for measuring output verbosity, persona inflation, refusal cost, and hidden reasoning tokens. Full 21-model × 16-task run costs at most ~$0.75 (worst case) with likely actual cost ~$0.20-0.55. See [`docs/tokenizer-efficiency-experiment.md §8`](docs/tokenizer-efficiency-experiment.md).
 
@@ -195,7 +195,7 @@ The comparison set (the models the new model is measured *against*) is **not** r
 
 3. **Research SWE** — SWE-bench Verified + SWE-bench Pro from published leaderboards ([swebench.com](https://swebench.com), [artificialanalysis.ai](https://artificialanalysis.ai)). Each score is stored as `{ score, source, date }`. Use `null` if the model is untested — matches the existing `models.json` convention. There is no local SWE harness; these are externally-published, attributed, dated scores.
 
-4. **Update `models.json`** — add (or refresh) the model's entry under `models[<slug>]` with: identity fields (`name`, `family`, `version`, `tier`, `context_window`, `parameters`, `open_weights`, `license`), `zen_pricing` / `openrouter_pricing`, the three measured values, and the `benchmarks` block. Also bump the top-level `last_updated` changelog string. If this model is a new flagship for a watched family, update the corresponding `appraise_slots.watching` pointer (e.g. `latest_sonnet`, `latest_m3`).
+4. **Update `models.json`** — add (or refresh) the model's entry under `models[<slug>]` with: identity fields (`name`, `family`, `version`, `tier`, `context_window`, `parameters`, `open_weights`, `license`), `zen_pricing` / `openrouter_pricing`, the three measured values, and the `benchmarks` block. Also bump the top-level `last_updated` changelog string. If this model is a new flagship for a watched family, update the corresponding `appraise_slots.watching` pointer (e.g. `latest_sonnet`, `latest_m3`). Note: `models.json` is the hand-edited site-facing artifact; the CLI's catalog source of truth is `catalogs/models.yaml`. Keep the two in sync when pricing or availability changes (the CLI never reads `models.json` — see ARCHITECTURE.md "Model-data files: catalog vs site artifact").
 
 5. **Build the comparison table** — one row for the new model plus one row per model in `appraise_slots.active_stack` (your daily drivers) and `appraise_slots.watching` (flagships you track). Every value except the new model's measured ones is read from `models.json`. Columns match the **Appraisal Table Template** above: SWE-bench Pro, TB 2.1, Input/Output $/M, Blend 7:2:1, Blend w/ Think, AAII, Thinking Tax, "Beats your stack?". For the new model, compute both blend columns using its freshly-measured `thinking_token_ratio` and `tokenizer_efficiency`.
 
@@ -221,7 +221,7 @@ From this repo root the site is at `../clocklobster-site` (one level up, across)
 
 | File | Purpose |
 |------|---------|
-| `models.json` | Canonical model database with pricing, benchmarks, features, `appraise_slots` watch list |
+| `models.json` | Canonical model database with pricing, benchmarks, features, `appraise_slots` watch list (site-facing; distinct from `catalogs/models.yaml`) |
 | `SKILL.md` | This file — skill instructions (market-wide research + per-model appraisal pipeline) |
 | `AGENTS.md` | Repo context + completion protocol (commit/push to main) for AI assistants |
 | `docs/tokenizer-efficiency-experiment.md` | Full experiment write-up: hypothesis, standardized conditions, method, results, discussion, proposed output/reasoning extension |

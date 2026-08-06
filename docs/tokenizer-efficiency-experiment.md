@@ -56,7 +56,7 @@ All measurements in Session 5 share these fixed conditions. Changing any one may
 
 | Condition | Fixed value | Why it matters |
 |-----------|-------------|----------------|
-| API key | `OPENROUTER_CODE_KEY` (single workspace) | Different keys route to different inference providers; Session 1-4 used 3 different keys with divergent results |
+| API key | `OPENROUTER_API_KEY` (current) — historical sessions used workspace-scoped keys | Different keys route to different inference providers; Session 1-4 used 3 different keys with divergent results |
 | API endpoint | `https://openrouter.ai/api/v1/chat/completions` | Direct provider APIs (AWS Bedrock, Azure, GCP) may report different token counts for the same model |
 | max_tokens | 20 | Must be small enough to minimize output cost but large enough for the model to return `usage`; 20 works for all measurable models |
 | temperature | 0 | Deterministic — prompt_tokens is deterministic regardless, but zero eliminates edge cases |
@@ -72,7 +72,7 @@ All measurements in Session 5 share these fixed conditions. Changing any one may
 |-----------|-------|
 | Endpoint | `https://openrouter.ai/api/v1/chat/completions` |
 | Method | POST |
-| Authentication | Bearer token (`OPENROUTER_CODE_KEY`) |
+| Authentication | Bearer token (`OPENROUTER_API_KEY`) |
 | max_tokens | 20 (all models) |
 | temperature | 0 |
 | messages | Single `user` message containing sample text |
@@ -117,7 +117,7 @@ The 60:40 blend reflects a typical coding workload where code-generation tasks d
 
 ### 4.2 Guardrail Handling
 
-Earlier sessions (1-4) encountered guardrail blocks for 11 models due to workspace-level Model Access filtering in OpenRouter. Session 5 used `OPENROUTER_CODE_KEY` which had permissive routing — no models were guardrail-blocked.
+Earlier sessions (1-4) encountered guardrail blocks for 11 models due to workspace-level Model Access filtering in OpenRouter. Session 5 used `OPENROUTER_API_KEY` (then named `OPENROUTER_CODE_KEY`) which had permissive routing — no models were guardrail-blocked.
 
 ### 4.3 Model ID Changes
 
@@ -182,7 +182,7 @@ Several model IDs changed between Sessions 1-4 and Session 5:
 
 Sessions 1-4 used varying sample texts and API keys. Session 5's standardized re-test shows that earlier measurements were affected by:
 
-- **Different OpenRouter API keys** route to different inference providers, which may serve different model builds. Session 5 used `OPENROUTER_CODE_KEY` exclusively.
+- **Different OpenRouter API keys** route to different inference providers, which may serve different model builds. Session 5 used `OPENROUTER_API_KEY` (current name) exclusively.
 - **Different sample lengths** (77-, 152-, 306-, and 382-word samples) produce different per-message overhead amortization
 - **Globally, Session 5 E values are higher than Session 1** — by ~0.2-0.6 E points per model — likely due to different provider routing
 
@@ -207,7 +207,7 @@ C_total = (W_in × E × Pin/10^6) + ((W_out × E + T_think) × Pout/10^6)
 ### 6.2 Limitations
 
 1. **Single provider**: All measurements via OpenRouter. Different providers (Azure, Cohere Cloud, AWS Bedrock) may report different token counts for the same model
-2. **Single API key**: `OPENROUTER_CODE_KEY` may route differently than other keys; Session 1 values (from `OPENROUTER_SETUP_KEY`) differ significantly
+2. **Single API key**: the repo now reads a single `OPENROUTER_API_KEY`; historical sessions used `OPENROUTER_CODE_KEY`/`OPENROUTER_SETUP_KEY`, which may route differently — Session 1 values (from `OPENROUTER_SETUP_KEY`) differ significantly
 3. **Single sample per type**: One code, one prose, one blended sample each. Real workloads vary within types
 4. **No output tokenization measured**: E measures input tokenization only. Output tokens follow the same tokenizer but weren't independently verified
 5. **Blend weight is arbitrary**: 60:40 code:prose reflects a coding workload. Other workloads (documentation, data analysis) would want different blends or the 33:33:33 blend
@@ -220,7 +220,7 @@ Earlier Sessions 1-4 reported significantly lower E values for many models (e.g.
 
 The experiment is fully reproducible:
 1. Set up an OpenRouter account with API key
-2. Use the `OPENROUTER_CODE_KEY` or any key with permissive routing
+2. Use the `OPENROUTER_API_KEY` or any key with permissive routing
 3. Submit POST requests with the sample texts and `max_tokens=20`
 4. Read `usage.prompt_tokens` from responses
 5. Divide by word count for E
@@ -413,7 +413,7 @@ Session 5 cost ~$0.20 for 63 successful data points. Measuring one model with al
 
 ## Appendix D: Superseded Session Data
 
-Sessions 1-4 (2026-07-08) used varying sample lengths, API keys (OPENROUTER_SETUP_KEY, OPENROUTER_VERI_KEY), and max_tokens values (16-20). These are archived in `data/tokenizer-efficiency-raw.csv` and `data/openrouter-generations-2026-07-08.csv` for reproducibility. Session 5 data supersedes all earlier measurements for cost calculations.
+Sessions 1-4 (2026-07-08) used varying sample lengths, API keys (OPENROUTER_SETUP_KEY, OPENROUTER_VERI_KEY — historical names; the current key is OPENROUTER_API_KEY), and max_tokens values (16-20). These are archived in `data/tokenizer-efficiency-raw.csv` and `data/openrouter-generations-2026-07-08.csv` for reproducibility. Session 5 data supersedes all earlier measurements for cost calculations.
 
 The primary limitations of Sessions 1-4:
 - Different sample texts per session (77-word, 152-word, 306-word, 382-word code samples)
