@@ -60,7 +60,12 @@ SCHEMAS = {
     },
 }
 
-MIN_DISTINCT_PROMPT_TOKENS = 4  # a real (model,method) group has >=4 distinct prompt_token values
+# Corruption-signature thresholds — mirror llm_cost_comparison/validation/legacy.py
+# (find_constant_prompt_tokens: min_group_size=3, len(distinct)<=1). The commit
+# gate (commit-data.sh) and `llmcc validate` must agree on the signature; if you
+# change these, change BOTH files.
+MIN_GROUP_SIZE = 3  # a (model,method) group needs at least this many rows
+MAX_DISTINCT = 1    # more than one distinct prompt_token value means real variance
 
 
 def check_file(path):
@@ -146,9 +151,9 @@ def check_file(path):
             groups[key].append(r['prompt_tokens'])
         corrupt_groups = []
         for key, tokens in groups.items():
-            if len(tokens) >= 16:  # only flag groups with enough rows to vary
+            if len(tokens) >= MIN_GROUP_SIZE:
                 distinct = len(set(tokens))
-                if distinct < MIN_DISTINCT_PROMPT_TOKENS:
+                if distinct <= MAX_DISTINCT:
                     corrupt_groups.append((key, distinct, len(tokens)))
         if corrupt_groups:
             details = ', '.join(f"{k}={d} distinct of {n}" for k, d, n in corrupt_groups[:5])

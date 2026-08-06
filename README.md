@@ -21,6 +21,8 @@ uv run pytest
 # Validate an existing CSV for the Session 6b corruption signature
 uv run llmcc validate data/experiment-session5-consolidated.csv
 
+`llmcc validate` and `scripts/validate-data.py --strict` share the same corruption-signature thresholds; the CLI is the canonical implementation.
+
 # Run an experiment (omit --dry-run to call OpenRouter)
 uv run llmcc run tokenizer-efficiency --dry-run
 

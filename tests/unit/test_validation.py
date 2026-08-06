@@ -143,3 +143,79 @@ def test_response_validator_accepts_valid_response() -> None:
         elapsed_ms=100,
     )
     assert ResponseValidator.validate(response) == []
+def test_measurement_multiple_violations_reported() -> None:
+    """A row with several simultaneous violations reports all of them."""
+    measurement = Measurement(
+        run_id=1,
+        experiment_id="output-verbosity",
+        model_slug="",
+        prompt_tokens=-1,
+        completion_tokens=5,
+        elapsed_ms=-4,
+        status="success",
+    )
+    errors = MeasurementValidator.validate(measurement)
+    assert any("model_slug" in e for e in errors)
+    assert any("prompt_tokens" in e for e in errors)
+    assert any("elapsed_ms" in e for e in errors)
+
+
+def test_negative_cost_rejected() -> None:
+    """A success row with negative cost is rejected."""
+    measurement = Measurement(
+        run_id=1,
+        experiment_id="output-verbosity",
+        model_slug="x",
+        prompt_tokens=10,
+        completion_tokens=5,
+        status="success",
+        cost=Decimal("-0.01"),
+    )
+    errors = MeasurementValidator.validate(measurement)
+    assert any("cost" in e for e in errors)
+
+
+def _write_compression_csv(path: Path, rows: list[dict[str, str]]) -> None:
+    """Write a compression-shaped CSV for the validate-data.py gate."""
+    with open(path, "w", newline="") as fh:
+        writer = csv.DictWriter(
+            fh, fieldnames=["model_id", "task_id", "method_id", "prompt_tokens"]
+        )
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def test_validate_data_py_and_llmcc_validate_agree(tmp_path: Path) -> None:
+    """The commit gate and llmcc validate flag the same corruption signature."""
+    repo_root = Path(__file__).resolve().parents[2]
+    corrupt_rows = [
+        {"model_id": "m1", "task_id": "t1", "method_id": "smc", "prompt_tokens": "100"},
+    ] * 5
+    clean_rows = [
+        {"model_id": "m1", "task_id": "t1", "method_id": "smc", "prompt_tokens": str(90 + i)}
+        for i in range(5)
+    ]
+
+    corrupt_path = tmp_path / "corrupt.csv"
+    clean_path = tmp_path / "clean.csv"
+    _write_compression_csv(corrupt_path, corrupt_rows)
+    _write_compression_csv(clean_path, clean_rows)
+
+    corrupt_script = subprocess.run(
+        [sys.executable, "scripts/validate-data.py", str(corrupt_path)],
+        cwd=repo_root, capture_output=True, text=True,
+    )
+    clean_script = subprocess.run(
+        [sys.executable, "scripts/validate-data.py", str(clean_path)],
+        cwd=repo_root, capture_output=True, text=True,
+    )
+
+    corrupt_legacy = validate_csv_signature(corrupt_rows, variance_groups=("model_id", "method_id"))
+    clean_legacy = validate_csv_signature(clean_rows, variance_groups=("model_id", "method_id"))
+
+    assert corrupt_script.returncode != 0
+    assert "CORRUPTION SIGNATURE" in corrupt_script.stdout
+    assert any("CORRUPTION" in e for e in corrupt_legacy[0])
+
+    assert clean_script.returncode == 0
+    assert not any("CORRUPTION" in e for e in clean_legacy[0])

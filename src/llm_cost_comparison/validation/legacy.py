@@ -31,6 +31,10 @@ def find_constant_prompt_tokens(
     """Detect the Session 6b corruption signature: prompt_tokens is constant within groups.
 
     Returns a list of (group_key, distinct_values, group_size) tuples for suspicious groups.
+
+    Mirrored by scripts/validate-data.py (MIN_GROUP_SIZE/MAX_DISTINCT) — the
+    commit gate (scripts/commit-data.sh) and `llmcc validate` must agree on the
+    corruption signature; update both files together.
     """
     groups: dict[tuple[str, ...], list[Any]] = defaultdict(list)
     for row in rows:
