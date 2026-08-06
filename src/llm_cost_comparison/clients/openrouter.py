@@ -112,7 +112,7 @@ class OpenRouterClient(LLMClient):
         except (KeyError, IndexError, TypeError) as exc:
             raise APIError(f"Unexpected OpenRouter response shape: {payload}") from exc
 
-        return ChatResponse(
+        response = ChatResponse(
             model_id=model_id,
             content=content,
             prompt_tokens=prompt_tokens,
@@ -121,6 +121,17 @@ class OpenRouterClient(LLMClient):
             total_tokens=total_tokens,
             elapsed_ms=elapsed_ms,
         )
+
+        # Validate before returning: a malformed provider payload with negative
+        # token counts must not flow into Measurement rows undetected. Deferred
+        # import avoids a module-load cycle between clients and validation.
+        from llm_cost_comparison.validation.validators import ResponseValidator
+
+        errors = ResponseValidator.validate(response)
+        if errors:
+            raise APIError("Invalid OpenRouter response: " + "; ".join(errors))
+
+        return response
 
     def close(self) -> None:
         """Close the underlying HTTP client."""

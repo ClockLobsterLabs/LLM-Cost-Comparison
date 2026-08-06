@@ -107,3 +107,26 @@ def test_chat_timeout_is_raised(settings: Settings) -> None:
             client.chat(request)
 
         assert route.call_count == settings.default_retries
+
+def test_negative_tokens_rejected(settings: Settings) -> None:
+    """A payload with negative prompt_tokens raises the typed APIError."""
+    with respx.mock:
+        respx.post("https://openrouter.ai/api/v1/chat/completions").respond(
+            200, json=_success_payload(prompt_tokens=-1)
+        )
+
+        client = OpenRouterClient(settings)
+        request = ChatRequest(
+            model_id="deepseek/deepseek-v4-flash",
+            messages=[Message(role="user", content="hi")],
+            max_tokens=20,
+        )
+        with pytest.raises(APIError, match="Invalid OpenRouter response"):
+            client.chat(request)
+
+
+def test_negative_elapsed_rejected(settings: Settings) -> None:
+    """A parsed response with negative elapsed_ms raises the typed APIError."""
+    client = OpenRouterClient(settings)
+    with pytest.raises(APIError, match="Invalid OpenRouter response"):
+        client._parse_response(_success_payload(), "deepseek/deepseek-v4-flash", -1)

@@ -1,6 +1,7 @@
 """Tests for validators and legacy CSV corruption checks."""
 
 
+from llm_cost_comparison.core.models import ChatResponse
 from llm_cost_comparison.storage.models import Measurement
 from llm_cost_comparison.validation.legacy import (
     find_constant_prompt_tokens,
@@ -8,7 +9,7 @@ from llm_cost_comparison.validation.legacy import (
     find_task_id_leaking_method_names,
     validate_csv_signature,
 )
-from llm_cost_comparison.validation.validators import MeasurementValidator
+from llm_cost_comparison.validation.validators import MeasurementValidator, ResponseValidator
 
 
 def test_valid_measurement() -> None:
@@ -105,3 +106,40 @@ def test_validate_csv_signature_integration() -> None:
     assert any("CORRUPTION" in e for e in errors)
     assert any("task_id contains method" in e for e in errors)
     assert any("empty 'category'" in w for w in warnings)
+
+def test_response_validator_rejects_negative_tokens() -> None:
+    """A ChatResponse with negative token counts is flagged."""
+    response = ChatResponse(
+        model_id="deepseek-v4-flash",
+        content="c",
+        prompt_tokens=-1,
+        completion_tokens=5,
+        elapsed_ms=10,
+    )
+    errors = ResponseValidator.validate(response)
+    assert any("token counts" in e for e in errors)
+
+
+def test_response_validator_rejects_negative_elapsed() -> None:
+    """A ChatResponse with negative elapsed_ms is flagged."""
+    response = ChatResponse(
+        model_id="deepseek-v4-flash",
+        content="c",
+        prompt_tokens=1,
+        completion_tokens=5,
+        elapsed_ms=-3,
+    )
+    errors = ResponseValidator.validate(response)
+    assert any("elapsed_ms" in e for e in errors)
+
+
+def test_response_validator_accepts_valid_response() -> None:
+    """A valid ChatResponse passes validation."""
+    response = ChatResponse(
+        model_id="deepseek-v4-flash",
+        content="c",
+        prompt_tokens=10,
+        completion_tokens=5,
+        elapsed_ms=100,
+    )
+    assert ResponseValidator.validate(response) == []
