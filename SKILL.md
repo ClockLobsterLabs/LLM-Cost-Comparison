@@ -203,7 +203,7 @@ The comparison set (the models the new model is measured *against*) is **not** r
 
 7. **Commit + push data repo** — `git add data/appraise/<slug>-<date>.csv models.json` (plus any SKILL.md/AGENTS.md changes) → `git commit -m "feat(data): appraise <ModelName> — tokenizer, thinking, speed, SWE"` → `git push origin main`.
 
-8. **Commit + push site repo** — in `clocklobster-site/`: `git add blog/news/` (new post + landing update) → `git commit -m "feat: add News post — <ModelName> appraisal"` → `git push origin main`. The site deploys via Worktree Cloud (`worktree/deploy-site@v2` action on push to `main`).
+8. **Commit + push site repo** — in `clocklobster-site/`: `git add blog/news/` (new post + landing update) → `git commit -m "feat: add News post — <ModelName> appraisal"` → `git push origin main`. The site's CI is validate-only; deploys to dotCanada (LiteSpeed) are done locally via the `dotcanada` branch pushed to the `dotCanada` remote.
 
 ### Cross-repo layout
 
