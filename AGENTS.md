@@ -57,7 +57,7 @@ Conventional Commits. Observed scopes: `feat(data):`, `feat(appraise):`, `fix(mo
 Two repos live as siblings under `C:\Repos\`:
 
 - **This repo** (data + scripts): `C:\Repos\LLM-Cost-Comparison`
-- **The website** (static, Worktree Cloud): `C:\Repos\clocklobster-site` → `github.com/victorsalmon/clocklobster-site`
+- **The website** (static, dotCanada/LiteSpeed): `C:\Repos\clocklobster.com` → `worktree.ca/clocklobster/clocklobster.com`
 
 From this repo root the site is at `../clocklobster-site`. Sibling repos are flat under `C:\Repos\`. The per-model appraisal pipeline writes a **News** post into the site repo's `blog/news/` and commits/pushes both repos. The site's `AGENTS.md` documents the reverse path.
 
