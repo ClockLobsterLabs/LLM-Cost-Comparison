@@ -285,6 +285,11 @@
           "score": 82.7,
           "source": "Terminal-Bench 2.1 DeepSeek 0731 release table (Jul 2026)",
           "date": "2026-07"
+        },
+        "deep_swe": {
+          "score": 54.4,
+          "source": "DeepSeek V4-Flash-0731 benchmark table (Jul 2026)",
+          "date": "2026-07"
         }
       },
       "speed_tok_per_s": 41.2,
@@ -440,6 +445,11 @@
         "terminal_bench_2_1": {
           "score": 87.9,
           "source": "Terminal-Bench 2.1 DeepSeek GA table (Aug 2026)",
+          "date": "2026-08"
+        },
+        "deep_swe": {
+          "score": 62.7,
+          "source": "DeepSeek V4-Pro-0813 benchmark table (Aug 2026)",
           "date": "2026-08"
         }
       },
