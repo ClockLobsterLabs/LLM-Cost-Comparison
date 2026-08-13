@@ -1,12 +1,12 @@
 {
   "$schema": "./models.schema.json",
-  "last_updated": "2026-07-09 (Session 5: Tokenizer efficiency across 48 models + 2 Max variants (xhigh reasoning: Flash Max E=2.17, Pro Max E=2.14). Removed Flash Free and Big Pickle (Zen-only, unreachable). Session 6: Output verbosity across 24 models. Session 6b: Compression experiments for DS V4 Flash/Pro with 5 methods.)",
+  "last_updated": "2026-08-13 (Session 7: appraised DeepSeek V4 Pro 0813 and V4 Flash 0731; updated tokenizer, speed, thinking, output-verbosity, and web benchmark scores).",
   "pricing_sources": {
     "primary": {
       "name": "OpenCode Zen",
       "docs": "https://opencode.ai/zen",
       "type": "PAYG via $20 top-up, auto-reload at $5",
-      "markup": "Zero — passes through provider cost + processing fee"
+      "markup": "Zero \u2014 passes through provider cost + processing fee"
     },
     "secondary": {
       "name": "OpenRouter",
@@ -19,7 +19,7 @@
     "complex": {
       "label": "Complex",
       "output_price_min": 18,
-      "role": "Hardest problems — architecture, audits, planning from scratch",
+      "role": "Hardest problems \u2014 architecture, audits, planning from scratch",
       "top_pick": "claude-fable-5",
       "top_3": [
         "claude-fable-5",
@@ -31,7 +31,7 @@
       "label": "Daily",
       "output_price_min": 8,
       "output_price_max": 17.99,
-      "role": "Strong daily driver — general coding, reasoning",
+      "role": "Strong daily driver \u2014 general coding, reasoning",
       "top_pick": "claude-sonnet-5",
       "top_3": [
         "claude-sonnet-5",
@@ -43,7 +43,7 @@
       "label": "Taskrunner",
       "output_price_min": 2,
       "output_price_max": 7.99,
-      "role": "Fast routine tasks — implementation, refactoring, reviews",
+      "role": "Fast routine tasks \u2014 implementation, refactoring, reviews",
       "top_pick": "glm-5-2",
       "top_3": [
         "grok-4-5",
@@ -82,7 +82,7 @@
     "top_3_per_tier": true
   },
   "appraise_slots": {
-    "_doc": "Watch list for the Appraise-Model skill. active_stack = the models a newly-released model is always compared against (the user's daily drivers). watching = flagship-per-family models the user tracks but does not use; updated to point at the current slug when a new flagship drops. null = no model currently tracked in that slot. Edit here to change the comparison set — no skill-code change needed.",
+    "_doc": "Watch list for the Appraise-Model skill. active_stack = the models a newly-released model is always compared against (the user's daily drivers). watching = flagship-per-family models the user tracks but does not use; updated to point at the current slug when a new flagship drops. null = no model currently tracked in that slot. Edit here to change the comparison set \u2014 no skill-code change needed.",
     "active_stack": [
       "deepseek-v4-flash",
       "deepseek-v4-flash-max",
@@ -249,192 +249,315 @@
       }
     },
     "deepseek-v4-flash-max": {
-      "name": "DeepSeek V4 Flash Max",
+      "name": "DeepSeek V4 Flash 0731",
       "family": "deepseek",
-      "version": "2026-04-24",
+      "version": "2026-07-31",
       "tier": "budget_taskrunner",
       "open_weights": true,
       "license": "MIT",
       "context_window": 1000000,
-      "parameters": "284B total / 13B active MoE (Max config)",
+      "parameters": "284B total / 13B active MoE",
       "zen_available": false,
       "zen_pricing": null,
       "openrouter_pricing": {
-        "input": 0.15,
-        "output": 0.3
+        "input": 0.072,
+        "output": 0.144,
+        "cached_read": 0.003
       },
       "pricing_source": "openrouter",
       "benchmarks": {
         "aa_intelligence_index": {
-          "score": null,
-          "source": "Likely ~35",
+          "score": 50,
+          "source": "Artificial Analysis v4.1 (Jul 2026)",
           "date": "2026-07"
         },
         "swe_bench_verified": {
           "score": 79.0,
-          "source": "SWE-bench Verified leaderboard via BenchLM.ai (Jul 2026). Previously 75.8 — corrected 3.2 pts up.",
+          "source": "SWE-bench Verified leaderboard (Jul 2026)",
           "date": "2026-07"
         },
         "swe_bench_pro": {
-          "score": 49.6,
+          "score": 52.6,
           "source": "SWE-bench Pro leaderboard (Jul 2026)",
           "date": "2026-07"
         },
-        "terminal_bench_2_1": null
+        "terminal_bench_2_1": {
+          "score": 82.7,
+          "source": "Terminal-Bench 2.1 DeepSeek 0731 release table (Jul 2026)",
+          "date": "2026-07"
+        }
       },
-      "speed_tok_per_s": 111,
-      "thinking_token_ratio": 0,
-      "new_features": "Same as Flash, Max serving config for best throughput",
-      "specialty": "Your Max variant choice on OpenRouter. Same model, tuned serving.",
-      "strategy_note": "Your secondary daily on OpenRouter. Comparable to Zen Flash.",
-      "tokenizer_efficiency": 2.17
+      "speed_tok_per_s": 41.2,
+      "thinking_token_ratio": 0.34,
+      "new_features": "Re-post-trained GA release. Agentic benchmark leader at budget pricing.",
+      "specialty": "Fast coding, agentic workflows, and high-throughput daily work",
+      "strategy_note": "Best value in Budget tier after 0731 post-training. Beats Pro-Preview on agent tasks at a fifth of the output price.",
+      "tokenizer_efficiency": 1.84,
+      "output_verbosity": {
+        "total_calls": 16,
+        "avg_output_tokens": 168.5,
+        "avg_words_per_call": 39.875,
+        "per_task": {
+          "one-word": {
+            "avg_tokens": 45.0,
+            "max_tokens": 45,
+            "min_tokens": 45,
+            "avg_words": 6.0
+          },
+          "one-sentence": {
+            "avg_tokens": 58.0,
+            "max_tokens": 58,
+            "min_tokens": 58,
+            "avg_words": 35.0
+          },
+          "short-code": {
+            "avg_tokens": 233.0,
+            "max_tokens": 233,
+            "min_tokens": 233,
+            "avg_words": 86.0
+          },
+          "short-list": {
+            "avg_tokens": 156.0,
+            "max_tokens": 156,
+            "min_tokens": 156,
+            "avg_words": 85.0
+          },
+          "reasoning": {
+            "avg_tokens": 346.0,
+            "max_tokens": 346,
+            "min_tokens": 346,
+            "avg_words": 117.0
+          },
+          "multi-step": {
+            "avg_tokens": 175.0,
+            "max_tokens": 175,
+            "min_tokens": 175,
+            "avg_words": 38.0
+          },
+          "haiku": {
+            "avg_tokens": 800.0,
+            "max_tokens": 800,
+            "min_tokens": 800,
+            "avg_words": 0.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 85.0,
+            "max_tokens": 85,
+            "min_tokens": 85,
+            "avg_words": 42.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 294.0,
+            "max_tokens": 294,
+            "min_tokens": 294,
+            "avg_words": 185.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 31.0,
+            "max_tokens": 31,
+            "min_tokens": 31,
+            "avg_words": 2.0
+          },
+          "socratic": {
+            "avg_tokens": 66.0,
+            "max_tokens": 66,
+            "min_tokens": 66,
+            "avg_words": 19.0
+          },
+          "repeat-exact": {
+            "avg_tokens": 13.0,
+            "max_tokens": 13,
+            "min_tokens": 13,
+            "avg_words": 4.0
+          },
+          "json-format": {
+            "avg_tokens": 51.0,
+            "max_tokens": 51,
+            "min_tokens": 51,
+            "avg_words": 2.0
+          },
+          "phishing-refusal": {
+            "avg_tokens": 67.0,
+            "max_tokens": 67,
+            "min_tokens": 67,
+            "avg_words": 0.0
+          },
+          "french-translate": {
+            "avg_tokens": 248.0,
+            "max_tokens": 248,
+            "min_tokens": 248,
+            "avg_words": 17.0
+          },
+          "extract-emails": {
+            "avg_tokens": 28.0,
+            "max_tokens": 28,
+            "min_tokens": 28,
+            "avg_words": 0.0
+          }
+        },
+        "session": 7,
+        "date": "2026-08-13",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0
+      }
     },
     "deepseek-v4-pro": {
-      "name": "DeepSeek V4 Pro",
+      "name": "DeepSeek V4 Pro 0813",
       "family": "deepseek",
-      "version": "2026-04-24",
+      "version": "2026-08-13",
       "tier": "taskrunner",
       "open_weights": true,
       "license": "MIT",
       "context_window": 1000000,
       "parameters": "1.6T total / 49B active MoE",
-      "zen_available": true,
-      "zen_pricing": {
-        "input": 1.74,
-        "output": 3.48,
-        "cached_read": 0.145
+      "zen_available": false,
+      "zen_pricing": null,
+      "openrouter_pricing": {
+        "input": 0.435,
+        "output": 0.87,
+        "cached_read": 0.003625
       },
-      "openrouter_pricing": null,
-      "pricing_source": "zen",
+      "pricing_source": "openrouter",
       "benchmarks": {
         "aa_intelligence_index": {
-          "score": 44,
-          "source": "AA v4.1",
-          "date": "2026-07"
+          "score": 53,
+          "source": "Artificial Analysis v4.1 (Aug 2026)",
+          "date": "2026-08"
         },
-        "swe_bench_verified": null,
+        "swe_bench_verified": {
+          "score": 80.6,
+          "source": "SWE-bench Verified leaderboard (Aug 2026)",
+          "date": "2026-08"
+        },
         "swe_bench_pro": {
           "score": 55.4,
-          "source": "SWE-bench Pro leaderboard (Jul 2026)",
-          "date": "2026-07"
+          "source": "SWE-bench Pro leaderboard (Aug 2026)",
+          "date": "2026-08"
         },
-        "terminal_bench_2_1": null
+        "terminal_bench_2_1": {
+          "score": 87.9,
+          "source": "Terminal-Bench 2.1 DeepSeek GA table (Aug 2026)",
+          "date": "2026-08"
+        }
       },
-      "speed_tok_per_s": 69.7,
-      "thinking_token_ratio": 4.0,
-      "new_features": "1.6T MoE, 1M context, strong reasoning at low cost",
-      "specialty": "Stronger reasoning than Flash, good for complex coding tasks",
-      "strategy_note": "Strong Taskrunner. Cheaper than GLM 5.2 ($3.48 vs $4.40 out) but lower AAII (44 vs 51). Good when GLM is overkill. Warning: 4× thinking tax inflates effective output cost to $17.40/M (5× $3.48), jumping from Taskrunner to Daily tier.",
-      "tokenizer_efficiency": 1.85,
+      "speed_tok_per_s": 95.6,
+      "thinking_token_ratio": 0.57,
+      "new_features": "GA release, 1.6T MoE, 1M context, 384K max output, enhanced agent capabilities",
+      "specialty": "Strong reasoning and complex coding at a fraction of frontier pricing",
+      "strategy_note": "Strong Taskrunner at .87/M out with AAII 53. Effective output cost with thinking tax is ~.37/M (1.57x), still well under Daily tier. Good when GLM 5.2 is overkill.",
+      "tokenizer_efficiency": 2.12,
       "output_verbosity": {
-        "session": 6,
-        "date": "2026-07-09",
-        "max_tokens": 1500,
-        "fallback_tokens": 4096,
         "total_calls": 16,
-        "error_calls": 0,
-        "maxed_out_1500": 0,
-        "still_maxed_4096": 0,
-        "avg_output_tokens": 418.2,
-        "avg_words_per_call": 75.1,
+        "avg_output_tokens": 252.125,
+        "avg_words_per_call": 32.8125,
         "per_task": {
-          "phishing-refusal": {
-            "avg_tokens": 136.0,
-            "max_tokens": 136.0,
-            "min_tokens": 136.0,
-            "avg_words": 52.0
-          },
-          "short-list": {
-            "avg_tokens": 467.0,
-            "max_tokens": 467.0,
-            "min_tokens": 467.0,
-            "avg_words": 100.0
-          },
-          "grumpy-sysadmin": {
-            "avg_tokens": 1071.0,
-            "max_tokens": 1071.0,
-            "min_tokens": 1071.0,
-            "avg_words": 518.0
-          },
-          "json-format": {
-            "avg_tokens": 44.0,
-            "max_tokens": 44.0,
-            "min_tokens": 44.0,
-            "avg_words": 2.0
-          },
-          "short-code": {
-            "avg_tokens": 244.0,
-            "max_tokens": 244.0,
-            "min_tokens": 244.0,
-            "avg_words": 86.0
-          },
-          "describe-sunset": {
-            "avg_tokens": 1121.0,
-            "max_tokens": 1121.0,
-            "min_tokens": 1121.0,
-            "avg_words": 50.0
-          },
-          "reasoning": {
-            "avg_tokens": 593.0,
-            "max_tokens": 593.0,
-            "min_tokens": 593.0,
-            "avg_words": 152.0
-          },
-          "extract-emails": {
-            "avg_tokens": 188.0,
-            "max_tokens": 188.0,
-            "min_tokens": 188.0,
-            "avg_words": 1.0
-          },
-          "pirate-speak": {
-            "avg_tokens": 121.0,
-            "max_tokens": 121.0,
-            "min_tokens": 121.0,
-            "avg_words": 1.0
-          },
-          "french-translate": {
-            "avg_tokens": 1486.0,
-            "max_tokens": 1486.0,
-            "min_tokens": 1486.0,
-            "avg_words": 17.0
-          },
-          "haiku": {
-            "avg_tokens": 84.0,
-            "max_tokens": 84.0,
-            "min_tokens": 84.0,
-            "avg_words": 10.0
+          "one-word": {
+            "avg_tokens": 25.0,
+            "max_tokens": 25,
+            "min_tokens": 25,
+            "avg_words": 6.0
           },
           "one-sentence": {
-            "avg_tokens": 298.0,
-            "max_tokens": 298.0,
-            "min_tokens": 298.0,
+            "avg_tokens": 113.0,
+            "max_tokens": 113,
+            "min_tokens": 113,
+            "avg_words": 36.0
+          },
+          "short-code": {
+            "avg_tokens": 93.0,
+            "max_tokens": 93,
+            "min_tokens": 93,
+            "avg_words": 17.0
+          },
+          "short-list": {
+            "avg_tokens": 407.0,
+            "max_tokens": 407,
+            "min_tokens": 407,
             "avg_words": 21.0
           },
-          "multi-step": {
-            "avg_tokens": 365.0,
-            "max_tokens": 365.0,
-            "min_tokens": 365.0,
-            "avg_words": 105.0
+          "reasoning": {
+            "avg_tokens": 391.0,
+            "max_tokens": 391,
+            "min_tokens": 391,
+            "avg_words": 143.0
           },
-          "repeat-exact": {
-            "avg_tokens": 44.0,
-            "max_tokens": 44.0,
-            "min_tokens": 44.0,
-            "avg_words": 4.0
+          "multi-step": {
+            "avg_tokens": 197.0,
+            "max_tokens": 197,
+            "min_tokens": 197,
+            "avg_words": 40.0
+          },
+          "haiku": {
+            "avg_tokens": 530.0,
+            "max_tokens": 530,
+            "min_tokens": 530,
+            "avg_words": 13.0
+          },
+          "describe-sunset": {
+            "avg_tokens": 800.0,
+            "max_tokens": 800,
+            "min_tokens": 800,
+            "avg_words": 0.0
+          },
+          "grumpy-sysadmin": {
+            "avg_tokens": 587.0,
+            "max_tokens": 587,
+            "min_tokens": 587,
+            "avg_words": 145.0
+          },
+          "pirate-speak": {
+            "avg_tokens": 75.0,
+            "max_tokens": 75,
+            "min_tokens": 75,
+            "avg_words": 1.0
           },
           "socratic": {
-            "avg_tokens": 231.0,
-            "max_tokens": 231.0,
-            "min_tokens": 231.0,
-            "avg_words": 24.0
+            "avg_tokens": 152.0,
+            "max_tokens": 152,
+            "min_tokens": 152,
+            "avg_words": 37.0
           },
-          "one-word": {
-            "avg_tokens": 198.0,
-            "max_tokens": 198.0,
-            "min_tokens": 198.0,
-            "avg_words": 58.0
+          "repeat-exact": {
+            "avg_tokens": 63.0,
+            "max_tokens": 63,
+            "min_tokens": 63,
+            "avg_words": 4.0
+          },
+          "json-format": {
+            "avg_tokens": 24.0,
+            "max_tokens": 24,
+            "min_tokens": 24,
+            "avg_words": 2.0
+          },
+          "phishing-refusal": {
+            "avg_tokens": 113.0,
+            "max_tokens": 113,
+            "min_tokens": 113,
+            "avg_words": 51.0
+          },
+          "french-translate": {
+            "avg_tokens": 400.0,
+            "max_tokens": 400,
+            "min_tokens": 400,
+            "avg_words": 0.0
+          },
+          "extract-emails": {
+            "avg_tokens": 64.0,
+            "max_tokens": 64,
+            "min_tokens": 64,
+            "avg_words": 9.0
           }
-        }
+        },
+        "session": 7,
+        "date": "2026-08-13",
+        "max_tokens": 1500,
+        "fallback_tokens": 4096,
+        "error_calls": 0,
+        "maxed_out_1500": 0,
+        "still_maxed_4096": 0
       }
     },
     "deepseek-v4-pro-max": {
@@ -475,7 +598,7 @@
       "speed_tok_per_s": 69.7,
       "new_features": "Same as Pro, Max serving config",
       "specialty": "Pro quality at budget pricing on OpenRouter",
-      "strategy_note": "Remarkable value — $1/M out for 44 AAII on OpenRouter. Watch for price changes.",
+      "strategy_note": "Remarkable value \u2014 $1/M out for 44 AAII on OpenRouter. Watch for price changes.",
       "tokenizer_efficiency": 2.14
     },
     "claude-fable-5": {
@@ -520,7 +643,7 @@
       },
       "speed_tok_per_s": null,
       "new_features": "Anthropic's newest frontier. #1 Arena ELO (1509). #1 Arena Agent (14.06% win rate).",
-      "specialty": "Absolute frontier — planning, architecture, hardest problems",
+      "specialty": "Absolute frontier \u2014 planning, architecture, hardest problems",
       "strategy_note": "Overkill for daily use vs your stack. Consider for critical planning/audit work if GLM 5.2 isn't enough.",
       "tokenizer_efficiency": 3.03
     },
@@ -809,7 +932,7 @@
         }
       },
       "speed_tok_per_s": 84.8,
-      "new_features": "Adaptive Reasoning (Low/Medium/High/XHigh/Max). Very verbose — 300M output tokens. Strong Arena presence.",
+      "new_features": "Adaptive Reasoning (Low/Medium/High/XHigh/Max). Very verbose \u2014 300M output tokens. Strong Arena presence.",
       "specialty": "Best daily driver at this price. Matches Opus 4.7 on AAII at 60% less cost.",
       "strategy_note": "AAII 53 at $10/M out is exceptional. If you ever need a stronger daily than Flash, this is the upgrade path. Consider for complex one-off tasks where GLM is unavailable.",
       "tokenizer_efficiency": 3.03
@@ -1455,7 +1578,7 @@
       "speed_tok_per_s": null,
       "new_features": "Oldest GPT variant. Very cheap, very limited.",
       "specialty": "Classification, simple extraction, formatting",
-      "strategy_note": "Worse than DeepSeek V4 Flash in every way except cost ($0.40 vs $0.28 out — wait, Flash is cheaper). No reason to use.",
+      "strategy_note": "Worse than DeepSeek V4 Flash in every way except cost ($0.40 vs $0.28 out \u2014 wait, Flash is cheaper). No reason to use.",
       "tokenizer_efficiency": 1.78
     },
     "gpt-5-2": {
@@ -1910,7 +2033,7 @@
       },
       "speed_tok_per_s": 46.5,
       "thinking_token_ratio": 0,
-      "new_features": "Code-specialized Kimi. 1T/32B MoE. Slow but capable. Optimized for direct response — negligible thinking tokens.",
+      "new_features": "Code-specialized Kimi. 1T/32B MoE. Slow but capable. Optimized for direct response \u2014 negligible thinking tokens.",
       "specialty": "Code generation, Chinese-language tasks, open-weight coding",
       "strategy_note": "At $4/M out with AAII 42 and 46 tok/s, it's slower and less capable than GLM 5.2 ($4.40 out, AAII 51, 208 tok/s). Pass.",
       "tokenizer_efficiency": 1.79,
@@ -2107,7 +2230,7 @@
         }
       },
       "speed_tok_per_s": 87.6,
-      "new_features": "BRAND NEW (released today!). AAII 54 — #4 overall. Most concise frontier (60M output tokens).",
+      "new_features": "BRAND NEW (released today!). AAII 54 \u2014 #4 overall. Most concise frontier (60M output tokens).",
       "specialty": "Concise frontier intelligence. Complex reasoning at taskrunner pricing.",
       "strategy_note": "**ALERT**: AAII 54 at $6/M out is the best value in this appraisal. Complex-level intelligence (beats Opus 4.8) at Taskrunner pricing. Only 500K context. Worth evaluating as a GLM 5.2 alternative for complex work.",
       "tokenizer_efficiency": 2.66,
@@ -2251,7 +2374,7 @@
       },
       "speed_tok_per_s": null,
       "new_features": "New xAI build model. Cheap. Unknown benchmarks.",
-      "specialty": "Experimental — watch for benchmark results",
+      "specialty": "Experimental \u2014 watch for benchmark results",
       "strategy_note": "Too new to evaluate. Re-check in next appraisal cycle.",
       "tokenizer_efficiency": 2.43
     },
@@ -2500,7 +2623,7 @@
       "version": "2026-06-01",
       "tier": "free",
       "open_weights": false,
-      "license": "Proprietary (free tier — data trains model)",
+      "license": "Proprietary (free tier \u2014 data trains model)",
       "context_window": 128000,
       "parameters": "Undisclosed",
       "zen_available": true,
@@ -2533,7 +2656,7 @@
       "version": "2026-06-01",
       "tier": "free",
       "open_weights": false,
-      "license": "Proprietary (free tier — data trains model)",
+      "license": "Proprietary (free tier \u2014 data trains model)",
       "context_window": 128000,
       "parameters": "Undisclosed",
       "zen_available": true,
@@ -2555,7 +2678,7 @@
         "terminal_bench_2_1": null
       },
       "speed_tok_per_s": null,
-      "new_features": "Free code model. Privacy warning — data trains Cohere models.",
+      "new_features": "Free code model. Privacy warning \u2014 data trains Cohere models.",
       "specialty": "Free code generation",
       "strategy_note": "Privacy warning: Cohere uses data for training. Skip unless you need a free model and DS Flash Free is down.",
       "tokenizer_efficiency": 1.75
@@ -2590,7 +2713,7 @@
       "speed_tok_per_s": null,
       "new_features": "NVIDIA free trial model. Limited availability.",
       "specialty": "Free NVIDIA-hosted experimentation",
-      "strategy_note": "NVIDIA trial terms — do not submit personal data. Only for curiosity.",
+      "strategy_note": "NVIDIA trial terms \u2014 do not submit personal data. Only for curiosity.",
       "tokenizer_efficiency": 1.88
     },
     "o4-mini": {
@@ -2667,7 +2790,7 @@
         },
         "swe_bench_verified": {
           "score": 49.3,
-          "source": "BenchLM.ai (Jul 2026). Previously 65.0 from Jan 2025 model card — stale data corrected.",
+          "source": "BenchLM.ai (Jul 2026). Previously 65.0 from Jan 2025 model card \u2014 stale data corrected.",
           "date": "2026-07"
         },
         "swe_bench_pro": null,
@@ -2852,7 +2975,7 @@
       "speed_tok_per_s": null,
       "thinking_token_ratio": 3.0,
       "new_features": "Original reasoning pioneer. 671B MoE. Open weights. RL-trained reasoning.",
-      "specialty": "Reasoning, math, coding — the model that kicked off the reasoning era",
+      "specialty": "Reasoning, math, coding \u2014 the model that kicked off the reasoning era",
       "strategy_note": "Aged but historically important. DeepSeek V4 Pro ($3.48 out, AAII 44) and o4-mini ($4.40 out, SWE-bench 68.1%) both outperform R1 in their respective strengths. R1 is superseded within the family.",
       "tokenizer_efficiency": 1.84,
       "output_verbosity": {
@@ -3606,7 +3729,7 @@
         },
         "swe_bench_verified": {
           "score": 75.0,
-          "source": "SWE-bench Verified — NOT in BenchLM.ai top 57 (Jul 2026). Score from Jun 2026, needs live verification. May reflect a different subset or stale data.",
+          "source": "SWE-bench Verified \u2014 NOT in BenchLM.ai top 57 (Jul 2026). Score from Jun 2026, needs live verification. May reflect a different subset or stale data.",
           "date": "2026-06"
         },
         "swe_bench_pro": null,

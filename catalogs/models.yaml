@@ -25,7 +25,7 @@ models:
     openrouter_id: deepseek/deepseek-v4-flash
     reasoning_effort: xhigh
 - slug: deepseek-v4-flash-max
-  name: DeepSeek V4 Flash Max
+  name: DeepSeek V4 Flash 0731
   family: deepseek
   tier: budget_taskrunner
   context_window: 1000000
@@ -36,40 +36,40 @@ models:
   pricing_source: openrouter
   pricing:
     openrouter:
-      input: 0.15
-      output: 0.3
-  features: Same as Flash, Max serving config for best throughput
-  specialty: Your Max variant choice on OpenRouter. Same model, tuned serving.
-  strategy_note: Your secondary daily on OpenRouter. Comparable to Zen Flash.
-  openrouter_id: deepseek/deepseek-v4-flash
-  reasoning_effort: xhigh
+      input: 0.072
+      output: 0.144
+      cached_read: 0.003
+  features: Re-post-trained GA release. Agentic benchmark leader at budget pricing.
+  specialty: Fast coding, agentic workflows, and high-throughput daily work.
+  strategy_note: Best value in Budget tier after 0731 post-training. Beats Pro-Preview
+    on agent tasks at a third of the output price.
+  openrouter_id: deepseek/deepseek-v4-flash-0731
+  reasoning_effort: max
 - slug: deepseek-v4-pro
-  name: DeepSeek V4 Pro
+  name: DeepSeek V4 Pro 0813
   family: deepseek
   tier: taskrunner
   context_window: 1000000
   parameters: 1.6T total / 49B active MoE
   open_weights: true
   license: MIT
-  zen_available: true
-  pricing_source: zen
+  zen_available: false
+  pricing_source: openrouter
   pricing:
-    zen:
-      input: 1.74
-      output: 3.48
-      cached_read: 0.145
+    openrouter:
+      input: 0.435
+      output: 0.87
+      cached_read: 0.003625
   features: 1.6T MoE, 1M context, strong reasoning at low cost
   specialty: Stronger reasoning than Flash, good for complex coding tasks
-  strategy_note: 'Strong Taskrunner. Cheaper than GLM 5.2 ($3.48 vs $4.40 out) but
-    lower AAII (44 vs 51). Good when GLM is overkill. Warning: 4× thinking tax inflates
-    effective output cost to $17.40/M (5× $3.48), jumping from Taskrunner to Daily
-    tier.'
-  openrouter_id: deepseek/deepseek-v4-pro
+  strategy_note: Strong Taskrunner. Cheaper than GLM 5.2 ($0.87 vs $4.40 out) but
+    lower AAII (53 vs 51). Good when GLM is overkill. Watch the 4× thinking tax.
+  openrouter_id: deepseek/deepseek-v4-pro-0813
   max_variants:
   - slug: deepseek-v4-pro-max
     suffix: max
-    openrouter_id: deepseek/deepseek-v4-pro
-    reasoning_effort: xhigh
+    openrouter_id: deepseek/deepseek-v4-pro-0813
+    reasoning_effort: max
 - slug: deepseek-v4-pro-max
   name: DeepSeek V4 Pro Max
   family: deepseek
