@@ -1,0 +1,8 @@
+[extend]
+useDefault = true
+
+[[rules]]
+id = "openrouter-api-key"
+description = "Detected an OpenRouter API key (sk-or-v1-...), risking unauthorized API usage and cost exposure."
+regex = '''sk-or-v1-[a-zA-Z0-9]{40,}'''
+keywords = ["sk-or-v1"]

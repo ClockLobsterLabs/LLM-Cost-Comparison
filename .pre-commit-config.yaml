@@ -1,0 +1,26 @@
+# Pre-commit hooks run the repo's uv environment directly, mirroring the CI
+# commands (`uv run ruff check .`, `uv run mypy src`) so local checks match CI.
+#
+# Install: uv run pre-commit install
+# Run all: uv run pre-commit run --all-files
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check
+        entry: uv run ruff check .
+        language: system
+        pass_filenames: false
+        types: [python]
+      - id: ruff-format
+        name: ruff format --check
+        entry: uv run ruff format --check .
+        language: system
+        pass_filenames: false
+        types: [python]
+      - id: mypy
+        name: mypy src
+        entry: uv run mypy src
+        language: system
+        pass_filenames: false
+        types: [python]
