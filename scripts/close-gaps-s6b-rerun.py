@@ -11,10 +11,11 @@ Output: data/output-experiment/session6b-rerun-cheap.csv (clean schema).
 
 Reason: original run-s6b-expansion.ps1 corrupted these models' rows.
 """
-import csv, json, os, re, time, urllib.request
+import csv, json, os, time, urllib.request
 
-CFG = open('experiment-config.ps1').read()
-API_KEY = re.search(r'sk-or-v1-[a-f0-9]+', CFG).group(0)
+API_KEY = os.environ.get('OPENROUTER_API_KEY')
+if not API_KEY:
+    raise SystemExit('OPENROUTER_API_KEY is required. Set it in the environment before running this script.')
 URL = 'https://openrouter.ai/api/v1/chat/completions'
 OUT = 'data/output-experiment/session6b-rerun-cheap.csv'
 CAP = 4096

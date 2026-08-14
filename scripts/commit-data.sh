@@ -15,7 +15,9 @@
 #   4. Pushes to origin/main
 #   5. Reports the commit hash + files changed
 #
-# Exit non-zero if validation fails or git rejects. Never commits experiment-config.ps1.
+# Exit non-zero if validation fails or git rejects. Refuses to stage the gitignored
+# secret files (.env / experiment-config.ps1) and aborts if any staged added line
+# contains an OpenRouter API key literal (sk-or-v1-...).
 
 set -euo pipefail
 
@@ -36,9 +38,10 @@ echo "Validation passed."
 
 echo
 echo "=== Step 2/4: Stage files ==="
-# Never allow committing the gitignored config with the API key
-if git diff --cached --name-only | grep -q 'experiment-config\.ps1'; then
-    echo "REFUSING: experiment-config.ps1 is staged. This file holds the API key." >&2
+# Never allow committing the gitignored secret files (.env / experiment-config.ps1)
+SECRET_FILES='experiment-config\.ps1\|\.env'
+if git diff --cached --name-only | grep -q "$SECRET_FILES"; then
+    echo "REFUSING: a gitignored secret file (.env / experiment-config.ps1) is staged." >&2
     exit 1
 fi
 
@@ -50,10 +53,16 @@ else
     echo "Staged: ${FILES[*]}"
 fi
 
-# Guard again: nothing with the key should slip in
-if git diff --cached --name-only | grep -q 'experiment-config\.ps1'; then
-    echo "REFUSING: experiment-config.ps1 got staged. Aborting." >&2
-    git reset HEAD experiment-config.ps1 2>/dev/null || true
+# Guard again: nothing with the key should slip in (secret-file names + staged-content key literal scan)
+if git diff --cached --name-only | grep -q "$SECRET_FILES"; then
+    echo "REFUSING: a gitignored secret file (.env / experiment-config.ps1) got staged. Aborting." >&2
+    git reset HEAD 2>/dev/null || true
+    exit 1
+fi
+
+if git diff --cached -U0 | grep -qE '^\+.*sk-or-v1-[A-Za-z0-9]{8,}'; then
+    echo "REFUSING: staged content contains an OpenRouter API key literal (sk-or-v1-...)." >&2
+    git reset HEAD 2>/dev/null || true
     exit 1
 fi
 
